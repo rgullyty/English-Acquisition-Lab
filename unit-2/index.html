@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Personal Introductions, Jobs &amp; Routines | English Acquisition Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary-red:#E31B23;
+  --primary-red-hover:#C6131B;
+  --header-gradient: linear-gradient(135deg, #E31B23 0%, #C2185B 50%, #8E24AA 100%);
+  --soft-peach:#FFEBE6;
+  --card-cream:#FFF9E6;
+  --surface-white:#FFFFFF;
+  --surface-light:#F4F5F7;
+  --text-main:#212121;
+  --text-muted:#757575;
+  --border-line:#E0D6C8;
+  --success-green:#2E7D32;
+  --success-bg:#E8F5E9;
+  --error-red:#D32F2F;
+  --error-bg:#FFEBEE;
+  --star-gold:#FFA000;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+html{height:-webkit-fill-available;}
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  background:var(--surface-light);
+  font-family:'Source Sans 3', sans-serif;
+  color:var(--text-main);
+  display:flex;
+  justify-content:center;
+  padding:0 0 env(safe-area-inset-bottom, 24px);
+  -webkit-overflow-scrolling:touch;
+}
+.wrap{width:100%;max-width:900px;}
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif;margin:0;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+button{font-family:inherit;touch-action:manipulation;}
+input,textarea{touch-action:manipulation;}
+
+/* ---------- HEADER ---------- */
+.app-header{
+  background:var(--header-gradient);
+  color:#fff;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 18px 16px;
+  border-radius:0 0 18px 18px;
+  margin-bottom:14px;
+  box-shadow:0 8px 24px rgba(142,36,170,0.25);
+  cursor:pointer;
+}
+.header-top{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.header-title{
+  font-weight:800;font-style:italic;letter-spacing:.4px;
+  font-size:clamp(17px,4.6vw,25px);line-height:1.05;
+}
+.header-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;opacity:.85;margin-top:4px;}
+.review-shortcut{
+  background:rgba(255,255,255,0.18);border:none;color:#fff;border-radius:20px;
+  padding:7px 12px;font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap;
+}
+.review-shortcut .nb{background:#fff;color:var(--primary-red);border-radius:10px;padding:0 6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;}
+.header-progress-row{display:flex;align-items:center;gap:8px;margin-top:12px;}
+.header-progress{flex:1;background:rgba(255,255,255,0.25);border-radius:10px;height:8px;overflow:hidden;}
+.header-progress-fill{background:#fff;height:100%;border-radius:10px;transition:width .3s;}
+.header-progress-pct{font-family:'IBM Plex Mono',monospace;font-size:11px;opacity:.9;}
+
+/* ---------- SHELL ---------- */
+.app-shell{padding:0 14px;}
+.main-card{
+  background:var(--surface-white);border-radius:16px;border:1px solid var(--border-line);
+  box-shadow:0 8px 22px rgba(0,0,0,0.06);padding:20px 18px 24px;min-height:400px;
+}
+.module-title{font-size:clamp(19px,4.4vw,24px);font-weight:800;color:var(--text-main);display:flex;align-items:center;gap:8px;}
+.module-desc{color:var(--text-muted);font-size:13.5px;margin-top:4px;margin-bottom:16px;line-height:1.5;}
+
+.back-bar{
+  background:none;border:none;color:var(--primary-red);font-weight:700;font-size:13.5px;
+  padding:0 0 14px;cursor:pointer;display:flex;align-items:center;gap:5px;
+}
+.back-bar:hover{text-decoration:underline;}
+.nav-back-row{display:flex;align-items:center;gap:8px;}
+.nav-back-row .back-bar{padding-bottom:14px;}
+.nav-back-row .nav-sep{color:var(--border-line);font-size:13px;padding-bottom:14px;}
+
+/* ---------- BUTTONS ---------- */
+.btn{
+  border-radius:10px;padding:11px 16px;font-size:14px;font-weight:700;cursor:pointer;border:1.5px solid transparent;
+  font-family:'Source Sans 3',sans-serif;
+}
+.btn-primary{background:var(--primary-red);color:#fff;}
+.btn-primary:hover{background:var(--primary-red-hover);}
+.btn-primary:disabled{opacity:.45;cursor:default;}
+.btn-ghost{background:#fff;border-color:var(--border-line);color:var(--text-main);}
+.btn-ghost:hover{border-color:var(--primary-red);color:var(--primary-red);}
+.btn-ghost.active{background:var(--header-gradient);color:#fff;border-color:transparent;}
+.btn-sm{padding:7px 12px;font-size:12.5px;border-radius:8px;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.icon-btn{background:none;border:1px solid var(--border-line);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);}
+.icon-btn:hover{border-color:var(--primary-red);color:var(--primary-red);}
+.icon-btn.star.active{color:var(--star-gold);border-color:var(--star-gold);}
+
+/* ---------- HUB PORTALS ---------- */
+.quickstart{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  background:var(--header-gradient);color:#fff;border:none;border-radius:14px;
+  padding:16px;font-size:16px;font-weight:800;font-family:'Barlow Condensed',sans-serif;
+  letter-spacing:.3px;cursor:pointer;margin-bottom:18px;box-shadow:0 6px 16px rgba(227,27,35,0.25);
+}
+.portal-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+@media (min-width:600px){ .portal-grid{grid-template-columns:1fr 1fr;} }
+.portal-card{
+  text-align:left;background:var(--card-cream);border:1px solid var(--border-line);border-radius:14px;
+  padding:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;position:relative;
+}
+.portal-card:hover{border-color:var(--primary-red);}
+.portal-card .em{font-size:30px;}
+.portal-card b{display:block;font-size:16.5px;color:var(--text-main);}
+.portal-card span{font-size:12.5px;color:var(--text-muted);line-height:1.4;display:block;margin-top:3px;}
+.portal-card .pb{position:absolute;top:12px;right:12px;background:var(--primary-red);color:#fff;border-radius:10px;font-size:10.5px;padding:2px 8px;font-family:'IBM Plex Mono',monospace;}
+
+/* ---------- STUDY PATH ---------- */
+.path-list{display:flex;flex-direction:column;gap:10px;}
+.path-card{
+  background:#fff;border:1.5px solid var(--border-line);border-radius:14px;padding:14px 16px;
+  display:flex;gap:12px;align-items:center;cursor:pointer;
+}
+.path-card:hover{border-color:var(--primary-red);}
+.path-card.done{border-color:var(--success-green);}
+.path-card .em{font-size:26px;flex-shrink:0;}
+.path-card .pc-main{flex:1;min-width:0;}
+.path-card b{font-size:15px;}
+.path-card .pc-desc{font-size:12px;color:var(--text-muted);margin-top:2px;line-height:1.4;}
+.path-card .pc-status{font-size:11px;font-family:'IBM Plex Mono',monospace;margin-top:6px;color:var(--text-muted);}
+.path-card .pc-status.done{color:var(--success-green);font-weight:700;}
+.path-card .pc-status.progress{color:var(--primary-red);font-weight:700;}
+.mini-bar{background:var(--surface-light);border-radius:6px;height:6px;overflow:hidden;margin-top:6px;}
+.mini-bar > div{background:var(--primary-red);height:100%;}
+.path-card.done .mini-bar > div{background:var(--success-green);}
+.check-badge{font-size:18px;color:var(--success-green);flex-shrink:0;}
+
+/* ---------- EXERCISE CARD ---------- */
+.ex-progress{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);margin-bottom:8px;display:flex;justify-content:space-between;}
+.instr-box{
+  background:var(--soft-peach);border-left:4px solid var(--primary-red);border-radius:8px;
+  padding:12px 14px;margin-bottom:14px;font-size:14.5px;line-height:1.5;
+}
+.instr-box b{color:var(--primary-red);}
+.target-box{
+  background:var(--card-cream);border:1px solid var(--border-line);border-radius:10px;
+  padding:14px 16px;margin-bottom:14px;
+}
+.eng-line{font-size:16.5px;font-style:italic;color:var(--text-main);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.pt-line{font-size:12.5px;color:var(--text-muted);margin-top:4px;}
+.audio-btn{background:var(--primary-red);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:13px;flex-shrink:0;}
+.audio-btn:hover{background:var(--primary-red-hover);}
+
+.options{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
+.opt-btn{
+  display:flex;align-items:center;gap:8px;text-align:left;background:#fff;border:1.5px solid var(--border-line);
+  border-radius:10px;padding:12px 14px;font-size:14.5px;color:var(--text-main);cursor:pointer;width:100%;
+}
+.opt-btn:hover:not(:disabled){border-color:var(--primary-red);}
+.opt-btn.correct{background:var(--success-bg);border-color:var(--success-green);font-weight:700;}
+.opt-btn.wrong{background:var(--error-bg);border-color:var(--error-red);}
+.opt-btn:disabled{cursor:default;}
+.opt-btn.selected{background:var(--soft-peach);border-color:var(--primary-red);}
+.opt-btn .chk{font-size:15px;flex-shrink:0;}
+
+.sound-badge-row{display:flex;justify-content:flex-end;margin-bottom:8px;}
+.sound-badge-pill{
+  display:inline-block;background:var(--header-gradient);color:#ffffff;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.4px;
+  padding:6px 16px;border-radius:20px;box-shadow:0 4px 10px rgba(227,27,35,0.2);
+}
+.expand-hint{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.expand-chevron{display:inline-block;transition:transform .2s;color:var(--primary-red);font-size:13px;}
+.expand-chevron.open{transform:rotate(180deg);}
+.expandable-card{cursor:pointer;}
+.skill-card{border:1px solid var(--border-line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff;}
+.skill-card-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;gap:10px;cursor:pointer;}
+.skill-card-body{padding:0 14px 14px;border-top:1px dashed var(--border-line);font-size:13.5px;color:var(--text-main);line-height:1.55;display:none;}
+.skill-card-body.open{display:block;padding-top:10px;}
+.skill-card-body b{color:var(--primary-red);}
+
+.type-input{width:100%;border:1.5px solid var(--border-line);border-radius:10px;padding:12px 13px;font-size:16px;color:var(--text-main);-webkit-appearance:none;}
+.type-input:focus{outline:none;border-color:var(--primary-red);}
+textarea.type-input{min-height:70px;resize:vertical;}
+
+.tile-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;min-height:44px;padding:10px;background:var(--surface-light);border-radius:10px;border:1px dashed var(--border-line);}
+.tile{background:#fff;border:1.5px solid var(--border-line);border-radius:8px;padding:9px 12px;font-size:14.5px;cursor:pointer;font-weight:600;color:var(--text-main);}
+.tile:hover{border-color:var(--primary-red);}
+.answer-strip{display:flex;flex-wrap:wrap;gap:8px;min-height:46px;padding:10px;background:#fff;border:2px solid var(--border-line);border-radius:10px;margin-bottom:10px;}
+.answer-strip.empty::before{content:"Toque nas palavras abaixo para montar a frase...";color:var(--text-muted);font-size:13px;}
+.ans-tile{background:var(--soft-peach);border:1.5px solid var(--primary-red);border-radius:8px;padding:9px 12px;font-size:14.5px;cursor:pointer;font-weight:600;}
+.blank-input{width:90px;border:1.5px solid var(--primary-red);border-radius:6px;padding:7px 8px;font-size:14px;}
+
+.feedback{border-radius:10px;padding:14px 16px;margin-top:14px;font-size:14.5px;line-height:1.55;}
+.feedback.ok{background:var(--success-bg);border:1px solid var(--success-green);}
+.feedback.bad{background:var(--error-bg);border:1px solid var(--error-red);}
+.feedback .fb-line{margin-bottom:4px;}
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-transform:uppercase;background:#fff;border:1px solid var(--border-line);border-radius:10px;padding:1px 7px;margin-left:6px;color:var(--text-muted);}
+
+.field-group{margin-bottom:10px;}
+.field-label{font-size:12.5px;font-weight:700;color:var(--text-muted);margin-bottom:4px;display:block;}
+.dialogue-line{background:var(--card-cream);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-style:italic;font-size:14.5px;display:flex;align-items:center;gap:8px;}
+
+.profile-card{background:var(--card-cream);border:1px solid var(--border-line);border-radius:10px;padding:14px 16px;margin-bottom:14px;}
+.profile-card .pf-row{display:flex;gap:6px;font-size:13.5px;padding:3px 0;}
+.profile-card .pf-row b{min-width:120px;color:var(--text-muted);font-weight:600;}
+
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(min-width:640px){.stat-grid{grid-template-columns:repeat(3,1fr);}}
+.stat-card{background:var(--card-cream);border:1px solid var(--border-line);border-radius:12px;padding:14px;}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:26px;color:var(--primary-red);}
+.stat-label{font-size:12px;color:var(--text-muted);margin-top:2px;}
+
+.empty-state{text-align:center;padding:32px 10px;color:var(--text-muted);}
+.empty-state .big{font-size:36px;margin-bottom:8px;}
+
+/* ---------- CATALOG ---------- */
+.search-input{width:100%;border:1.5px solid var(--border-line);border-radius:10px;padding:11px 14px;font-size:16px;margin-bottom:12px;-webkit-appearance:none;}
+.chip-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;-webkit-overflow-scrolling:touch;}
+.chip{background:#fff;border:1.5px solid var(--border-line);border-radius:20px;padding:6px 13px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--text-muted);white-space:nowrap;}
+.chip.active{background:var(--header-gradient);color:#fff;border-color:transparent;}
+.cat-item{border:1px solid var(--border-line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff;}
+.cat-item-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;gap:10px;}
+.cat-item-head .ci-text{flex:1;min-width:0;}
+.cat-item-head .ci-en{font-weight:700;font-size:14.5px;}
+.cat-item-head .ci-en-row{font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.cat-item-head .ci-pt{font-size:12px;color:var(--text-muted);margin-top:2px;}
+.cat-item-actions{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.cat-item-body{padding:0 14px 14px;border-top:1px dashed var(--border-line);font-size:13.5px;color:var(--text-main);display:none;}
+.cat-item-body.open{display:block;padding-top:10px;}
+.cat-item-body .arrow-line{margin-top:6px;color:var(--text-muted);}
+.ex-line-en{font-size:14.5px;color:var(--text-main);margin-top:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.ex-line-en:first-child{margin-top:0;}
+.ex-line-pt{font-size:12.5px;color:var(--text-muted);margin-top:2px;margin-left:2px;}
+
+.search-result{background:var(--card-cream);border:1px solid var(--border-line);border-radius:10px;padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+
+.review-item{border:1px solid var(--border-line);border-radius:10px;padding:12px 14px;margin-bottom:10px;background:#fff;}
+.badge-pill{font-family:'IBM Plex Mono',monospace;font-size:10px;background:var(--error-bg);color:var(--error-red);border-radius:10px;padding:2px 8px;}
+
+/* ---------- TWO DRAWERS (M02) ---------- */
+.chip-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;min-height:40px;}
+.sort-chip{background:#fff;border:1.5px solid var(--border-line);border-radius:20px;padding:9px 15px;font-size:14px;cursor:pointer;font-weight:600;color:var(--text-main);}
+.sort-chip:hover{border-color:var(--primary-red);}
+.sort-chip.selected{background:var(--soft-peach);border-color:var(--primary-red);box-shadow:0 0 0 2px rgba(227,27,35,0.15);}
+.drawer-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.drawer{flex:1;min-width:135px;background:var(--card-cream);border:2px dashed var(--border-line);border-radius:14px;padding:14px 12px;text-align:center;cursor:pointer;min-height:96px;}
+.drawer:hover{border-color:var(--primary-red);}
+.drawer b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:17px;margin-bottom:2px;}
+.drawer span{font-size:11px;color:var(--text-muted);}
+.drawer-items{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
+.drawer-item{border-radius:8px;padding:6px 9px;font-size:12px;font-weight:600;text-align:left;}
+.drawer-item.right{background:var(--success-bg);color:var(--success-green);border:1px solid var(--success-green);}
+.drawer-item.wrong{background:var(--error-bg);color:var(--error-red);border:1px solid var(--error-red);}
+
+/* ---------- TELEMETRY GATE (IDENTIFICAÇÃO DO ALUNO) ---------- */
+.telemetry-overlay{
+  position:fixed;inset:0;background:rgba(33,33,33,0.55);z-index:999;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  padding-top:calc(20px + env(safe-area-inset-top,0px));padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));
+}
+.telemetry-card{
+  background:var(--surface-white);border-radius:16px;padding:22px 20px;max-width:400px;width:100%;
+  box-shadow:0 12px 32px rgba(0,0,0,0.25);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="app-header" id="headerClick">
+    <div class="header-top">
+      <div>
+        <div class="header-title">PERSONAL INTRODUCTIONS, JOBS &amp; ROUTINES</div>
+        <div class="header-sub">UNIT 2 · ENGLISH ACQUISITION LAB</div>
+      </div>
+      <button class="review-shortcut" id="reviewShortcut">🔁 Revisão <span class="nb" id="reviewBadge" style="display:none;">0</span></button>
+    </div>
+    <div class="header-progress-row">
+      <div class="header-progress"><div class="header-progress-fill" id="hsProgFill" style="width:0%"></div></div>
+      <div class="header-progress-pct" id="hsProgPct">0%</div>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <div class="main-card" id="mainCard"></div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   MOTOR DE ÁUDIO — ROUND-ROBIN MULTI-VOZ EM 5 NÍVEIS
+   ===================================================================== */
+const ELITE_VOICE_NAMES = [
+  "Microsoft AvaMultilingual Online (Natural) - English (United States)",
+  "Microsoft Christopher Online (Natural) - English (United States)",
+  "Microsoft EmmaMultilingual Online (Natural) - English (United States)",
+  "Microsoft Clara Online (Natural) - English (Canada)"
+];
+
+let voicePool = [];
+let voiceRotationIndex = 0;
+
+function buildVoicePool(){
+  if(!("speechSynthesis" in window)) return [];
+  const voices = window.speechSynthesis.getVoices() || [];
+  if(voices.length === 0) return [];
+
+  const isExactUS = v => /^en[-_]US$/i.test(v.lang || "");
+  const isEnglish = v => /^en([-_]|$)/i.test(v.lang || "");
+
+  // Nível 1: Elite Edge Desktop
+  const elitePool = ELITE_VOICE_NAMES.map(name => voices.find(v => v.name === name)).filter(Boolean);
+  if(elitePool.length > 0) return elitePool;
+
+  // Nível 2: iOS / Safari Enhanced
+  const iosPool = voices.filter(v => isExactUS(v) && /enhanced|premium/i.test(v.name || ""));
+  if(iosPool.length > 0) return iosPool;
+
+  // Nível 3: Chrome Google Cloud
+  const googlePool = voices.filter(v => isExactUS(v) && /google/i.test(v.name || ""));
+  if(googlePool.length > 0) return googlePool;
+
+  // Nível 4: Android / Local en-US
+  const localUSPool = voices.filter(isExactUS);
+  if(localUSPool.length > 0) return localUSPool;
+
+  // Nível 5: Fallback geral
+  return voices.filter(isEnglish);
+}
+
+function refreshVoicePool(){
+  voicePool = buildVoicePool();
+  voiceRotationIndex = 0;
+}
+
+if("speechSynthesis" in window){
+  refreshVoicePool();
+  window.speechSynthesis.onvoiceschanged = refreshVoicePool;
+}
+
+function speak(text){
+  if(!("speechSynthesis" in window) || !text) return;
+  try{
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = 0.95;
+    if(voicePool.length > 0){
+      u.voice = voicePool[voiceRotationIndex % voicePool.length];
+      voiceRotationIndex = (voiceRotationIndex + 1) % voicePool.length;
+    }
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function audioBtn(text){
+  return '<button class="audio-btn" data-speak="'+escapeAttr(text)+'" title="ouvir">🔊</button>';
+}
+function escapeAttr(s){ return (s||"").replace(/"/g,"&quot;"); }
+function wireAudioButtons(root){
+  (root||document).querySelectorAll("[data-speak]").forEach(function(b){
+    b.addEventListener("click",function(e){ e.stopPropagation(); speak(b.getAttribute("data-speak")); });
+  });
+}
+/* Padrão unificado de frase de exemplo: linha 1 = EN + áudio dedicado; linha 2 = PT, em linha própria */
+function exampleBlock(en, pt){
+  if(!en) return "";
+  return '<div class="ex-line-en">→ '+en+' '+audioBtn(en)+'</div>' + (pt ? '<div class="ex-line-pt">'+pt+'</div>' : '');
+}
+
+/* =====================================================================
+   TELEMETRIA EXTERNA — GOOGLE SHEETS (VIA GOOGLE APPS SCRIPT WEB APP)
+   =====================================================================
+   1) Implante telemetry-backend.gs como Web App (Executar como: Eu;
+      Quem tem acesso: Qualquer pessoa).
+   2) Cole a URL de implantação (termina em /exec) na constante abaixo.
+   3) Enquanto TELEMETRY_URL contiver "COLE_SUA_URL_AQUI", o envio fica
+      automaticamente desativado (falha silenciosa) — o app funciona
+      normalmente offline ou sem telemetria configurada.
+   ===================================================================== */
+const TELEMETRY_URL = "https://script.google.com/macros/s/AKfycbwFYboJnemy0sPrzR9wgn2DGasu2_R3T4dVkjbLknSo0pNFTE9HNJTOsDCNz6zFs75l/exec";
+const UNIT_NAME = "Personal Introductions, Jobs & Routines";
+const STUDENT_ID_KEY = "piu_student_id_v1";
+const STUDENT_NAME_KEY = "piu_student_name_v1";
+
+function getStudentId(){
+  let id = null;
+  try{ id = localStorage.getItem(STUDENT_ID_KEY); }catch(e){}
+  if(!id){
+    id = "stu-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,8);
+    try{ localStorage.setItem(STUDENT_ID_KEY, id); }catch(e){}
+  }
+  return id;
+}
+function getStudentName(){
+  try{ return localStorage.getItem(STUDENT_NAME_KEY) || ""; }catch(e){ return ""; }
+}
+function setStudentName(name){
+  try{ localStorage.setItem(STUDENT_NAME_KEY, name); }catch(e){}
+}
+function getStudentInfo(){ return {id:getStudentId(), name:getStudentName()||"Aluno anônimo"}; }
+
+function sendTelemetry(payload){
+  try{
+    if(!TELEMETRY_URL || TELEMETRY_URL.indexOf("COLE_SUA_URL_AQUI")!==-1) return;
+    fetch(TELEMETRY_URL, {
+      method:"POST",
+      mode:"no-cors",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    }).catch(function(){ /* falha de rede: ignorada silenciosamente, nunca trava a experiência do aluno */ });
+  }catch(err){ /* qualquer erro de telemetria é sempre silencioso */ }
+}
+function sendModuleTelemetry(moduleKey){
+  const m = MODULES_META.find(function(mm){ return mm.key===moduleKey; });
+  const p = moduleProgress(moduleKey);
+  sendTelemetry({
+    event:"module_complete",
+    unit: UNIT_NAME,
+    timestamp: new Date().toISOString(),
+    student: getStudentInfo(),
+    moduleKey: moduleKey,
+    moduleTitle: m ? m.title : moduleKey,
+    moduleDone: p.done,
+    moduleTotal: p.total,
+    modulePct: p.pct,
+    overallPct: overallProgress(),
+    accuracy: computeStats().accuracy
+  });
+}
+function sendSessionSummaryTelemetry(){
+  sendTelemetry({
+    event:"session_summary",
+    unit: UNIT_NAME,
+    timestamp: new Date().toISOString(),
+    student: getStudentInfo(),
+    overallPct: overallProgress(),
+    accuracy: computeStats().accuracy,
+    reviewQueueCount: state.reviewQueue.length,
+    modules: MODULES_META.map(function(m){ const p=moduleProgress(m.key); return {key:m.key, title:m.title, done:p.done, total:p.total, pct:p.pct}; }),
+    errorLog: (state.errorLog||[]).slice(0,30)
+  });
+}
+let lastSessionTelemetryTs = 0;
+function maybeSendSessionSummary(){
+  const now = Date.now();
+  if(now - lastSessionTelemetryTs < 4000) return; // evita duplicidade entre visibilitychange e pagehide
+  lastSessionTelemetryTs = now;
+  sendSessionSummaryTelemetry();
+}
+
+/* =====================================================================
+   DADOS — BASE LEXICAL PRIORITÁRIA
+   ===================================================================== */
+
+/* ---- M01: EXPLORE — 15 CARDS ---- */
+const EXPLORE_ITEMS = [
+  {id:"exp-01", en:"job", pt:"emprego / profissão",
+    ex1:"She is looking for a new job.", ex1pt:"Ela está procurando um emprego novo.",
+    ex2:"I love my job.", ex2pt:"Eu amo meu emprego."},
+  {id:"exp-02", en:"nurse", pt:"enfermeiro(a)",
+    ex1:"She's a nurse at the city hospital.", ex1pt:"Ela é enfermeira no hospital da cidade.",
+    ex2:"My brother wants to be a nurse.", ex2pt:"Meu irmão quer ser enfermeiro."},
+  {id:"exp-03", en:"engineer", pt:"engenheiro(a)",
+    ex1:"He's an engineer at a tech company.", ex1pt:"Ele é engenheiro em uma empresa de tecnologia.",
+    ex2:"Engineers solve real problems.", ex2pt:"Engenheiros resolvem problemas reais."},
+  {id:"exp-04", en:"routine", pt:"rotina",
+    ex1:"My routine starts at 6 a.m.", ex1pt:"Minha rotina começa às 6 da manhã.",
+    ex2:"Everyone has a different routine.", ex2pt:"Todo mundo tem uma rotina diferente."},
+  {id:"exp-05", en:"wake up", pt:"acordar",
+    ex1:"I wake up at 7:00 every day.", ex1pt:"Eu acordo às 7:00 todos os dias.",
+    ex2:"She wakes up early on weekdays.", ex2pt:"Ela acorda cedo nos dias de semana."},
+  {id:"exp-06", en:"get up", pt:"levantar (da cama)",
+    ex1:"He gets up right after his alarm.", ex1pt:"Ele levanta logo depois do despertador.",
+    ex2:"I don't get up easily on Mondays.", ex2pt:"Eu não levanto fácil nas segundas."},
+  {id:"exp-07", en:"have breakfast", pt:"tomar café da manhã",
+    ex1:"We have breakfast in the morning.", ex1pt:"Nós tomamos café da manhã de manhã.",
+    ex2:"She has breakfast at 8:00.", ex2pt:"Ela toma café da manhã às 8:00."},
+  {id:"exp-08", en:"go to work", pt:"ir trabalhar",
+    ex1:"I go to work by bus.", ex1pt:"Eu vou trabalhar de ônibus.",
+    ex2:"He goes to work at 9:00.", ex2pt:"Ele vai trabalhar às 9:00."},
+  {id:"exp-09", en:"in the morning / in the afternoon", pt:"de manhã / de tarde",
+    ex1:"I study in the morning.", ex1pt:"Eu estudo de manhã.",
+    ex2:"She works in the afternoon.", ex2pt:"Ela trabalha de tarde."},
+  {id:"exp-10", en:"at night", pt:"à noite",
+    ex1:"He works at night.", ex1pt:"Ele trabalha à noite.",
+    ex2:"I read at night before bed.", ex2pt:"Eu leio à noite antes de dormir."},
+  {id:"exp-11", en:"on weekdays / on weekends", pt:"nos dias de semana / nos fins de semana",
+    ex1:"I work on weekdays.", ex1pt:"Eu trabalho nos dias de semana.",
+    ex2:"We relax on weekends.", ex2pt:"Nós relaxamos nos fins de semana."},
+  {id:"exp-12", en:"What do you do?", pt:"O que você faz? (profissão)",
+    ex1:"What do you do for a living?", ex1pt:"O que você faz para viver?",
+    ex2:"\u201CWhat do you do?\u201D \u201CI'm a teacher.\u201D", ex2pt:"\u201CO que você faz?\u201D \u201CEu sou professor(a).\u201D"},
+  {id:"exp-13", en:"What time...?", pt:"A que horas...?",
+    ex1:"What time do you finish work?", ex1pt:"A que horas você termina o trabalho?",
+    ex2:"What time does she wake up?", ex2pt:"A que horas ela acorda?"},
+  {id:"exp-14", en:"shift", pt:"turno (de trabalho)",
+    ex1:"I work the night shift.", ex1pt:"Eu trabalho no turno da noite.",
+    ex2:"Her shift starts at 2:00.", ex2pt:"O turno dela começa às 2:00."},
+  {id:"exp-15", en:"part-time / full-time", pt:"meio período / período integral",
+    ex1:"I have a part-time job.", ex1pt:"Eu tenho um emprego de meio período.",
+    ex2:"He works full-time at a bank.", ex2pt:"Ele trabalha período integral em um banco."}
+];
+
+/* ---- M02: THE TWO DRAWERS — 8 QUESTIONS ---- */
+/* Microfase 1 — BE Chameleon (banco fechado: 3 itens) */
+const BE_CHAMELEON_ITEMS = [
+  {id:"cham-01", before:"I", after:"ready.", answer:"am", options:["am","is","are"]},
+  {id:"cham-02", before:"She", after:"ready.", answer:"is", options:["is","are","am"]},
+  {id:"cham-03", before:"They", after:"ready.", answer:"are", options:["are","am","is"]}
+];
+
+/* Microfase 2 — Verb Detective (banco fechado: 4 itens) */
+const VERB_DETECTIVE_ITEMS = [
+  {id:"vdet-01", sentence:"___ you ready?", verbWord:"ready", answer:"BE"},
+  {id:"vdet-02", sentence:"___ you study?", verbWord:"study", answer:"DO"},
+  {id:"vdet-03", sentence:"___ she a student?", verbWord:"a student", answer:"BE"},
+  {id:"vdet-04", sentence:"___ she work here?", verbWord:"work", answer:"DO"}
+];
+
+/* Microfase 3 — The Two Drawers (banco fechado: 8 itens, pares contrastivos) */
+const TWO_DRAWERS_ITEMS = [
+  {id:"drw-01", sentence:"___ you ready?", cue:"ready", answer:"BE", target:"Are you ready?"},
+  {id:"drw-02", sentence:"___ you study?", cue:"study", answer:"DODOES", target:"Do you study?"},
+  {id:"drw-03", sentence:"___ she a student?", cue:"a student", answer:"BE", target:"Is she a student?"},
+  {id:"drw-04", sentence:"___ she work here?", cue:"work", answer:"DODOES", target:"Does she work here?"},
+  {id:"drw-05", sentence:"___ you a student?", cue:"a student", answer:"BE", target:"Are you a student?"},
+  {id:"drw-06", sentence:"___ you work in the afternoon?", cue:"work", answer:"DODOES", target:"Do you work in the afternoon?"},
+  {id:"drw-07", sentence:"___ they ready?", cue:"ready", answer:"BE", target:"Are they ready?"},
+  {id:"drw-08", sentence:"___ he work here?", cue:"work", answer:"DODOES", target:"Does he work here?"}
+];
+
+/* ---- M03: FIX THE QUESTION — 6 ERROS REAIS ---- */
+const FIX_Q_ITEMS = [
+  {id:"fixq-01", broken:"Do you are a nurse?", target:"Are you a nurse?"},
+  {id:"fixq-02", broken:"Where you work?", target:"Where do you work?"},
+  {id:"fixq-03", broken:"What time you go to bed?", target:"What time do you go to bed?"},
+  {id:"fixq-04", broken:"Are you work at night?", target:"Do you work at night?"},
+  {id:"fixq-05", broken:"She do work on Saturdays?", target:"Does she work on Saturdays?"},
+  {id:"fixq-06", broken:"What you do in the morning?", target:"What do you do in the morning?"}
+];
+
+/* ---- M04: LISTEN & FIND THE DETAIL — 2 DIÁLOGOS, 6 DESAFIOS ---- */
+const LISTEN_SCRIPTS = [
+  {scriptId:"listen-party", title:"At Dylan's Party",
+    script:"Hi! I'm Marco. I'm a chef, and I work at an Italian restaurant downtown. I usually work at night, from six to midnight.",
+    fields:[
+      {id:"listen-party-job", label:"Job", answers:["chef"]},
+      {id:"listen-party-place", label:"Workplace", answers:["italian restaurant downtown","an italian restaurant downtown","italian restaurant"]},
+      {id:"listen-party-time", label:"Work time", answers:["at night","six to midnight","from six to midnight","night"]}
+    ]},
+  {scriptId:"listen-work", title:"Shift &amp; Hospital Schedule",
+    script:"I'm a nurse. I work in the afternoon, from two to ten. I usually have lunch at one, right before my shift.",
+    fields:[
+      {id:"listen-work-job", label:"Job", answers:["nurse"]},
+      {id:"listen-work-shift", label:"Shift time", answers:["afternoon","from two to ten","two to ten","in the afternoon"]},
+      {id:"listen-work-lunch", label:"Lunchtime", answers:["one","at one","1","1:00","one o'clock"]}
+    ]}
+];
+
+/* ---- M05: BUILD THE ROUTINE — 8 FRASES ---- */
+const BUILDROUTINE_ITEMS = [
+  {id:"broutine-01", cue:"Rotina: acordar às 7:00.", target:"I wake up at 7:00."},
+  {id:"broutine-02", cue:"Rotina: tomar café da manhã de manhã.", target:"I have breakfast in the morning."},
+  {id:"broutine-03", cue:"Rotina de Ana: ir trabalhar às 8:30.", target:"She goes to work at 8:30."},
+  {id:"broutine-04", cue:"Rotina de Marco: almoçar de tarde.", target:"He has lunch in the afternoon."},
+  {id:"broutine-05", cue:"Rotina da equipe: trabalhar nos dias de semana.", target:"We work on weekdays."},
+  {id:"broutine-06", cue:"Rotina dos colegas: relaxar nos fins de semana.", target:"They relax on weekends."},
+  {id:"broutine-07", cue:"Rotina: ir dormir à noite.", target:"I go to bed at night."},
+  {id:"broutine-08", cue:"Rotina de Ana: checar o e-mail à noite (fim de tarde).", target:"She checks her email in the evening."}
+];
+
+/* ---- M06: ASK & TELL — RECUPERAÇÃO REVERSA (8 SITUAÇÕES) ---- */
+const ASKTELL_ITEMS = [
+  {id:"askt-01", situation:"Pergunte a profissão de alguém.", target:"What do you do?"},
+  {id:"askt-02", situation:"Pergunte a que horas a pessoa acorda.", target:"What time do you wake up?"},
+  {id:"askt-03", situation:"Pergunte se a pessoa trabalha nos fins de semana.", target:"Do you work on weekends?"},
+  {id:"askt-04", situation:"Pergunte onde a pessoa trabalha.", target:"Where do you work?"},
+  {id:"askt-05", situation:"Pergunte se ele é professor.", target:"Is he a teacher?"},
+  {id:"askt-06", situation:"Pergunte a que horas ela vai dormir.", target:"What time does she go to bed?"},
+  {id:"askt-07", situation:"Pergunte se ela trabalha à noite.", target:"Does she work at night?"},
+  {id:"askt-08", situation:"Pergunte de onde a pessoa é.", target:"Where are you from?"}
+];
+
+/* ---- M07: MEET SOMEONE — SIMULAÇÃO DE ENTREVISTA (8 PASSOS + RESUMO) ---- */
+const MEET_LADDER = [
+  {id:"meet-01", ask:"Hi! What's your name?", need:["name"], hintPt:"Responda com: My name is ...", audio:"Hi! What's your name?"},
+  {id:"meet-02", ask:"What do you do?", need:["i'm a","work","teacher","nurse","engineer","student","chef"], hintPt:"Responda com: I'm a ...", audio:"What do you do?"},
+  {id:"meet-03", ask:"Where do you work?", need:["work","at","hospital","school","company","office","restaurant"], hintPt:"Responda com: I work at ...", audio:"Where do you work?"},
+  {id:"meet-04", ask:"What time do you wake up?", need:["wake up","o'clock",":","i wake"], hintPt:"Responda com: I wake up at ...", audio:"What time do you wake up?"},
+  {id:"meet-05", ask:"Do you work on weekends?", need:["yes","no","i do","i don't","i do not"], hintPt:"Responda com: Yes, I do. / No, I don't.", audio:"Do you work on weekends?"},
+  {id:"meet-06", ask:"What time do you go to bed?", need:["go to bed","i go"], hintPt:"Responda com: I go to bed at ...", audio:"What time do you go to bed?"},
+  {id:"meet-07", ask:"Is your job stressful?", need:["yes","no","it is","it's","it isn't"], hintPt:"Responda com: Yes, it is. / No, it isn't.", audio:"Is your job stressful?"},
+  {id:"meet-08", ask:"How's it going?", need:["good","fine","great","pretty good","ok"], hintPt:"Responda com: Pretty good, thanks.", audio:"How's it going?"}
+];
+
+/* ---- CATÁLOGO — EXPRESSÕES DE TEMPO ---- */
+const TIME_EXPR_ITEMS = [
+  {id:"time-01", en:"in the morning", pt:"de manhã", note:"Usamos “in the” com morning, afternoon e evening."},
+  {id:"time-02", en:"in the afternoon", pt:"de tarde", note:"Usamos “in the” com morning, afternoon e evening."},
+  {id:"time-03", en:"in the evening", pt:"no fim de tarde / à noitinha", note:"Usamos “in the” com morning, afternoon e evening."},
+  {id:"time-04", en:"at night", pt:"à noite", note:"Exceção: “night” usa “at”, não “in the”."},
+  {id:"time-05", en:"at 8:00", pt:"às 8:00", note:"Usamos “at” com horários específicos."},
+  {id:"time-06", en:"on weekdays", pt:"nos dias de semana", note:"Usamos “on” com dias e tipos de dia (weekdays/weekends)."},
+  {id:"time-07", en:"on weekends", pt:"nos fins de semana", note:"Usamos “on” com dias e tipos de dia (weekdays/weekends)."}
+];
+
+/* =====================================================================
+   TRILHA — 7 MICRO-MISSÕES (ORDEM PEDAGÓGICA)
+   ===================================================================== */
+const MODULES_META = [
+  {key:"explore", em:"🔎", title:"Explore: Meet the Language", desc:"Conheça o vocabulário essencial de profissões e rotinas com áudio."},
+  {key:"drawers", em:"🗄️", title:"The Two Drawers", desc:"Classifique as perguntas nas gavetas certas: Be ou Do/Does."},
+  {key:"fixquestion", em:"🛠️", title:"Fix the Question", desc:"Conserte perguntas reais com erros de estrutura."},
+  {key:"listen", em:"🎧", title:"Listen & Find the Detail", desc:"Ouça os diálogos e capture os dados factuais."},
+  {key:"buildroutine", em:"⏰", title:"Build the Routine", desc:"Conecte atividade, horário e a preposição certa."},
+  {key:"asktell", em:"💬", title:"Ask & Tell", desc:"Monte a pergunta funcional exata para cada situação."},
+  {key:"meetsomeone", em:"🗣️", title:"Meet Someone", desc:"Conduza uma entrevista completa e feche com um resumo em 3ª pessoa."}
+];
+
+/* =====================================================================
+   ESTADO / PERSISTÊNCIA
+   ===================================================================== */
+const STORE_KEY = "personalIntroJobsRoutines_v1";
+function defaultState(){
+  return {
+    favorites:[],
+    progress:{},
+    reviewQueue:[],
+    errors:[],
+    errorLog:[],
+    customContent:[],
+    exploreViewed:[]
+  };
+}
+let state = defaultState();
+try{
+  const raw = localStorage.getItem(STORE_KEY);
+  if(raw) state = Object.assign(defaultState(), JSON.parse(raw));
+}catch(e){ state = defaultState(); }
+function saveState(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){ /* Safari private mode / quota — falha silenciosa */ }
+}
+
+/* =====================================================================
+   UTILITÁRIOS
+   ===================================================================== */
+function normalize(s){
+  return (s||"").toLowerCase().trim()
+    .replace(/[.,!?;:"“”'’]/g,"")
+    .replace(/\s+/g," ");
+}
+function acceptedMatch(input, acceptedList){
+  const n = normalize(input);
+  if(!n) return false;
+  return acceptedList.some(function(a){ return normalize(a) === n; });
+}
+function looseContains(input, needles){
+  const n = normalize(input);
+  if(needles.length===0) return n.length>1;
+  return needles.some(function(k){ return n.indexOf(normalize(k)) !== -1; });
+}
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+function getProgress(id){
+  if(!state.progress[id]) state.progress[id] = {seen:0,correct:0,wrong:0,level:1};
+  return state.progress[id];
+}
+function registerResult(id, correct){
+  const p = getProgress(id);
+  p.seen++;
+  if(correct){ p.correct++; p.level = Math.min(5,(p.level||1)+1); }
+  else { p.wrong++; p.level = p.level||1; }
+  saveState();
+}
+function pushError(itemId, moduleKey, label, errorType, wrongText, correctText){
+  const existing = state.reviewQueue.find(function(r){ return r.itemId===itemId; });
+  if(existing){ existing.tries=(existing.tries||1)+1; existing.ts=Date.now(); existing.module=moduleKey; }
+  else { state.reviewQueue.push({id:"rev-"+itemId+"-"+Date.now(), itemId:itemId, module:moduleKey, label:label, errorType:errorType, ts:Date.now(), tries:1}); }
+  state.errors.unshift({itemId:itemId, module:moduleKey, label:label, errorType:errorType, wrongText:wrongText, correctText:correctText, ts:Date.now()});
+  state.errors = state.errors.slice(0,40);
+  if(!state.errorLog) state.errorLog = [];
+  if(!state.errorLog.some(function(e){ return e.itemId===itemId; })){
+    state.errorLog.push({itemId:itemId, module:moduleKey, label:label, errorType:errorType, wrongText:wrongText, correctText:correctText, ts:Date.now()});
+  }
+  saveState();
+}
+function removeFromReview(itemId){
+  state.reviewQueue = state.reviewQueue.filter(function(r){ return r.itemId!==itemId; });
+  saveState();
+}
+function toggleFavorite(id){
+  const i = state.favorites.indexOf(id);
+  if(i>=0) state.favorites.splice(i,1); else state.favorites.push(id);
+  saveState();
+}
+function isFav(id){ return state.favorites.indexOf(id) !== -1; }
+function markModuleAnswered(moduleKey){
+  if(moduleKey==="explore"){
+    const item = EXPLORE_ITEMS[sessionState.idx];
+    if(!state.exploreViewed) state.exploreViewed=[];
+    if(item && state.exploreViewed.indexOf(item.id)===-1){ state.exploreViewed.push(item.id); }
+    saveState();
+  }
+}
+
+/* =====================================================================
+   PROGRESSO POR MÓDULO
+   ===================================================================== */
+function moduleIds(key){
+  switch(key){
+    case "explore": return EXPLORE_ITEMS.map(function(i){return i.id;});
+    case "drawers": { var idsD=BE_CHAMELEON_ITEMS.map(function(i){return i.id;}).concat(VERB_DETECTIVE_ITEMS.map(function(i){return i.id;})).concat(TWO_DRAWERS_ITEMS.map(function(i){return i.id;})); return idsD; }
+    case "fixquestion": return FIX_Q_ITEMS.map(function(i){return i.id;});
+    case "listen": { var ids=[]; LISTEN_SCRIPTS.forEach(function(s){ s.fields.forEach(function(f){ ids.push(f.id); }); }); return ids; }
+    case "buildroutine": return BUILDROUTINE_ITEMS.map(function(i){return i.id;});
+    case "asktell": return ASKTELL_ITEMS.map(function(i){return i.id;});
+    case "meetsomeone": { var ids2=MEET_LADDER.map(function(s){return s.id;}); ids2.push("meet-summary"); return ids2; }
+    default: return [];
+  }
+}
+function moduleProgress(key){
+  if(key==="explore"){
+    const total = EXPLORE_ITEMS.length;
+    const done = Math.min((state.exploreViewed||[]).length, total);
+    return {done:done, total:total, pct: total? Math.round(100*done/total):0};
+  }
+  const ids = moduleIds(key);
+  const done = ids.filter(function(id){ return state.progress[id] && state.progress[id].correct>0; }).length;
+  return {done:done, total:ids.length, pct: ids.length? Math.round(100*done/ids.length):0};
+}
+function resetModuleProgress(key){
+  // M01 Explore é uma missão de reconhecimento (não avaliada, sem nota de
+  // erro). Uma vez que o aluno visualiza um card, ele permanece "visto" —
+  // isso garante que state.exploreViewed nunca regrida para valores
+  // parciais nos snapshots de telemetria (Sessões / visibilitychange /
+  // pagehide). "Revisar novamente" apenas reabre a navegação do card 1,
+  // sem apagar o que já foi concluído.
+  if(key==="explore"){ saveState(); return; }
+  const ids = moduleIds(key);
+  ids.forEach(function(id){ delete state.progress[id]; });
+  state.reviewQueue = state.reviewQueue.filter(function(r){ return ids.indexOf(r.itemId)===-1; });
+  saveState();
+}
+function overallProgress(){
+  let doneSum=0, totalSum=0;
+  MODULES_META.forEach(function(m){ const p=moduleProgress(m.key); doneSum+=p.done; totalSum+=p.total; });
+  return totalSum? Math.round(100*doneSum/totalSum):0;
+}
+function computeStats(){
+  const ids = Object.keys(state.progress);
+  let correct=0, wrong=0, seen=0;
+  ids.forEach(function(id){ const p=state.progress[id]; correct+=p.correct; wrong+=p.wrong; seen+=p.seen; });
+  const accuracy = seen>0 ? Math.round(100*correct/(correct+wrong||1)) : 0;
+  return {accuracy:accuracy, seen:seen};
+}
+
+/* =====================================================================
+   NAVEGAÇÃO POR NÍVEIS
+   ===================================================================== */
+let level = "hub"; // hub | path | module | review | catalog | performance
+let activeModule = null;
+let sessionState = {};
+
+function goHub(){ level="hub"; activeModule=null; sessionState={}; render(); scrollTop(); }
+function goPath(){ level="path"; activeModule=null; sessionState={}; render(); scrollTop(); }
+function goModule(key){ level="module"; activeModule=key; sessionState={}; render(); scrollTop(); }
+function goReview(){ level="review"; sessionState={}; render(); scrollTop(); }
+function goCatalog(){
+  level="catalog";
+  sessionState={catalogCategory:"All", catalogFavOnly:false, catalogQuery:"", catalogExpanded:{}};
+  render(); scrollTop();
+}
+function goPerformance(){ level="performance"; sessionState={perfExpanded:{}}; render(); scrollTop(); }
+function scrollTop(){ window.scrollTo({top:0, behavior:"smooth"}); }
+
+document.getElementById("reviewShortcut").addEventListener("click", function(e){ e.stopPropagation(); goReview(); });
+document.getElementById("headerClick").addEventListener("click", function(){ goHub(); });
+
+function updateHeader(){
+  const pct = overallProgress();
+  document.getElementById("hsProgFill").style.width = pct+"%";
+  document.getElementById("hsProgPct").textContent = pct+"%";
+  const rq = state.reviewQueue.length;
+  const badge = document.getElementById("reviewBadge");
+  if(rq>0){ badge.style.display="inline-block"; badge.textContent = rq; } else { badge.style.display="none"; }
+}
+
+function backBar(label, onClick){
+  const b = document.createElement("button");
+  b.className = "back-bar";
+  b.textContent = "← " + label;
+  b.addEventListener("click", onClick);
+  return b;
+}
+
+function render(){
+  updateHeader();
+  const el = document.getElementById("mainCard");
+  el.innerHTML = "";
+  if(level==="hub") return renderHub(el);
+  if(level==="path") return renderPath(el);
+  if(level==="module") return renderModuleExercise(el);
+  if(level==="review") return renderReview(el);
+  if(level==="catalog") return renderCatalog(el);
+  if(level==="performance") return renderPerformance(el);
+}
+
+/* ---------------- NÍVEL 1 — HUB ---------------- */
+function renderHub(el){
+  const pct = overallProgress();
+  const firstIncomplete = MODULES_META.find(function(m){ return moduleProgress(m.key).pct < 100; });
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🏠 Personal Introductions, Jobs &amp; Routines</div>
+    <div class="module-desc">Progresso geral da unidade: <b>${pct}%</b>. Escolha um portal para continuar.</div>
+    <button class="quickstart" id="quickBtn">▶ Continuar Estudos</button>
+    <div class="portal-grid" id="portalGrid"></div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("quickBtn").addEventListener("click", function(){
+    if(firstIncomplete) goModule(firstIncomplete.key); else goReview();
+  });
+  const portals = [
+    {em:"📘", title:"Trilha de Estudos", desc:"Acesse as 7 missões da lição, em ordem pedagógica.", action:goPath, badge:null},
+    {em:"🔁", title:"Fila de Revisão", desc:"Recupere ativamente os itens que você errou.", action:goReview, badge: state.reviewQueue.length>0 ? state.reviewQueue.length : null},
+    {em:"📚", title:"Central de Conteúdo", desc:"Consulte todo o vocabulário e as expressões de tempo, favorite itens e adicione novos termos.", action:goCatalog, badge:null},
+    {em:"📊", title:"Desempenho & Habilidades", desc:"Veja sua precisão, domínio e erros por categoria.", action:goPerformance, badge:null}
+  ];
+  const grid = document.getElementById("portalGrid");
+  portals.forEach(function(p){
+    const card = document.createElement("button");
+    card.className = "portal-card";
+    card.innerHTML = `<div class="em">${p.em}</div><div><b>${p.title}</b><span>${p.desc}</span></div>${p.badge?`<div class="pb">${p.badge}</div>`:""}`;
+    card.addEventListener("click", function(e){ e.stopPropagation(); p.action(); });
+    grid.appendChild(card);
+  });
+}
+
+/* ---------------- NÍVEL 2 — TRILHA DE ESTUDOS ---------------- */
+function renderPath(el){
+  el.appendChild(backBar("Voltar ao Início", goHub));
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">📘 Trilha de Estudos</div>
+    <div class="module-desc">Progressão pedagógica: do reconhecimento do vocabulário à simulação de uma conversa real.</div>
+    <div class="path-list" id="pathList"></div>
+  `;
+  el.appendChild(wrap);
+  const list = document.getElementById("pathList");
+  MODULES_META.forEach(function(m){
+    const p = moduleProgress(m.key);
+    const status = p.pct>=100 ? "done" : (p.done>0 ? "progress" : "pending");
+    const card = document.createElement("button");
+    card.className = "path-card" + (status==="done" ? " done":"");
+    card.innerHTML = `
+      <div class="em">${m.em}</div>
+      <div class="pc-main">
+        <b>${m.title}</b>
+        <div class="pc-desc">${m.desc}</div>
+        <div class="pc-status ${status==='done'?'done':(status==='progress'?'progress':'')}">${status==='done'?'Concluído':(status==='progress'?'Em progresso':'Pendente')} · ${p.done}/${p.total}</div>
+        <div class="mini-bar"><div style="width:${p.pct}%"></div></div>
+      </div>
+      ${status==='done' ? '<div class="check-badge">✓</div>' : ''}
+    `;
+    card.addEventListener("click", function(){ goModule(m.key); });
+    list.appendChild(card);
+  });
+}
+
+function nextModuleKey(key){
+  const idx = MODULES_META.findIndex(function(m){ return m.key===key; });
+  if(idx>=0 && idx<MODULES_META.length-1) return MODULES_META[idx+1].key;
+  return null;
+}
+
+/* ---------------- NÍVEL 3 — EXERCÍCIO ATIVO ---------------- */
+function renderModuleExercise(el){
+  const navRow = document.createElement("div");
+  navRow.className = "nav-back-row";
+  navRow.appendChild(backBar("Início", goHub));
+  const sep = document.createElement("span");
+  sep.className = "nav-sep";
+  sep.textContent = "|";
+  navRow.appendChild(sep);
+  navRow.appendChild(backBar("Trilha", goPath));
+  el.appendChild(navRow);
+  const holder = document.createElement("div");
+  holder.id = "moduleHolder";
+  el.appendChild(holder);
+  const key = activeModule;
+  if(key==="explore") return renderExplore(holder);
+  if(key==="drawers") return renderDrawers(holder);
+  if(key==="fixquestion") return renderFixQuestion(holder);
+  if(key==="listen") return renderListen(holder);
+  if(key==="buildroutine") return renderBuildRoutine(holder);
+  if(key==="asktell") return renderAskTell(holder);
+  if(key==="meetsomeone") return renderMeetSomeoneNew(holder);
+}
+
+function moduleSummary(el, title, moduleKey, correctCount, total){
+  if(!sessionState.telemetrySent){ sessionState.telemetrySent = true; sendModuleTelemetry(moduleKey); }
+  const wrap = document.createElement("div");
+  const nextKey = nextModuleKey(moduleKey);
+  const nextMeta = nextKey ? MODULES_META.find(function(m){return m.key===nextKey;}) : null;
+  const restartLabel = moduleKey==="explore" ? "Revisar novamente" : "Reiniciar";
+  wrap.innerHTML = `
+    <div class="module-title">${title}</div>
+    <div class="feedback ok" style="margin-top:14px;">
+      🏆 Missão concluída! ${correctCount!==undefined ? `Você acertou <b>${correctCount}/${total}</b>.` : ""}
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="restartBtn">${restartLabel}</button>
+      ${nextMeta ? `<button class="btn btn-primary" id="nextModBtn">Avançar para ${nextMeta.title} ▶</button>` : `<button class="btn btn-primary" id="pathBtn">Voltar para a Trilha</button>`}
+    </div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("restartBtn").addEventListener("click", function(){ resetModuleProgress(moduleKey); sessionState={}; render(); });
+  if(nextMeta) document.getElementById("nextModBtn").addEventListener("click", function(){ goModule(nextKey); });
+  else document.getElementById("pathBtn").addEventListener("click", goPath);
+}
+
+/* =====================================================================
+   M01 — EXPLORE: MEET THE LANGUAGE
+   ===================================================================== */
+function renderExplore(el){
+  if(sessionState.idx===undefined) sessionState.idx=0;
+  if(sessionState.idx >= EXPLORE_ITEMS.length){ return moduleSummary(el, "🔎 Explore: Meet the Language", "explore"); }
+  const item = EXPLORE_ITEMS[sessionState.idx];
+  const isLast = sessionState.idx === EXPLORE_ITEMS.length-1;
+  const expanded = !!sessionState.exploreExpanded;
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🔎 Explore: Meet the Language</div>
+    <div class="ex-progress"><span>Card ${sessionState.idx+1} / ${EXPLORE_ITEMS.length}</span><span class="mono">${state.exploreViewed.indexOf(item.id)!==-1?'✓ visto':'novo'}</span></div>
+    <div class="target-box">
+      <div class="eng-line"><b>${item.en}</b> ${audioBtn(item.en)}
+        <button class="icon-btn star ${isFav(item.id)?'active':''}" data-favtoggle="${item.id}" title="favoritar">${isFav(item.id)?'⭐':'☆'}</button>
+      </div>
+      <div class="pt-line">🇧🇷 ${item.pt}</div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-item-head expandable-card" id="exampleToggle">
+        <div class="ci-text"><div class="ci-en">Ver 2 frases de exemplo</div></div>
+        <span class="expand-hint"><span class="expand-chevron ${expanded?'open':''}">▼</span></span>
+      </div>
+      <div class="cat-item-body ${expanded?'open':''}" id="exampleBody">
+        ${exampleBlock(item.ex1, item.ex1pt)}
+        ${exampleBlock(item.ex2, item.ex2pt)}
+      </div>
+    </div>
+    <div class="header-progress" style="margin-top:16px;"><div class="header-progress-fill" style="background:var(--primary-red);width:${Math.round(100*(sessionState.idx+1)/EXPLORE_ITEMS.length)}%"></div></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="backExploreBtn" ${sessionState.idx===0 ? "disabled" : ""}>◀ Back</button>
+      <button class="btn btn-primary" id="nextExploreBtn">${isLast ? 'Concluir ✓' : 'Next ▶'}</button>
+    </div>
+  `;
+  el.appendChild(wrap);
+  wireAudioButtons(el);
+  document.getElementById("exampleToggle").addEventListener("click", function(){
+    sessionState.exploreExpanded = !sessionState.exploreExpanded;
+    render();
+  });
+  el.querySelector("[data-favtoggle]").addEventListener("click", function(e){ e.stopPropagation(); toggleFavorite(item.id); render(); });
+  document.getElementById("backExploreBtn").addEventListener("click", function(){
+    if(sessionState.idx===0) return;
+    sessionState.idx--;
+    sessionState.exploreExpanded = false;
+    render();
+  });
+  document.getElementById("nextExploreBtn").addEventListener("click", function(){
+    markModuleAnswered("explore");
+    sessionState.idx++;
+    sessionState.exploreExpanded = false;
+    render();
+  });
+}
+
+/* =====================================================================
+   M02 — THE TWO DRAWERS (3 microfases · 15 decisões · banco fechado)
+   ===================================================================== */
+function initDrawersSession(){
+  sessionState.phase = "chameleon";
+  sessionState.chamOrder = shuffle(BE_CHAMELEON_ITEMS.map(function(_,i){return i;}));
+  sessionState.chamIdx = 0;
+  sessionState.chamPicked = null;
+  sessionState.vdetOrder = shuffle(VERB_DETECTIVE_ITEMS.map(function(_,i){return i;}));
+  sessionState.vdetIdx = 0;
+  sessionState.vdetPicked = null;
+  sessionState.drawOrder = shuffle(TWO_DRAWERS_ITEMS.map(function(_,i){return i;}));
+  sessionState.placed = {};
+  sessionState.selectedChip = null;
+  sessionState.drawerFeedback = null;
+}
+function renderDrawers(el){
+  if(!sessionState.phase) initDrawersSession();
+  if(sessionState.phase==="chameleon") return renderChameleon(el);
+  if(sessionState.phase==="chameleonDone") return renderChameleonDone(el);
+  if(sessionState.phase==="verbdetective") return renderVerbDetective(el);
+  if(sessionState.phase==="drawers") return renderTwoDrawersPhase(el);
+  if(sessionState.phase==="closing") return renderDrawersClosing(el);
+}
+
+/* ---- MICROFASE 1 — BE CHAMELEON (3 itens fixos) ---- */
+function renderChameleon(el){
+  if(sessionState.chamIdx >= BE_CHAMELEON_ITEMS.length){ sessionState.phase="chameleonDone"; return render(); }
+  const item = BE_CHAMELEON_ITEMS[sessionState.chamOrder[sessionState.chamIdx]];
+  const picked = sessionState.chamPicked;
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🦎 BE Chameleon</div>
+    <div class="ex-progress"><span>Item ${sessionState.chamIdx+1} / ${BE_CHAMELEON_ITEMS.length}</span><span class="mono">MICROFASE 1/3</span></div>
+    <div class="instr-box">am, is e are são formas do mesmo verbo: <b>BE</b>. Complete a frase.</div>
+    <div class="target-box"><div class="eng-line">${item.before} <b>___</b> ${item.after}</div></div>
+    <div class="options" id="chamOptions">${item.options.map(function(o){ return '<button class="opt-btn" data-opt="'+o+'">'+o+'</button>'; }).join("")}</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost btn-sm" id="chamRestart">↻ Reiniciar</button>
+      <button class="btn btn-ghost btn-sm" id="chamShuffle">⇄ Embaralhar</button>
+    </div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("chamRestart").addEventListener("click", function(){ sessionState.chamIdx=0; sessionState.chamPicked=null; render(); });
+  document.getElementById("chamShuffle").addEventListener("click", function(){ sessionState.chamOrder=shuffle(BE_CHAMELEON_ITEMS.map(function(_,i){return i;})); sessionState.chamIdx=0; sessionState.chamPicked=null; render(); });
+  if(picked===null || picked===undefined){
+    el.querySelectorAll("#chamOptions .opt-btn").forEach(function(b){
+      b.addEventListener("click", function(){
+        const chosen = b.dataset.opt;
+        const correct = chosen === item.answer;
+        registerResult(item.id, correct);
+        sessionState.chamPicked = chosen;
+        if(!correct) pushError(item.id,"drawers","I/She/They ___ ready.","BE_FORM",chosen,item.answer); else removeFromReview(item.id);
+        render();
+      });
+    });
+  } else {
+    el.querySelectorAll("#chamOptions .opt-btn").forEach(function(b){
+      b.disabled = true;
+      if(b.dataset.opt===item.answer) b.classList.add("correct");
+      else if(b.dataset.opt===picked) b.classList.add("wrong");
+    });
+    const correct = picked===item.answer;
+    const fb = document.getElementById("fbArea");
+    fb.innerHTML = `<div class="feedback ${correct?'ok':'bad'}">${correct?'✅ Isso mesmo! “'+item.answer+'” é BE.':'❌ A forma correta é “'+item.answer+'”. am, is e are são todas formas de BE.'}</div>
+      <div class="btn-row"><button class="btn btn-primary" id="chamNext">Continuar ▶</button></div>`;
+    document.getElementById("chamNext").addEventListener("click", function(){ sessionState.chamIdx++; sessionState.chamPicked=null; render(); });
+  }
+}
+function renderChameleonDone(el){
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🦎 BE Chameleon</div>
+    <div class="feedback ok" style="text-align:center;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;color:var(--primary-red);">BE = am · is · are</div>
+      <div class="fb-line" style="margin-top:6px;">am, is e are são formas do mesmo verbo: <b>BE</b>.</div>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" id="toVerbDet">Continuar para Verb Detective ▶</button></div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("toVerbDet").addEventListener("click", function(){ sessionState.phase="verbdetective"; render(); });
+}
+
+/* ---- MICROFASE 2 — VERB DETECTIVE (4 itens fixos) ---- */
+function renderVerbDetective(el){
+  if(sessionState.vdetIdx >= VERB_DETECTIVE_ITEMS.length){ sessionState.phase="drawers"; return render(); }
+  const item = VERB_DETECTIVE_ITEMS[sessionState.vdetOrder[sessionState.vdetIdx]];
+  const picked = sessionState.vdetPicked;
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🕵️ Verb Detective</div>
+    <div class="ex-progress"><span>Item ${sessionState.vdetIdx+1} / ${VERB_DETECTIVE_ITEMS.length}</span><span class="mono">MICROFASE 2/3</span></div>
+    <div class="instr-box">Primeiro encontre o verbo. Depois veja se ele é uma forma de BE.</div>
+    <div class="target-box"><div class="eng-line">${item.sentence}</div></div>
+    <div class="options" id="vdetOptions">
+      <button class="opt-btn" data-opt="BE">BE</button>
+      <button class="opt-btn" data-opt="DO">DO</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost btn-sm" id="vdetRestart">↻ Reiniciar</button>
+      <button class="btn btn-ghost btn-sm" id="vdetShuffle">⇄ Embaralhar</button>
+    </div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("vdetRestart").addEventListener("click", function(){ sessionState.vdetIdx=0; sessionState.vdetPicked=null; render(); });
+  document.getElementById("vdetShuffle").addEventListener("click", function(){ sessionState.vdetOrder=shuffle(VERB_DETECTIVE_ITEMS.map(function(_,i){return i;})); sessionState.vdetIdx=0; sessionState.vdetPicked=null; render(); });
+  if(picked===null || picked===undefined){
+    el.querySelectorAll("#vdetOptions .opt-btn").forEach(function(b){
+      b.addEventListener("click", function(){
+        const chosen = b.dataset.opt;
+        const correct = chosen === item.answer;
+        registerResult(item.id, correct);
+        sessionState.vdetPicked = chosen;
+        if(!correct) pushError(item.id,"drawers",item.sentence,"BE_VS_DO",chosen,item.answer); else removeFromReview(item.id);
+        render();
+      });
+    });
+  } else {
+    el.querySelectorAll("#vdetOptions .opt-btn").forEach(function(b){
+      b.disabled = true;
+      if(b.dataset.opt===item.answer) b.classList.add("correct");
+      else if(b.dataset.opt===picked) b.classList.add("wrong");
+    });
+    const correct = picked===item.answer;
+    const fb = document.getElementById("fbArea");
+    fb.innerHTML = correct
+      ? `<div class="feedback ok">✅ ${item.answer} — “${item.verbWord}” is the verb.</div><div class="btn-row"><button class="btn btn-primary" id="vdetNext">Continuar ▶</button></div>`
+      : `<div class="feedback bad">❌ Look at the verb: ${item.verbWord} → the sentence uses ${item.answer}.<div class="pt-line">Aqui o verbo é “${item.verbWord}” → a frase usa ${item.answer}.</div></div><div class="btn-row"><button class="btn btn-primary" id="vdetNext">Continuar ▶</button></div>`;
+    document.getElementById("vdetNext").addEventListener("click", function(){ sessionState.vdetIdx++; sessionState.vdetPicked=null; render(); });
+  }
+}
+
+/* ---- MICROFASE 3 — THE TWO DRAWERS (experiência principal, 8 itens) ---- */
+function renderTwoDrawersPhase(el){
+  const placedCount = Object.keys(sessionState.placed).length;
+  if(placedCount >= TWO_DRAWERS_ITEMS.length){ sessionState.phase="closing"; sessionState.drawerFeedback=null; return render(); }
+  const pending = sessionState.drawOrder.map(function(i){return TWO_DRAWERS_ITEMS[i];}).filter(function(it){ return !sessionState.placed[it.id]; });
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🗄️ The Two Drawers</div>
+    <div class="ex-progress"><span>Classificadas: ${placedCount} / ${TWO_DRAWERS_ITEMS.length}</span><span class="mono">MICROFASE 3/3</span></div>
+    <div class="instr-box"><b>Toque em uma pergunta</b> e depois toque na gaveta correta.</div>
+    <div class="chip-pool" id="chipPool"></div>
+    <div class="drawer-row">
+      <div class="drawer" data-drawer="BE"><b>🗄️ BE</b><span>am / is / are</span><div class="drawer-items" id="drawerBE"></div></div>
+      <div class="drawer" data-drawer="DODOES"><b>🗄️ DO/DOES</b><span>do / does + verbo</span><div class="drawer-items" id="drawerDD"></div></div>
+    </div>
+    <div id="fbArea">${sessionState.drawerFeedback||""}</div>
+  `;
+  el.appendChild(wrap);
+  const pool = document.getElementById("chipPool");
+  pending.forEach(function(it){
+    const chip = document.createElement("button");
+    chip.className = "sort-chip" + (sessionState.selectedChip===it.id ? " selected":"");
+    chip.textContent = it.sentence;
+    chip.addEventListener("click", function(){
+      sessionState.selectedChip = sessionState.selectedChip===it.id ? null : it.id;
+      sessionState.drawerFeedback = null;
+      render();
+    });
+    pool.appendChild(chip);
+  });
+  el.querySelectorAll("[data-drawer]").forEach(function(d){
+    d.addEventListener("click", function(){
+      if(!sessionState.selectedChip) return;
+      const item = TWO_DRAWERS_ITEMS.find(function(i){return i.id===sessionState.selectedChip;});
+      const chosenDrawer = d.dataset.drawer;
+      const correct = item.answer === chosenDrawer;
+      registerResult(item.id, correct);
+      if(correct){
+        removeFromReview(item.id);
+        sessionState.drawerFeedback = `<div class="feedback ok">${chosenDrawer==="BE"?"BE drawer ✓":"DO drawer ✓"} — ${item.cue} → ${chosenDrawer==="BE"?"BE":"DO/DOES"}</div>`;
+      } else {
+        const errType = item.answer==="BE" ? "DO_WITH_BE" : "BE_WITH_MAIN_VERB";
+        pushError(item.id,"drawers",item.sentence,errType,chosenDrawer,item.answer);
+        const msg = item.answer==="BE"
+          ? `BE is already the verb. DO stays out.<div class="pt-line">Aqui o verbo é BE. O DO não entra.</div>`
+          : `The main verb is "${item.cue}". Use DO.<div class="pt-line">Aqui o verbo é ${item.cue}. Use DO.</div>`;
+        sessionState.drawerFeedback = `<div class="feedback bad">${msg}</div>`;
+      }
+      sessionState.placed[item.id] = {drawer:chosenDrawer, correct:correct};
+      sessionState.selectedChip = null;
+      render();
+    });
+  });
+  renderPlacedDrawers();
+  function renderPlacedDrawers(){
+    ["BE","DODOES"].forEach(function(dr){
+      const box = document.getElementById(dr==="BE"?"drawerBE":"drawerDD");
+      if(!box) return;
+      box.innerHTML = "";
+      Object.keys(sessionState.placed).forEach(function(id){
+        const p = sessionState.placed[id];
+        if(p.drawer!==dr) return;
+        const item = TWO_DRAWERS_ITEMS.find(function(i){return i.id===id;});
+        const row = document.createElement("div");
+        row.className = "drawer-item " + (p.correct?"right":"wrong");
+        row.textContent = (p.correct?"✅ ":"❌ ") + item.sentence;
+        box.appendChild(row);
+      });
+    });
+  }
+}
+
+/* ---- FECHAMENTO — GABARITO CONSOLIDADO ---- */
+function renderDrawersClosing(el){
+  if(!sessionState.telemetrySent){ sessionState.telemetrySent = true; sendModuleTelemetry("drawers"); }
+  const correctCount = Object.values(sessionState.placed).filter(function(p){return p.correct;}).length;
+  const beItems = TWO_DRAWERS_ITEMS.filter(function(i){return i.answer==="BE";});
+  const doItems = TWO_DRAWERS_ITEMS.filter(function(i){return i.answer==="DODOES";});
+  const nextKey = nextModuleKey("drawers");
+  const nextMeta = nextKey ? MODULES_META.find(function(m){return m.key===nextKey;}) : null;
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🗄️ The Two Drawers — Gabarito</div>
+    <div class="feedback ok">🏆 Missão concluída! Você acertou <b>${correctCount}/${TWO_DRAWERS_ITEMS.length}</b> nas gavetas.</div>
+    <div class="drawer-row" style="margin-top:14px;">
+      <div class="drawer" style="cursor:default;"><b>🗄️ BE</b><span>am / is / are</span>
+        <div class="drawer-items">${beItems.map(function(i){ return '<div class="drawer-item right">✅ '+i.target+'</div>'; }).join("")}</div>
+      </div>
+      <div class="drawer" style="cursor:default;"><b>🗄️ DO/DOES</b><span>do / does + verbo</span>
+        <div class="drawer-items">${doItems.map(function(i){ return '<div class="drawer-item right">✅ '+i.target+'</div>'; }).join("")}</div>
+      </div>
+    </div>
+    <div class="instr-box" style="margin-top:16px;">
+      <b>Síntese:</b> BE já é o verbo/operador da pergunta. DO/DOES é usado quando o verbo principal não é BE.
+      <div class="pt-line" style="margin-top:4px;">Não escolho DO ou BE porque a frase é uma pergunta — primeiro encontro o verbo. Se for BE, BE fica no comando. Se não for BE, DO/DOES entra.</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="drawersRestart">↻ Reiniciar missão</button>
+      ${nextMeta ? `<button class="btn btn-primary" id="drawersNext">Avançar para ${nextMeta.title} ▶</button>` : `<button class="btn btn-primary" id="drawersPath">Voltar para a Trilha</button>`}
+    </div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("drawersRestart").addEventListener("click", function(){ resetModuleProgress("drawers"); sessionState={}; render(); });
+  if(nextMeta) document.getElementById("drawersNext").addEventListener("click", function(){ goModule(nextKey); });
+  else document.getElementById("drawersPath").addEventListener("click", goPath);
+}
+
+/* =====================================================================
+   M03 — FIX THE QUESTION
+   ===================================================================== */
+function renderFixQuestion(el){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.order=shuffle(FIX_Q_ITEMS.map(function(_,i){return i;})); sessionState.correctCount=0; }
+  if(sessionState.idx >= sessionState.order.length){ return moduleSummary(el, "🛠️ Fix the Question", "fixquestion", sessionState.correctCount, FIX_Q_ITEMS.length); }
+  const item = FIX_Q_ITEMS[sessionState.order[sessionState.idx]];
+  if(!sessionState.bank){ sessionState.bank = shuffle(item.target.split(" ")).map(function(w){return {word:w, used:false};}); sessionState.answer=[]; }
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🛠️ Fix the Question</div>
+    <div class="ex-progress"><span>Item ${sessionState.idx+1} / ${sessionState.order.length}</span></div>
+    <div class="instr-box">❌ <b>${item.broken}</b><div class="pt-line">Toque nas palavras abaixo para montar a versão correta.</div></div>
+    <div id="buildArea"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="checkBtn">Verificar</button>
+      <button class="btn btn-ghost" id="clearBtn">Limpar</button>
+    </div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  renderBuildArea();
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    sessionState.bank = shuffle(item.target.split(" ")).map(function(w){return {word:w, used:false};});
+    sessionState.answer = [];
+    renderBuildArea();
+    document.getElementById("fbArea").innerHTML="";
+  });
+  document.getElementById("checkBtn").addEventListener("click", function(){ checkFix(); });
+
+  function renderBuildArea(){
+    const area = document.getElementById("buildArea");
+    const answerHtml = sessionState.answer.length===0 ? "" : sessionState.answer.map(function(t,i){ return '<span class="ans-tile" data-remove-idx="'+i+'">'+t.word+'</span>'; }).join("");
+    area.innerHTML = `
+      <div class="answer-strip ${sessionState.answer.length===0?'empty':''}">${answerHtml}</div>
+      <div class="tile-bank">${sessionState.bank.map(function(t,i){ return t.used?"":'<span class="tile" data-tile-idx="'+i+'">'+t.word+'</span>'; }).join("")}</div>
+    `;
+    area.querySelectorAll("[data-tile-idx]").forEach(function(t){
+      t.addEventListener("click", function(){
+        const idx = +t.dataset.tileIdx;
+        sessionState.bank[idx].used = true;
+        sessionState.answer.push({word: sessionState.bank[idx].word});
+        renderBuildArea();
+      });
+    });
+    area.querySelectorAll("[data-remove-idx]").forEach(function(t){
+      t.addEventListener("click", function(){
+        const idx = +t.dataset.removeIdx;
+        const removed = sessionState.answer.splice(idx,1)[0];
+        const bankItem = sessionState.bank.find(function(b){ return b.used && b.word===removed.word; });
+        if(bankItem) bankItem.used = false;
+        renderBuildArea();
+      });
+    });
+  }
+  function checkFix(){
+    const assembled = sessionState.answer.map(function(t){return t.word;}).join(" ");
+    const correct = normalize(assembled) === normalize(item.target);
+    registerResult(item.id, correct);
+    if(correct) sessionState.correctCount++;
+    const fb = document.getElementById("fbArea");
+    if(correct){
+      removeFromReview(item.id);
+      fb.innerHTML = `<div class="feedback ok"><div class="fb-line">✅ Corrigido! <b>${item.target}</b> ${audioBtn(item.target)}</div></div>`;
+    } else {
+      pushError(item.id,"fixquestion",item.broken,"QUESTION_FORMATION",assembled,item.target);
+      fb.innerHTML = `<div class="feedback bad">
+        <div class="fb-line">❌ Você montou: “${assembled||'(vazio)'}”</div>
+        <div class="fb-line">✅ Correto: <b>${item.target}</b> ${audioBtn(item.target)}</div>
+        <div class="fb-line">💡 Confira o auxiliar certo (be, do ou does) na pergunta.</div>
+        <span class="tag">QUESTION_FORMATION</span>
+      </div>`;
+    }
+    wireAudioButtons(fb);
+    document.getElementById("checkBtn").disabled = true;
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-primary" id="fixNext">Próxima pergunta ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("fixNext").addEventListener("click", function(){ sessionState.idx++; sessionState.bank=null; render(); });
+  }
+}
+
+/* =====================================================================
+   M04 — LISTEN & FIND THE DETAIL
+   ===================================================================== */
+function renderListen(el){
+  if(sessionState.scriptIdx===undefined) sessionState.scriptIdx=0;
+  if(sessionState.scriptIdx >= LISTEN_SCRIPTS.length){ return moduleSummary(el, "🎧 Listen & Find the Detail", "listen"); }
+  const script = LISTEN_SCRIPTS[sessionState.scriptIdx];
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🎧 Listen & Find the Detail</div>
+    <div class="ex-progress"><span>Diálogo ${sessionState.scriptIdx+1} / ${LISTEN_SCRIPTS.length}</span><span class="mono">${script.title}</span></div>
+    <div class="target-box"><button class="btn btn-primary" id="playAudioBtn">🔊 Ouvir Áudio</button></div>
+    <div id="fieldsArea"></div>
+    <div class="btn-row"><button class="btn btn-primary" id="checkListenBtn">Verificar</button></div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("playAudioBtn").addEventListener("click", function(){ speak(script.script); });
+  document.getElementById("fieldsArea").innerHTML = script.fields.map(function(f,i){
+    return '<div class="field-group"><span class="field-label">'+f.label+'</span><input class="type-input" data-lc-idx="'+i+'"></div>';
+  }).join("");
+  document.getElementById("checkListenBtn").addEventListener("click", function(){
+    let correctCount=0; const wrongLabels=[];
+    document.querySelectorAll("[data-lc-idx]").forEach(function(inp){
+      const idx = +inp.dataset.lcIdx;
+      const f = script.fields[idx];
+      const ok = acceptedMatch(inp.value, f.answers);
+      registerResult(f.id, ok);
+      if(ok){ correctCount++; removeFromReview(f.id); }
+      else { wrongLabels.push(f.label); pushError(f.id,"listen",f.label,"COMPREHENSION",inp.value,f.answers[0]); }
+    });
+    const allCorrect = correctCount===script.fields.length;
+    const fb = document.getElementById("fbArea");
+    if(allCorrect){
+      fb.innerHTML = `<div class="feedback ok">✅ Você capturou todas as informações corretamente! <div class="fb-line" style="margin-top:6px;">📜 “${script.script}” ${audioBtn(script.script)}</div></div>`;
+    } else {
+      fb.innerHTML = `<div class="feedback bad">❌ Você acertou ${correctCount}/${script.fields.length}. Campos a revisar: <b>${wrongLabels.join(", ")}</b>.<div class="fb-line" style="margin-top:6px;">📜 “${script.script}” ${audioBtn(script.script)}</div><span class="tag">COMPREHENSION</span></div>`;
+    }
+    wireAudioButtons(fb);
+    document.getElementById("checkListenBtn").disabled = true;
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-primary" id="nextListenBtn">Próximo diálogo ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("nextListenBtn").addEventListener("click", function(){ sessionState.scriptIdx++; render(); });
+  });
+}
+
+/* =====================================================================
+   M05 — BUILD THE ROUTINE
+   ===================================================================== */
+function renderBuildRoutine(el){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.order=shuffle(BUILDROUTINE_ITEMS.map(function(_,i){return i;})); sessionState.correctCount=0; }
+  if(sessionState.idx >= sessionState.order.length){ return moduleSummary(el, "⏰ Build the Routine", "buildroutine", sessionState.correctCount, BUILDROUTINE_ITEMS.length); }
+  const item = BUILDROUTINE_ITEMS[sessionState.order[sessionState.idx]];
+  if(!sessionState.bank){ sessionState.bank = shuffle(item.target.split(" ")).map(function(w){return {word:w, used:false};}); sessionState.answer=[]; }
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">⏰ Build the Routine</div>
+    <div class="ex-progress"><span>Item ${sessionState.idx+1} / ${sessionState.order.length}</span></div>
+    <div class="instr-box"><b>${item.cue}</b><div class="pt-line">Conecte atividade, horário e a preposição certa (in the / at / on).</div></div>
+    <div id="buildArea"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="checkBtn">Verificar</button>
+      <button class="btn btn-ghost" id="clearBtn">Limpar</button>
+    </div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  renderBuildArea();
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    sessionState.bank = shuffle(item.target.split(" ")).map(function(w){return {word:w, used:false};});
+    sessionState.answer = [];
+    renderBuildArea();
+    document.getElementById("fbArea").innerHTML="";
+  });
+  document.getElementById("checkBtn").addEventListener("click", function(){ checkRoutine(); });
+
+  function renderBuildArea(){
+    const area = document.getElementById("buildArea");
+    const answerHtml = sessionState.answer.length===0 ? "" : sessionState.answer.map(function(t,i){ return '<span class="ans-tile" data-remove-idx="'+i+'">'+t.word+'</span>'; }).join("");
+    area.innerHTML = `
+      <div class="answer-strip ${sessionState.answer.length===0?'empty':''}">${answerHtml}</div>
+      <div class="tile-bank">${sessionState.bank.map(function(t,i){ return t.used?"":'<span class="tile" data-tile-idx="'+i+'">'+t.word+'</span>'; }).join("")}</div>
+    `;
+    area.querySelectorAll("[data-tile-idx]").forEach(function(t){
+      t.addEventListener("click", function(){
+        const idx = +t.dataset.tileIdx;
+        sessionState.bank[idx].used = true;
+        sessionState.answer.push({word: sessionState.bank[idx].word});
+        renderBuildArea();
+      });
+    });
+    area.querySelectorAll("[data-remove-idx]").forEach(function(t){
+      t.addEventListener("click", function(){
+        const idx = +t.dataset.removeIdx;
+        const removed = sessionState.answer.splice(idx,1)[0];
+        const bankItem = sessionState.bank.find(function(b){ return b.used && b.word===removed.word; });
+        if(bankItem) bankItem.used = false;
+        renderBuildArea();
+      });
+    });
+  }
+  function checkRoutine(){
+    const assembled = sessionState.answer.map(function(t){return t.word;}).join(" ");
+    const correct = normalize(assembled) === normalize(item.target);
+    registerResult(item.id, correct);
+    if(correct) sessionState.correctCount++;
+    const fb = document.getElementById("fbArea");
+    if(correct){
+      removeFromReview(item.id);
+      fb.innerHTML = `<div class="feedback ok"><div class="fb-line">✅ Muito bem! <b>${item.target}</b> ${audioBtn(item.target)}</div></div>`;
+    } else {
+      pushError(item.id,"buildroutine",item.cue,"VOCABULARY",assembled,item.target);
+      fb.innerHTML = `<div class="feedback bad">
+        <div class="fb-line">❌ Você montou: “${assembled||'(vazio)'}”</div>
+        <div class="fb-line">✅ Correto: <b>${item.target}</b> ${audioBtn(item.target)}</div>
+        <div class="fb-line">💡 Lembre-se: “in the morning/afternoon/evening”, mas “at night” e “at” + horário.</div>
+        <span class="tag">VOCABULARY</span>
+      </div>`;
+    }
+    wireAudioButtons(fb);
+    document.getElementById("checkBtn").disabled = true;
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-primary" id="brNext">Próxima frase ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("brNext").addEventListener("click", function(){ sessionState.idx++; sessionState.bank=null; render(); });
+  }
+}
+
+/* =====================================================================
+   M06 — ASK & TELL (RECUPERAÇÃO REVERSA)
+   ===================================================================== */
+function renderAskTell(el){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.order=shuffle(ASKTELL_ITEMS.map(function(_,i){return i;})); sessionState.correctCount=0; }
+  if(sessionState.idx >= sessionState.order.length){ return moduleSummary(el, "💬 Ask & Tell", "asktell", sessionState.correctCount, ASKTELL_ITEMS.length); }
+  const item = ASKTELL_ITEMS[sessionState.order[sessionState.idx]];
+  if(!sessionState.bank){ sessionState.bank = shuffle(item.target.split(" ")).map(function(w){return {word:w, used:false};}); sessionState.answer=[]; }
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">💬 Ask &amp; Tell</div>
+    <div class="ex-progress"><span>Situação ${sessionState.idx+1} / ${sessionState.order.length}</span></div>
+    <div class="instr-box"><b>Situação:</b> ${item.situation}</div>
+    <div id="buildArea"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="checkBtn">Verificar</button>
+      <button class="btn btn-ghost" id="clearBtn">Limpar</button>
+    </div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  renderBuildArea();
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    sessionState.bank = shuffle(item.target.split(" ")).map(function(w){return {word:w, used:false};});
+    sessionState.answer = [];
+    renderBuildArea();
+    document.getElementById("fbArea").innerHTML="";
+  });
+  document.getElementById("checkBtn").addEventListener("click", function(){ checkAskTell(); });
+
+  function renderBuildArea(){
+    const area = document.getElementById("buildArea");
+    const answerHtml = sessionState.answer.length===0 ? "" : sessionState.answer.map(function(t,i){ return '<span class="ans-tile" data-remove-idx="'+i+'">'+t.word+'</span>'; }).join("");
+    area.innerHTML = `
+      <div class="answer-strip ${sessionState.answer.length===0?'empty':''}">${answerHtml}</div>
+      <div class="tile-bank">${sessionState.bank.map(function(t,i){ return t.used?"":'<span class="tile" data-tile-idx="'+i+'">'+t.word+'</span>'; }).join("")}</div>
+    `;
+    area.querySelectorAll("[data-tile-idx]").forEach(function(t){
+      t.addEventListener("click", function(){
+        const idx = +t.dataset.tileIdx;
+        sessionState.bank[idx].used = true;
+        sessionState.answer.push({word: sessionState.bank[idx].word});
+        renderBuildArea();
+      });
+    });
+    area.querySelectorAll("[data-remove-idx]").forEach(function(t){
+      t.addEventListener("click", function(){
+        const idx = +t.dataset.removeIdx;
+        const removed = sessionState.answer.splice(idx,1)[0];
+        const bankItem = sessionState.bank.find(function(b){ return b.used && b.word===removed.word; });
+        if(bankItem) bankItem.used = false;
+        renderBuildArea();
+      });
+    });
+  }
+  function checkAskTell(){
+    const assembled = sessionState.answer.map(function(t){return t.word;}).join(" ");
+    const correct = normalize(assembled) === normalize(item.target);
+    registerResult(item.id, correct);
+    if(correct) sessionState.correctCount++;
+    const fb = document.getElementById("fbArea");
+    if(correct){
+      removeFromReview(item.id);
+      fb.innerHTML = `<div class="feedback ok"><div class="fb-line">✅ Pergunta perfeita! <b>${item.target}</b> ${audioBtn(item.target)}</div></div>`;
+    } else {
+      pushError(item.id,"asktell",item.situation,"QUESTION_FORMATION",assembled,item.target);
+      fb.innerHTML = `<div class="feedback bad">
+        <div class="fb-line">❌ Você montou: “${assembled||'(vazio)'}”</div>
+        <div class="fb-line">✅ Correto: <b>${item.target}</b> ${audioBtn(item.target)}</div>
+        <span class="tag">QUESTION_FORMATION</span>
+      </div>`;
+    }
+    wireAudioButtons(fb);
+    document.getElementById("checkBtn").disabled = true;
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-primary" id="atNext">Próxima situação ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("atNext").addEventListener("click", function(){ sessionState.idx++; sessionState.bank=null; render(); });
+  }
+}
+
+/* =====================================================================
+   M07 — MEET SOMEONE (SIMULAÇÃO + RESUMO EM 3ª PESSOA)
+   ===================================================================== */
+function renderMeetSomeoneNew(el){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.log=[]; }
+  if(sessionState.idx < MEET_LADDER.length){
+    const step = MEET_LADDER[sessionState.idx];
+    const wrap = document.createElement("div");
+    wrap.innerHTML = `
+      <div class="module-title">🗣️ Meet Someone</div>
+      <div class="ex-progress"><span>Passo ${sessionState.idx+1} / ${MEET_LADDER.length+1}</span></div>
+      <div class="target-box"><div class="eng-line">${step.ask} ${audioBtn(step.audio)}</div></div>
+      <div class="pt-line" style="margin-bottom:10px;">💡 ${step.hintPt}</div>
+      <input type="text" class="type-input" id="ladderInput" placeholder="Escreva sua resposta em inglês..." autocomplete="off">
+      <div class="btn-row"><button class="btn btn-primary" id="ladderSend">Enviar</button></div>
+      <div id="fbArea"></div>
+    `;
+    el.appendChild(wrap);
+    wireAudioButtons(el);
+    document.getElementById("ladderInput").addEventListener("keydown", function(e){ if(e.key==="Enter") document.getElementById("ladderSend").click(); });
+    document.getElementById("ladderSend").addEventListener("click", function(){
+      const val = document.getElementById("ladderInput").value;
+      const ok = looseContains(val, step.need);
+      registerResult(step.id, ok);
+      sessionState.log.push({ask:step.ask, userText:val, ok:ok});
+      if(!ok) pushError(step.id,"meetsomeone",step.ask,"NATURALNESS",val,step.hintPt); else removeFromReview(step.id);
+      const fb = document.getElementById("fbArea");
+      fb.innerHTML = `<div class="feedback ${ok?'ok':'bad'}">${ok?'✅ Boa resposta!':'⚠️ Resposta registrada — tente se aproximar do modelo sugerido na dica.'}</div>`;
+      document.getElementById("ladderSend").disabled = true;
+      document.getElementById("ladderInput").disabled = true;
+      const btnRow=document.createElement("div"); btnRow.className="btn-row";
+      btnRow.innerHTML='<button class="btn btn-primary" id="ladderNext">Continuar ▶</button>';
+      fb.appendChild(btnRow);
+      document.getElementById("ladderNext").addEventListener("click", function(){ sessionState.idx++; render(); });
+    });
+    return;
+  }
+  // Passo final — resumo em 3ª pessoa
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🗣️ Meet Someone — Resumo Final</div>
+    <div class="ex-progress"><span>Passo ${MEET_LADDER.length+1} / ${MEET_LADDER.length+1}</span></div>
+    <div class="instr-box"><b>Tarefa:</b> Agora escreva um resumo em 3ª pessoa sobre a pessoa que você acabou de entrevistar (nome, profissão, local de trabalho e um horário da rotina).</div>
+    <textarea class="type-input" id="summaryInput" placeholder="This is... He/She is a... He/She works at... He/She wakes up at..."></textarea>
+    <div class="btn-row"><button class="btn btn-primary" id="checkSummaryBtn">Verificar</button></div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("checkSummaryBtn").addEventListener("click", function(){
+    const txt = document.getElementById("summaryInput").value;
+    const n = normalize(txt);
+    const hasPronoun = n.indexOf("he ")!==-1 || n.indexOf("she ")!==-1 || n.indexOf("he's")!==-1 || n.indexOf("she's")!==-1;
+    const hasVerb = n.indexOf("works")!==-1 || n.indexOf("is a")!==-1 || n.indexOf("wakes")!==-1 || n.indexOf("goes")!==-1;
+    const hasTime = n.indexOf(" at ")!==-1 || n.indexOf("in the")!==-1 || n.indexOf(" on ")!==-1 || n.indexOf("night")!==-1;
+    const correct = hasPronoun && hasVerb && hasTime && n.length>15;
+    registerResult("meet-summary", correct);
+    if(!sessionState.telemetrySent){ sessionState.telemetrySent = true; sendModuleTelemetry("meetsomeone"); }
+    const fb = document.getElementById("fbArea");
+    const passed = sessionState.log.filter(function(l){return l.ok;}).length;
+    if(correct){
+      removeFromReview("meet-summary");
+      fb.innerHTML = `<div class="feedback ok">✅ Ótimo resumo! Você usou 3ª pessoa, um verbo de rotina/profissão e uma expressão de tempo.<div class="fb-line" style="margin-top:8px;">Exemplo: <i>This is Marco. He's a chef. He works at an Italian restaurant. He works at night.</i></div></div>`;
+    } else {
+      pushError("meet-summary","meetsomeone","Resumo em 3ª pessoa","NATURALNESS",txt,"This is... He/She is a... He/She works at... at/in the...");
+      fb.innerHTML = `<div class="feedback bad">❌ Tente incluir: um pronome de 3ª pessoa (he/she), um verbo de profissão ou rotina (is a / works / wakes up) e uma expressão de tempo (at.../in the.../at night).<div class="fb-line" style="margin-top:8px;">Exemplo: <i>This is Marco. He's a chef. He works at an Italian restaurant. He works at night.</i></div><span class="tag">NATURALNESS</span></div>`;
+    }
+    const wrap2 = document.createElement("div");
+    wrap2.innerHTML = `<div class="module-desc" style="margin-top:14px;">Passos completados nesta entrevista: <b>${passed}/${MEET_LADDER.length}</b></div>`;
+    fb.appendChild(wrap2);
+    document.getElementById("checkSummaryBtn").disabled = true;
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-ghost" id="restartMeetBtn">Tentar novamente</button><button class="btn btn-primary" id="finishMeetBtn">Voltar para a Trilha</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("restartMeetBtn").addEventListener("click", function(){ resetModuleProgress("meetsomeone"); sessionState={}; render(); });
+    document.getElementById("finishMeetBtn").addEventListener("click", goPath);
+  });
+}
+
+/* ---------------- FILA DE REVISÃO ---------------- */
+function renderReview(el){
+  el.appendChild(backBar("Voltar ao Início", goHub));
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🔁 Fila de Revisão</div>
+    <div class="module-desc">Itens que você errou entram automaticamente aqui. Pratique novamente até dominar!</div>
+    <div id="reviewList"></div>
+  `;
+  el.appendChild(wrap);
+  const box = document.getElementById("reviewList");
+  if(state.reviewQueue.length===0){ box.innerHTML = '<div class="empty-state"><div class="big">🎉</div>Nenhum item pendente de revisão no momento.</div>'; return; }
+  const frames = ["🔁 Revisão", "🔁 Tente de novo", "🔁 Reforçando"];
+  const moduleTitle = {};
+  MODULES_META.forEach(function(m){ moduleTitle[m.key]=m.title; });
+  const sortedQueue = state.reviewQueue.slice().sort(function(a,b){
+    const pa = a.errorType==="DO_WITH_BE" ? 0 : 1;
+    const pb = b.errorType==="DO_WITH_BE" ? 0 : 1;
+    return pa-pb;
+  });
+  box.innerHTML = sortedQueue.map(function(r,i){
+    return `<div class="review-item">
+      <div class="badge-pill">${r.errorType||"REVIEW"}</div>
+      <div style="margin-top:6px;"><b>${frames[i%frames.length]}:</b> ${r.label}</div>
+      <div class="pt-line">Módulo original: ${moduleTitle[r.module]||r.module} · tentativas com erro: ${r.tries}</div>
+      <div class="btn-row"><button class="btn btn-primary btn-sm" data-review-go="${r.module}">Revisar agora</button></div>
+    </div>`;
+  }).join("");
+  box.querySelectorAll("[data-review-go]").forEach(function(b){
+    b.addEventListener("click", function(){ goModule(b.dataset.reviewGo); });
+  });
+}
+
+/* ---------------- CATÁLOGO & FAVORITOS ---------------- */
+function buildCatalogItems(){
+  const items = [];
+  EXPLORE_ITEMS.forEach(function(p){ items.push({id:p.id, en:p.en, pt:p.pt, cat:"Vocabulary", example:p.ex1, examplePt:p.ex1pt, note:null}); });
+  TIME_EXPR_ITEMS.forEach(function(t){ items.push({id:t.id, en:t.en, pt:t.pt, cat:"Time Expressions", example:null, examplePt:null, note:t.note}); });
+  LISTEN_SCRIPTS.forEach(function(s){ items.push({id:s.scriptId, en:s.title, pt:"Diálogo completo", cat:"Dialogues", example:s.script, examplePt:null, note:null}); });
+  state.customContent.forEach(function(c){ items.push({id:c.id, en:c.en, pt:c.pt, cat:"My Vocabulary", example:null, examplePt:null, note:null}); });
+  return items;
+}
+function renderCatalog(el){
+  el.appendChild(backBar("Voltar ao Início", goHub));
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">📚 Central de Conteúdo</div>
+    <div class="module-desc">Consulte todo o vocabulário e as expressões de tempo desta unidade, acesse seus favoritos e adicione novos termos.</div>
+    <input type="text" class="search-input" id="catQuery" placeholder="Pesquisar (ex: “shift”, “morning”, “nurse”...)">
+    <div class="chip-row" id="catCatRow"></div>
+    <div class="btn-row" style="margin-top:0;margin-bottom:6px;">
+      <button class="btn btn-primary btn-sm" id="addTermBtn">➕ Adicionar Termo</button>
+    </div>
+    <div id="addTermForm"></div>
+    <div id="catList"></div>
+  `;
+  el.appendChild(wrap);
+
+  const categories = ["All","Vocabulary","Time Expressions","Dialogues","My Vocabulary"];
+  const catRow = document.getElementById("catCatRow");
+  categories.forEach(function(c){
+    const chip = document.createElement("button");
+    chip.className = "chip" + (sessionState.catalogCategory===c ? " active":"");
+    chip.textContent = c==="All" ? "All" : c;
+    chip.addEventListener("click", function(){ sessionState.catalogCategory=c; render(); });
+    catRow.appendChild(chip);
+  });
+  const favChip = document.createElement("button");
+  favChip.className = "chip" + (sessionState.catalogFavOnly ? " active":"");
+  favChip.textContent = "⭐ Favorites";
+  favChip.addEventListener("click", function(){ sessionState.catalogFavOnly = !sessionState.catalogFavOnly; render(); });
+  catRow.appendChild(favChip);
+
+  const queryInput = document.getElementById("catQuery");
+  queryInput.value = sessionState.catalogQuery || "";
+  queryInput.addEventListener("input", function(){ sessionState.catalogQuery = queryInput.value; renderList(); });
+
+  document.getElementById("addTermBtn").addEventListener("click", function(){
+    const formArea = document.getElementById("addTermForm");
+    formArea.innerHTML = `
+      <div class="field-group"><span class="field-label">Inglês (frase/termo) *</span><input class="type-input" id="f_en"></div>
+      <div class="field-group"><span class="field-label">Português (tradução) *</span><input class="type-input" id="f_pt"></div>
+      <div class="btn-row"><button class="btn btn-primary" id="saveTermBtn">Salvar</button><button class="btn btn-ghost" id="cancelTermBtn">Cancelar</button></div>
+    `;
+    document.getElementById("saveTermBtn").addEventListener("click", function(){
+      const en = document.getElementById("f_en").value.trim();
+      const pt = document.getElementById("f_pt").value.trim();
+      if(!en || !pt){ alert("Preencha inglês e português."); return; }
+      state.customContent.push({id:"custom-"+Date.now(), en:en, pt:pt});
+      saveState();
+      render();
+    });
+    document.getElementById("cancelTermBtn").addEventListener("click", function(){ formArea.innerHTML=""; });
+  });
+
+  renderList();
+  function renderList(){
+    const box = document.getElementById("catList");
+    const q = normalize(sessionState.catalogQuery);
+    let items = buildCatalogItems();
+    items = items.filter(function(it){
+      if(sessionState.catalogCategory!=="All" && it.cat!==sessionState.catalogCategory) return false;
+      if(sessionState.catalogFavOnly && !isFav(it.id)) return false;
+      if(q && normalize(it.en).indexOf(q)===-1 && normalize(it.pt).indexOf(q)===-1) return false;
+      return true;
+    });
+    if(items.length===0){ box.innerHTML = '<div class="empty-state"><div class="big">📭</div>Nenhum item encontrado com esses filtros.</div>'; return; }
+    box.innerHTML = items.map(function(it){
+      const expanded = !!sessionState.catalogExpanded[it.id];
+      return `<div class="cat-item">
+        <div class="cat-item-head expandable-card" data-headtoggle="${it.id}">
+          <div class="ci-text"><div class="ci-en-row">${it.en} ${audioBtn(it.en)}</div><div class="ci-pt">${it.pt}</div></div>
+          <div class="cat-item-actions">
+            <span class="tag">${it.cat}</span>
+            <button class="icon-btn star ${isFav(it.id)?'active':''}" data-favtoggle="${it.id}">${isFav(it.id)?'⭐':'☆'}</button>
+            <span class="expand-hint"><span class="expand-chevron ${expanded?'open':''}">▼</span></span>
+          </div>
+        </div>
+        <div class="cat-item-body ${expanded?'open':''}">
+          ${it.note ? '<div class="arrow-line">💡 '+it.note+'</div>' : ''}
+          ${it.example ? exampleBlock(it.example, it.examplePt) : ''}
+          ${!it.example && !it.note ? '<div class="pt-line">Sem detalhes adicionais para este item.</div>' : ''}
+        </div>
+      </div>`;
+    }).join("");
+    wireAudioButtons(box);
+    box.querySelectorAll("[data-favtoggle]").forEach(function(b){
+      b.addEventListener("click", function(e){ e.stopPropagation(); toggleFavorite(b.dataset.favtoggle); renderList(); updateHeader(); });
+    });
+    box.querySelectorAll("[data-headtoggle]").forEach(function(head){
+      head.addEventListener("click", function(e){
+        if(e.target.closest("[data-favtoggle]") || e.target.closest("[data-speak]")) return;
+        const id = head.dataset.headtoggle;
+        sessionState.catalogExpanded[id] = !sessionState.catalogExpanded[id];
+        renderList();
+      });
+    });
+  }
+}
+
+const GRAMMAR_SUBTYPES = ["BE_FORM","BE_VS_DO","DO_WITH_BE","BE_WITH_MAIN_VERB"];
+function mapErrorTypeToSkill(t){ return GRAMMAR_SUBTYPES.indexOf(t)!==-1 ? "GRAMMAR" : t; }
+const SKILL_INFO = {
+  GRAMMAR: {what:"Contraste entre o verbo be (identidade, origem, idade) e do/does (ações e rotinas).",
+    why:"Confundir be com do/does gera perguntas e frases incompreensíveis (ex.: “Do you are a nurse?”) — é o erro mais comum nesta unidade.",
+    tip:"Pergunte-se: a pergunta é sobre QUEM a pessoa é (be) ou o que ela FAZ (do/does)? Pratique no módulo The Two Drawers."},
+  QUESTION_FORMATION: {what:"Uso correto do auxiliar (do/does) em perguntas com Wh- e a ordem das palavras.",
+    why:"Sem o auxiliar certo na posição certa, a pergunta soa quebrada para um falante nativo (ex.: “Where you work?” em vez de “Where do you work?”).",
+    tip:"Lembre-se da fórmula: Wh- + do/does + sujeito + verbo. Pratique em Fix the Question e Ask & Tell."},
+  COMPREHENSION: {what:"Capacidade de capturar dados factuais (profissão, local e horário) a partir de um áudio.",
+    why:"Em uma conversa real você não tem texto escrito — só o que ouve. É o teste mais próximo de uma situação autêntica.",
+    tip:"Ouça o áudio quantas vezes precisar no módulo Listen &amp; Find the Detail antes de preencher os campos."},
+  VOCABULARY: {what:"Vocabulário de profissões, rotinas e as preposições de tempo corretas (in the / at / on).",
+    why:"Trocar “at morning” por “in the morning”, por exemplo, é um erro muito comum e soa estranho em inglês natural.",
+    tip:"Memorize os padrões fixos: “in the morning/afternoon/evening”, mas “at night” e “at” + horário. Pratique em Build the Routine."},
+  NATURALNESS: {what:"Capacidade de responder de forma natural e apropriada em uma conversa real sobre trabalho e rotina.",
+    why:"Uma entrevista completa (Meet Someone) exige reagir na hora, sem tempo para planejar cada frase, e depois relatar em 3ª pessoa.",
+    tip:"Pratique frases curtas e diretas (“I'm a nurse.”, “I work at night.”) até que saiam automaticamente."}
+};
+function renderPerformance(el){
+  el.appendChild(backBar("Voltar ao Início", goHub));
+  const st = computeStats();
+  const skillTags = ["GRAMMAR","QUESTION_FORMATION","COMPREHENSION","VOCABULARY","NATURALNESS"];
+  const counts = {};
+  skillTags.forEach(function(t){ counts[t]=0; });
+  state.errors.forEach(function(e){ const mapped = mapErrorTypeToSkill(e.errorType); if(counts[mapped]!==undefined) counts[mapped]++; });
+  const weakest = Object.entries(counts).sort(function(a,b){ return b[1]-a[1]; })[0];
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">📊 Desempenho &amp; Habilidades</div>
+    <div class="module-desc">Seu progresso geral nesta unidade.</div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">${st.accuracy}%</div><div class="stat-label">Accuracy</div></div>
+      <div class="stat-card"><div class="stat-num">${overallProgress()}%</div><div class="stat-label">Progresso da unidade</div></div>
+      <div class="stat-card"><div class="stat-num">${state.reviewQueue.length}</div><div class="stat-label">Review queue</div></div>
+      <div class="stat-card"><div class="stat-num">${state.favorites.length}</div><div class="stat-label">⭐ Favorites</div></div>
+    </div>
+    <div class="module-desc" style="margin-top:18px;"><b>Habilidades (baseado em erros recentes)</b>${weakest && weakest[1]>0 ? ` — precisa mais atenção: <b>${weakest[0]}</b>` : " — nenhum erro recente registrado 🎉"}</div>
+    <div id="skillCards"></div>
+    <div class="module-desc" style="margin-top:18px;"><b>Erros recentes</b></div>
+    <div id="recentErrors"></div>
+  `;
+  el.appendChild(wrap);
+  if(!sessionState.perfExpanded) sessionState.perfExpanded = {};
+  renderSkillCards();
+  function renderSkillCards(){
+    const box = document.getElementById("skillCards");
+    const shown = skillTags.filter(function(t){ return counts[t]>0; });
+    if(shown.length===0){ box.innerHTML = ""; return; }
+    box.innerHTML = shown.map(function(t){
+      const expanded = !!sessionState.perfExpanded[t];
+      const info = SKILL_INFO[t] || {};
+      return `<div class="skill-card">
+        <div class="skill-card-head expandable-card" data-skilltoggle="${t}">
+          <div style="flex:1;">
+            <span class="field-label" style="margin-bottom:0;">${t} — ${counts[t]} erro(s)</span>
+            <div class="mini-bar"><div style="width:${Math.min(100,counts[t]*20)}%"></div></div>
+          </div>
+          <span class="expand-hint">ℹ️ Dicas <span class="expand-chevron ${expanded?'open':''}">▼</span></span>
+        </div>
+        <div class="skill-card-body ${expanded?'open':''}">
+          <div class="fb-line"><b>O que é:</b> ${info.what||""}</div>
+          <div class="fb-line"><b>Por que importa:</b> ${info.why||""}</div>
+          <div class="fb-line"><b>💡 Dica prática:</b> ${info.tip||""}</div>
+        </div>
+      </div>`;
+    }).join("");
+    box.querySelectorAll("[data-skilltoggle]").forEach(function(h){
+      h.addEventListener("click", function(){
+        const t = h.dataset.skilltoggle;
+        sessionState.perfExpanded[t] = !sessionState.perfExpanded[t];
+        renderSkillCards();
+      });
+    });
+  }
+  const box = document.getElementById("recentErrors");
+  if(state.errors.length===0){ box.innerHTML = '<div class="empty-state"><div class="big">🎉</div>Nenhum erro registrado ainda.</div>'; return; }
+  box.innerHTML = state.errors.slice(0,10).map(function(e){
+    return `<div class="review-item">
+      <span class="tag">${e.errorType}</span>
+      <div class="pt-line" style="margin-top:6px;">${e.label}</div>
+      ${e.wrongText? '<div class="fb-line">❌ “'+e.wrongText+'”</div>':""}
+      ${e.correctText? '<div class="fb-line">✅ “'+e.correctText+'”</div>':""}
+    </div>`;
+  }).join("");
+}
+
+/* =====================================================================
+   IDENTIFICAÇÃO DO ALUNO (uma única vez, para nomear a telemetria)
+   ===================================================================== */
+function showStudentGate(){
+  if(getStudentName()) return;
+  const overlay = document.createElement("div");
+  overlay.className = "telemetry-overlay";
+  overlay.innerHTML = `
+    <div class="telemetry-card">
+      <div class="module-title" style="font-size:20px;">👋 Antes de começar</div>
+      <div class="module-desc">Como podemos te chamar? Isso ajuda seu professor(a) a acompanhar seu progresso nesta unidade.</div>
+      <input type="text" class="type-input" id="studentNameInput" placeholder="Seu nome" autocomplete="off">
+      <div class="btn-row">
+        <button class="btn btn-primary" id="studentNameStart">Começar</button>
+        <button class="btn btn-ghost" id="studentNameSkip">Continuar sem identificação</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  const input = document.getElementById("studentNameInput");
+  input.addEventListener("keydown", function(e){ if(e.key==="Enter") document.getElementById("studentNameStart").click(); });
+  document.getElementById("studentNameStart").addEventListener("click", function(){
+    const name = input.value.trim();
+    setStudentName(name || "Aluno anônimo");
+    overlay.remove();
+  });
+  document.getElementById("studentNameSkip").addEventListener("click", function(){
+    setStudentName("Aluno anônimo");
+    overlay.remove();
+  });
+}
+
+/* =====================================================================
+   INIT
+   ===================================================================== */
+render();
+showStudentGate();
+document.addEventListener("visibilitychange", function(){
+  if(document.visibilityState === "hidden") maybeSendSessionSummary();
+});
+window.addEventListener("pagehide", function(){ maybeSendSessionSummary(); });
+</script>
+</body>
+</html>
