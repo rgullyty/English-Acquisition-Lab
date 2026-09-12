@@ -310,4 +310,1333 @@ const GOLDEN_PHRASES = [
 const COLLOCATIONS = [
   {id:"col-01", prompt:"She works ___ a living.", options:["for","of","at","in"], answer:"for", full:"work for a living", note:"Usamos “for a living” para dizer qual é a profissão de alguém.", ex:"What do you do for a living?", exPt:"O que você faz para viver / qual é a sua profissão?"},
   {id:"col-02", prompt:"I'm in the same class ___ Soo-jin.", options:["with","as","of","for"], answer:"as", full:"in the same class as", note:"Usamos “the same ___ as” para comparar/igualar duas coisas.", ex:"I'm in the same class as Jay.", exPt:"Eu estou na mesma turma que o Jay."},
-  {id:"col-03", prompt:"See you ___ the morning.", options:["at","on","in","for"], answer:"in", full:"in the morning", note:"Usamos “in the morning/aftern
+  {id:"col-03", prompt:"See you ___ the morning.", options:["at","on","in","for"], answer:"in", full:"in the morning", note:"Usamos “in the morning/afternoon” mas “at night”.", ex:"I have class in the morning.", exPt:"Eu tenho aula de manhã."},
+  {id:"col-04", prompt:"I'll see you ___ 8:00.", options:["in","on","at","for"], answer:"at", full:"at 8:00", note:"Usamos “at” com horários específicos.", ex:"The meeting is at 8:00.", exPt:"A reunião é às 8:00."},
+  {id:"col-05", prompt:"She's ___ vacation this week.", options:["at","in","on","for"], answer:"on", full:"on vacation", note:"A expressão fixa é “on vacation”.", ex:"They're on vacation in Brazil.", exPt:"Eles estão de férias no Brasil."},
+  {id:"col-06", prompt:"Wait for me ___ there.", options:["over","on","at","in"], answer:"over", full:"over there", note:"“Over there” indica um lugar à distância, apontando.", ex:"My friend is over there.", exPt:"Meu amigo está ali."}
+];
+
+/* ---- ASKING QUESTIONS (build the sentence) ---- */
+const BUILD_ITEMS = [
+  {id:"bts-01", situation:"Pergunte de onde alguém é.", target:"Where are you from?"},
+  {id:"bts-02", situation:"Pergunte a idade de alguém.", target:"How old are you?"},
+  {id:"bts-03", situation:"Pergunte a Jay de onde ele é.", target:"Where is Jay from?"},
+  {id:"bts-04", situation:"Pergunte o sobrenome de alguém.", target:"What's your last name?"},
+  {id:"bts-05", situation:"Pergunte o que as pessoas costumam te chamar.", target:"What do people call you?"},
+  {id:"bts-06", situation:"Pergunte como se soletra algo.", target:"How do you spell that?"},
+  {id:"bts-07", situation:"Pergunte se alguém é do Brasil.", target:"Are you from Brazil?"},
+  {id:"bts-08", situation:"Pergunte como é Seul.", target:"What's Seoul like?"},
+  {id:"bts-09", situation:"Pergunte como são os colegas de alguém.", target:"What are your classmates like?"},
+  {id:"bts-10", situation:"Peça para a pessoa repetir o sobrenome.", target:"What's your last name again?"}
+];
+
+/* ---- KEEP THE CONVERSATION GOING (what would you say) ---- */
+const WWS_ITEMS = [
+  {id:"wws-01", kind:"mcq", errorType:"SOCIAL_RESPONSE",
+    context:"Você conhece alguém chamado Alexandra. Ela diz: “My name is Alexandra Costa, but please call me Alexa.”",
+    prompt:"O que você pode chamá-la?",
+    options:["Alexandra","Alexa","Costa","Miss Costa"], answerIndex:1,
+    explain:"Ela pediu explicitamente para ser chamada de “Alexa” — esse é o apelido (nickname)."},
+  {id:"wws-02", kind:"typed", errorType:"SOCIAL_RESPONSE",
+    context:"Você quer saber como as pessoas costumam chamar alguém.",
+    prompt:"O que você diria?",
+    accepted:["what do people call you","what do people call you?"],
+    explain:"“What do people call you?” é a forma natural de perguntar sobre apelidos/formas de chamar alguém."},
+  {id:"wws-03", kind:"typed", errorType:"SOCIAL_RESPONSE",
+    context:"Você não ouviu o sobrenome da pessoa.",
+    prompt:"O que você diria?",
+    accepted:["i'm sorry what's your last name again","i'm sorry. what's your last name again?","what's your last name again","what's your last name again?"],
+    explain:"“What's your last name again?” pede que a informação seja repetida educadamente."},
+  {id:"wws-04", kind:"typed", errorType:"SPELLING",
+    context:"Você ouviu “Valdez”, mas não sabe soletrar.",
+    prompt:"O que você diria?",
+    accepted:["how do you spell that","how do you spell that?","how do you spell it","how do you spell it?"],
+    explain:"“How do you spell that?” pede a soletração de uma palavra ou nome."},
+  {id:"wws-05", kind:"mcq", errorType:"SOCIAL_RESPONSE",
+    context:"Você escreveu “Valdes”. A pessoa responde: “Actually, it's Valdez.”",
+    prompt:"Por que a pessoa disse “Actually”?",
+    options:["To correct the information.","To agree with you.","To greet you.","To say goodbye."], answerIndex:0,
+    explain:"“Actually” é usado para corrigir uma informação incorreta de forma educada."},
+  {id:"wws-06", kind:"typed", errorType:"SOCIAL_RESPONSE",
+    context:"Alguém pergunta: “So, you're from South Korea?”",
+    prompt:"Como você confirma que a informação está correta?",
+    accepted:["that's right","that's right."],
+    explain:"“That's right.” confirma que a informação está correta."},
+  {id:"wws-07", kind:"mcq", errorType:"SOCIAL_RESPONSE",
+    context:"Alguém pergunta casualmente: “How's it going?”",
+    prompt:"O que você responderia?",
+    options:["Pretty good, thanks.","I'm from Brazil.","Nice to meet you.","See you later."], answerIndex:0,
+    explain:"“Pretty good, thanks.” é a resposta casual natural para “How's it going?”."},
+  {id:"wws-08", kind:"mcq", errorType:"SOCIAL_RESPONSE",
+    context:"Alguém pergunta casualmente: “What's up?”",
+    prompt:"O que você responderia?",
+    options:["Oh, not much.","I'm 25.","Have a good day.","That's right."], answerIndex:0,
+    explain:"“Oh, not much.” é a resposta casual típica para “What's up?”."},
+  {id:"wws-09", kind:"typed", errorType:"SOCIAL_RESPONSE",
+    context:"Alguém se despede: “Have a good day.”",
+    prompt:"O que você diria?",
+    accepted:["thank you you too","thank you. you, too.","thanks you too","thank you you, too"],
+    explain:"“Thank you. You, too.” devolve a despedida de forma natural."},
+  {id:"wws-10", kind:"mcq", errorType:"SOCIAL_RESPONSE",
+    context:"Um colega pergunta: “Do you have time for coffee?”",
+    prompt:"O que você responderia (aceitando)?",
+    options:["Sure. I'd love some coffee.","No problem, see you.","That's right.","Pretty good, thanks."], answerIndex:0,
+    explain:"“Sure. I'd love some coffee.” aceita o convite educadamente."}
+];
+
+/* ---- CLARIFYING & REPAIRING (fix the misunderstanding) ---- */
+const FIX_ITEMS = [
+  {id:"fix-01", errorType:"QUESTION_ORDER",
+    context:"A pessoa disse: “My last name is Valdez.” Você escreveu: Valdes.",
+    prompt:"Corrija a informação.",
+    accepted:["actually it's valdez","actually, it's valdez","actually it's valdez.","actually, it's valdez."],
+    explain:"Usamos “Actually, it's...” para corrigir educadamente uma informação errada."},
+  {id:"fix-02", errorType:"VOCABULARY",
+    context:"A pessoa disse: “I'm Alexandra.” Você entendeu: Alexander.",
+    prompt:"Corrija a informação.",
+    accepted:["actually it's alexandra","actually, it's alexandra","actually it's alexandra.","actually, it's alexandra."],
+    explain:"“Actually, it's Alexandra.” corrige o nome de forma clara e educada."},
+  {id:"fix-03", errorType:"SOCIAL_RESPONSE",
+    context:"A pessoa disse: “I'm from South Korea.” Você entendeu: South Africa. Você quer confirmar antes de corrigir.",
+    prompt:"O que você pergunta para confirmar?",
+    accepted:["so you're from south korea","so, you're from south korea?","so you're from south korea?"],
+    explain:"“So, you're from South Korea?” confirma a informação antes de aceitá-la como certa."},
+  {id:"fix-04", errorType:"LISTENING",
+    context:"A pessoa falou algo rapidamente e você não entendeu.",
+    prompt:"O que você diria para pedir que ela repita?",
+    accepted:["can you say that again","can you say that again?"],
+    explain:"“Can you say that again?” pede repetição de forma educada."},
+  {id:"fix-05", errorType:"SPELLING",
+    context:"A pessoa forneceu o sobrenome dela, mas você precisa confirmar como se escreve.",
+    prompt:"O que você pergunta?",
+    accepted:["how do you spell that","how do you spell that?","how do you spell it","how do you spell it?"],
+    explain:"“How do you spell that?” confirma a grafia exata de uma palavra."}
+];
+
+/* ---- LISTENING FOR DETAILS ---- */
+const LISTEN_ITEMS = [
+  {id:"lc-01", script:"Hi, my name is Alexandra Costa. I'm from Brazil. I'm twenty-four, and I'm a student.",
+    fields:[["First name","Alexandra"],["Last name","Costa"],["Country","Brazil"],["Age","24"],["Job","student"]]},
+  {id:"lc-02", script:"Hi, I'm Jay Park. I'm from South Korea. I'm twenty-one. I'm in the same class as Soo-jin.",
+    questions:[["What's his first name?",["jay"]],["What's his last name?",["park"]],["Where is he from?",["south korea"]],["How old is he?",["21"]],["Who is Soo-jin?",["his classmate","classmate","she is his classmate"]]]},
+  {id:"lc-03", script:"My name is Alexandra Costa. Everyone calls me Alexa. I'm from Brazil, but I live in São Paulo.",
+    questions:[["What's her first name?",["alexandra"]],["What's her last name?",["costa"]],["What do people call her?",["alexa"]],["Where is she from?",["brazil"]]]}
+];
+
+/* ---- WHAT WAS THE QUESTION? ---- */
+const QM_PAIRS = [
+  {id:"qm-01", answer:"I'm from Brazil.", options:["Where are you from?","What's your name?","How old are you?","Who is she?"], question:"Where are you from?"},
+  {id:"qm-02", answer:"I'm 25.", options:["How old are you?","Where are you from?","What do you do?","Who is she?"], question:"How old are you?"},
+  {id:"qm-03", answer:"She's my classmate.", options:["Who is she?","What's her name?","Where is she from?","How old is she?"], question:"Who is she?"},
+  {id:"qm-04", answer:"It's an exciting city.", options:["What's the city like?","Where is the city?","What's the city's name?","How old is the city?"], question:"What's the city like?"},
+  {id:"qm-05", answer:"They're shy but friendly.", options:["What are your classmates like?","Who are your classmates?","Where are your classmates from?","How old are your classmates?"], question:"What are your classmates like?"},
+  {id:"qm-06", answer:"It's Maria.", options:["What's her first name?","Where is she from?","How old is she?","What does she do?"], question:"What's her first name?"},
+  {id:"qm-07", answer:"I'm a student.", options:["What do you do?","Where do you live?","How old are you?","Who are you?"], question:"What do you do?"},
+  {id:"qm-08", answer:"My name is Jay Park.", options:["What's your name?","Where are you from?","How old are you?","What do you do?"], question:"What's your name?"},
+  {id:"qm-09", answer:"Yes, I am.", options:["Are you a student?","Is she a student?","Are they students?","Am I a student?"], question:"Are you a student?"},
+  {id:"qm-10", answer:"No, I'm not.", options:["Are you from Canada?","Is he from Canada?","Are they from Canada?","Where are you from?"], question:"Are you from Canada?"}
+];
+
+/* ---- PRONUNCIATION & LINKING (pool completo — sorteio de 10 a cada rodada) ---- */
+const FT_OPTIONS = ["O \"t\" soa parecido com o \"r\" de \"arara\"","O \"t\" fica totalmente mudo","O \"t\" soa como \"tch\" (como em tchau)"];
+const SOUND_POOL = [
+  /* Consoante → Vogal */
+  {id:"cv-01", badge:"🎯 PADRÃO: Consoante → Vogal", cat:"Consoante → Vogal", stimulusType:"sentence", stimulus:"My friend is over there.",
+    command:"Onde ocorre a conexão em destaque?", options:["friend‿is","is‿over","My‿friend","over‿there"], correct:["friend‿is","is‿over"],
+    explain:"O /d/ final de 'friend' gruda no 'is' e o /z/ de 'is' gruda no 'over', ficando tipo 'frien-diz-over'."},
+  {id:"cv-02", badge:"🎯 PADRÃO: Consoante → Vogal", cat:"Consoante → Vogal", stimulusType:"sentence", stimulus:"How old are you?",
+    command:"Onde ocorre a conexão em destaque?", options:["old‿are","How‿old","are‿you"], correct:["old‿are"],
+    explain:"O som /d/ final de 'old' gruda na vogal de 'are', ficando tipo 'ol-dare'."},
+  {id:"cv-03", badge:"🎯 PADRÃO: Consoante → Vogal", cat:"Consoante → Vogal", stimulusType:"sentence", stimulus:"This is my brother.",
+    command:"Onde ocorre a conexão em destaque?", options:["This‿is","is‿my","my‿brother"], correct:["This‿is"],
+    explain:"O som /s/ com som de 'z' em 'This' gruda na vogal de 'is', ficando tipo 'Thi-zis'."},
+  {id:"cv-04", badge:"🎯 PADRÃO: Consoante → Vogal", cat:"Consoante → Vogal", stimulusType:"sentence", stimulus:"Where is he from?",
+    command:"Onde ocorre a conexão em destaque?", options:["Where‿is","is‿he","he‿from"], correct:["Where‿is"],
+    explain:"O som /r/ final de 'Where' gruda direto no 'is', ficando tipo 'Whe-riz'."},
+  {id:"cv-05", badge:"🎯 PADRÃO: Consoante → Vogal", cat:"Consoante → Vogal", stimulusType:"sentence", stimulus:"Stand up, please.",
+    command:"Onde ocorre a conexão em destaque?", options:["Stand‿up","up‿please","please‿stand"], correct:["Stand‿up"],
+    explain:"O som /d/ final de 'Stand' gruda na vogal de 'up', ficando tipo 'Stan-dup'."},
+  /* Mesmo Som */
+  {id:"ss-01", badge:"🎯 PADRÃO: Mesmo Som", cat:"Mesmo Som", stimulusType:"sentence", stimulus:"That's a big game.",
+    command:"Onde ocorre a conexão em destaque?", options:["big‿game","a‿big","That's‿a"], correct:["big‿game"],
+    explain:"O som /g/ final de 'big' se funde com o /g/ inicial de 'game', ficando tipo 'bi-game'."},
+  {id:"ss-02", badge:"🎯 PADRÃO: Mesmo Som", cat:"Mesmo Som", stimulusType:"sentence", stimulus:"What's your phone number?",
+    command:"Onde ocorre a conexão em destaque?", options:["phone‿number","your‿phone","What's‿your"], correct:["phone‿number"],
+    explain:"O som /n/ final de 'phone' se funde com o /n/ inicial de 'number', ficando tipo 'pho-number'."},
+  {id:"ss-03", badge:"🎯 PADRÃO: Mesmo Som", cat:"Mesmo Som", stimulusType:"sentence", stimulus:"Nice to meet you, take care.",
+    command:"Onde ocorre a conexão em destaque?", options:["take‿care","Nice‿to","meet‿you"], correct:["take‿care"],
+    explain:"O som /k/ final de 'take' se funde com o /k/ inicial de 'care', ficando tipo 'tay-care'."},
+  {id:"ss-04", badge:"🎯 PADRÃO: Mesmo Som", cat:"Mesmo Som", stimulusType:"sentence", stimulus:"She has a red dress.",
+    command:"Onde ocorre a conexão em destaque?", options:["red‿dress","has‿a","a‿red"], correct:["red‿dress"],
+    explain:"O som /d/ final de 'red' se funde com o /d/ inicial de 'dress', ficando tipo 're-dress'."},
+  {id:"ss-05", badge:"🎯 PADRÃO: Mesmo Som", cat:"Mesmo Som", stimulusType:"sentence", stimulus:"This street is very quiet.",
+    command:"Onde ocorre a conexão em destaque?", options:["this‿street","street‿is","is‿very"], correct:["this‿street"],
+    explain:"O som /s/ final de 'this' se funde com o /s/ inicial de 'street', ficando tipo 'thi-street'."},
+  /* Flap T */
+  {id:"ft-01", badge:"🎯 PRONÚNCIA & SONS", cat:"Flap T", stimulusType:"word", stimulus:"water",
+    command:"Como a letra 't' é pronunciada nesta palavra?", options:FT_OPTIONS.slice(), correct:[FT_OPTIONS[0]],
+    explain:"No inglês americano, o 't' entre vogais soa parecido com o 'r' de 'arara', ficando tipo 'wá-rer'."},
+  {id:"ft-02", badge:"🎯 PRONÚNCIA & SONS", cat:"Flap T", stimulusType:"word", stimulus:"better",
+    command:"Como a letra 't' é pronunciada nesta palavra?", options:FT_OPTIONS.slice(), correct:[FT_OPTIONS[0]],
+    explain:"O 'tt' entre vogais ganha um som parecido com o 'r' de 'arara', ficando tipo 'bé-rer'."},
+  {id:"ft-03", badge:"🎯 PRONÚNCIA & SONS", cat:"Flap T", stimulusType:"word", stimulus:"city",
+    command:"Como a letra 't' é pronunciada nesta palavra?", options:FT_OPTIONS.slice(), correct:[FT_OPTIONS[0]],
+    explain:"O 't' no meio da palavra soa parecido com o 'r' de 'arara', ficando tipo 'sí-ri'."},
+  {id:"ft-04", badge:"🎯 PRONÚNCIA & SONS", cat:"Flap T", stimulusType:"word", stimulus:"party",
+    command:"Como a letra 't' é pronunciada nesta palavra?", options:FT_OPTIONS.slice(), correct:[FT_OPTIONS[0]],
+    explain:"Depois do 'r' e antes de uma vogal, o 't' soa parecido com o 'r' de 'arara', ficando tipo 'pár-ri'."},
+  {id:"ft-05", badge:"🎯 PRONÚNCIA & SONS", cat:"Flap T", stimulusType:"word", stimulus:"meeting",
+    command:"Como a letra 't' é pronunciada nesta palavra?", options:FT_OPTIONS.slice(), correct:[FT_OPTIONS[0]],
+    explain:"O 't' antes de 'ing' soa parecido com o 'r' de 'arara', ficando tipo 'mí-ring'."},
+  /* Silent E */
+  {id:"se-01", badge:"🎯 PRONÚNCIA & SONS", cat:"Silent E", stimulusType:"word", stimulus:"name",
+    command:"Qual letra não é pronunciada nesta palavra?", options:["A letra \"e\" é muda","A letra \"a\" é muda","A letra \"m\" é muda"], correct:["A letra \"e\" é muda"],
+    explain:"A palavra termina no som do 'm', e o 'e' final não é falado, ficando tipo 'neim'."},
+  {id:"se-02", badge:"🎯 PRONÚNCIA & SONS", cat:"Silent E", stimulusType:"word", stimulus:"nice",
+    command:"Qual letra não é pronunciada nesta palavra?", options:["A letra \"e\" é muda","A letra \"i\" é muda","A letra \"c\" é muda"], correct:["A letra \"e\" é muda"],
+    explain:"A palavra termina no som de 's', e o 'e' final não é falado, ficando tipo 'nais'."},
+  {id:"se-03", badge:"🎯 PRONÚNCIA & SONS", cat:"Silent E", stimulusType:"word", stimulus:"phone",
+    command:"Qual letra não é pronunciada nesta palavra?", options:["A letra \"e\" é muda","A letra \"o\" é muda","A letra \"p\" é muda"], correct:["A letra \"e\" é muda"],
+    explain:"A palavra termina no som do 'n', e o 'e' final não é falado, ficando tipo 'foun'."},
+  {id:"se-04", badge:"🎯 PRONÚNCIA & SONS", cat:"Silent E", stimulusType:"word", stimulus:"live",
+    command:"Qual letra não é pronunciada nesta palavra?", options:["A letra \"e\" é muda","A letra \"i\" é muda","A letra \"v\" é muda"], correct:["A letra \"e\" é muda"],
+    explain:"A palavra termina no som do 'v', e o 'e' final não é falado, ficando tipo 'liv'."},
+  {id:"se-05", badge:"🎯 PRONÚNCIA & SONS", cat:"Silent E", stimulusType:"word", stimulus:"late",
+    command:"Qual letra não é pronunciada nesta palavra?", options:["A letra \"e\" é muda","A letra \"a\" é muda","A letra \"l\" é muda"], correct:["A letra \"e\" é muda"],
+    explain:"A palavra termina no som do 't', e o 'e' final não é falado, ficando tipo 'leit'."}
+];
+
+/* ---- MEET SOMEONE NEW (conversation ladder) ---- */
+const LADDER_STEPS = [
+  {id:"cl-01", ask:"Hi! What's your name?", need:["name"], hintPt:"Responda com: My name is ...", audio:"Hi! What's your name?"},
+  {id:"cl-02", ask:"What do people call you?", need:["call","everyone"], hintPt:"Responda com: Everyone calls me ...", audio:"What do people call you?"},
+  {id:"cl-03", ask:"Where are you from?", need:["from"], hintPt:"Responda com: I'm from ...", audio:"Where are you from?"},
+  {id:"cl-04", ask:"How old are you?", need:["i'm","m "], hintPt:"Responda com: I'm ... (idade)", audio:"How old are you?"},
+  {id:"cl-05", ask:"What do you do?", need:["i'm a","student","teacher","work"], hintPt:"Responda com: I'm a ...", audio:"What do you do?"},
+  {id:"cl-06", ask:"What's your last name?", need:[], hintPt:"Diga seu sobrenome (pode ser inventado).", audio:"What's your last name?"},
+  {id:"cl-07", ask:"(A outra pessoa não entendeu seu sobrenome direito.)", need:["actually","it's"], hintPt:"Corrija com: Actually, it's ...", audio:"Sorry, I didn't catch that."},
+  {id:"cl-08", ask:"How do you spell that?", need:[], hintPt:"Soletre, por exemplo: V-A-L-D-E-Z", audio:"How do you spell that?"},
+  {id:"cl-09", ask:"How's it going?", need:["good","fine","great","ok","well"], hintPt:"Responda com: Pretty good, thanks.", audio:"How's it going?"},
+  {id:"cl-10", ask:"Have a good day!", need:["thank","thanks"], hintPt:"Responda com: Thank you. You, too.", audio:"Have a good day!"}
+];
+
+/* =====================================================================
+   TRILHA — 9 MÓDULOS (ORDEM PEDAGÓGICA)
+   ===================================================================== */
+const MODULES_META = [
+  {key:"essential", em:"🔎", title:"Essential Phrases", desc:"Conheça e memorize as expressões essenciais da unidade antes de praticar."},
+  {key:"pronunciation", em:"🔊", title:"Pronunciation & Linking", desc:"Treine o ouvido para perceber como as palavras se conectam no inglês real."},
+  {key:"asking", em:"🧩", title:"Asking Questions", desc:"Formule as perguntas certas para conhecer qualquer pessoa."},
+  {key:"listening", em:"🎧", title:"Listening for Details", desc:"Capture nomes, países, idades e detalhes direto do áudio."},
+  {key:"whatwasq", em:"❓", title:"What Was the Question?", desc:"Ouça a resposta e descubra exatamente qual pergunta foi feita."},
+  {key:"introducing", em:"🕵️", title:"Introducing Others", desc:"Colete dados em diálogos e apresente pessoas com naturalidade."},
+  {key:"keepgoing", em:"🎭", title:"Keep the Conversation Going", desc:"Reaja de forma natural e mantenha o diálogo fluindo."},
+  {key:"clarifying", em:"🛠️", title:"Clarifying & Repairing", desc:"Resolva mal-entendidos e confirme informações com segurança."},
+  {key:"meetsomeone", em:"🗣️", title:"Meet Someone New", desc:"Junte tudo e conduza uma conversa completa do início ao fim."}
+];
+
+/* =====================================================================
+   ESTADO / PERSISTÊNCIA
+   ===================================================================== */
+const STORE_KEY = "unit1WhereAreYouFrom_v2";
+function defaultState(){
+  return {
+    xp:0, streak:0, bestStreak:0,
+    favorites:[],
+    progress:{},
+    reviewQueue:[],
+    errors:[],
+    customContent:[],
+    viewedPhrases:[],
+    pronunciationCompleted:false
+  };
+}
+let state = defaultState();
+try{
+  const raw = localStorage.getItem(STORE_KEY);
+  if(raw) state = Object.assign(defaultState(), JSON.parse(raw));
+}catch(e){ state = defaultState(); }
+function saveState(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){ /* Safari private mode / quota — falha silenciosa */ }
+}
+
+/* =====================================================================
+   UTILITÁRIOS
+   ===================================================================== */
+function normalize(s){
+  return (s||"").toLowerCase().trim()
+    .replace(/[.,!?;:"“”'’]/g,"")
+    .replace(/\s+/g," ");
+}
+function acceptedMatch(input, acceptedList){
+  const n = normalize(input);
+  if(!n) return false;
+  return acceptedList.some(function(a){ return normalize(a) === n; });
+}
+function looseContains(input, needles){
+  const n = normalize(input);
+  if(needles.length===0) return n.length>1;
+  return needles.some(function(k){ return n.indexOf(normalize(k)) !== -1; });
+}
+let chosenVoice = null;
+function pickVoice(){
+  try{
+    if(!window.speechSynthesis) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if(!voices || !voices.length) return null;
+    const en = voices.filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf("en")===0; });
+    if(!en.length) return null;
+    /* 1) Vozes aprimoradas do ecossistema Apple/iOS (e equivalentes desktop) */
+    const priorityTerms = ["premium","enhanced","siri","ava","samantha","alex","natural","neural","google"];
+    let pref = en.find(function(v){
+      const name = (v.name||"").toLowerCase();
+      return priorityTerms.some(function(t){ return name.indexOf(t)!==-1; });
+    });
+    /* 2) Voz padrão en-US / en_US */
+    if(!pref) pref = en.find(function(v){ const l=v.lang.toLowerCase(); return l==="en-us" || l==="en_us"; });
+    /* 3) Fallback seguro: primeira voz em inglês disponível */
+    if(!pref) pref = en[0];
+    return pref || null;
+  }catch(e){ return null; }
+}
+try{
+  if(window.speechSynthesis){
+    chosenVoice = pickVoice();
+    window.speechSynthesis.onvoiceschanged = function(){ try{ chosenVoice = pickVoice(); }catch(e){} };
+  }
+}catch(e){}
+function speak(text){
+  if(!text) return;
+  try{
+    if(!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = 0.95;
+    if(!chosenVoice) chosenVoice = pickVoice();
+    if(chosenVoice) u.voice = chosenVoice;
+    window.speechSynthesis.speak(u);
+  }catch(e){ /* iOS pode bloquear síntese fora de gesto do usuário — falha silenciosa */ }
+}
+function audioBtn(text){
+  return '<button class="audio-btn" data-speak="'+escapeAttr(text)+'" title="ouvir">🔊</button>';
+}
+function escapeAttr(s){ return (s||"").replace(/"/g,"&quot;"); }
+function wireAudioButtons(root){
+  (root||document).querySelectorAll("[data-speak]").forEach(function(b){
+    b.addEventListener("click",function(e){ e.stopPropagation(); speak(b.getAttribute("data-speak")); });
+  });
+}
+
+function getProgress(id){
+  if(!state.progress[id]) state.progress[id] = {seen:0,correct:0,wrong:0,level:1};
+  return state.progress[id];
+}
+function addXP(n){ state.xp += n; saveState(); }
+function registerResult(id, correct){
+  const p = getProgress(id);
+  p.seen++;
+  if(correct){ p.correct++; state.streak++; if(state.streak>state.bestStreak) state.bestStreak=state.streak; addXP(10); p.level = Math.min(5,(p.level||1)+1); }
+  else { p.wrong++; state.streak=0; p.level = p.level||1; }
+  saveState();
+}
+function pushError(itemId, moduleKey, label, errorType, wrongText, correctText){
+  const existing = state.reviewQueue.find(function(r){ return r.itemId===itemId; });
+  if(existing){ existing.tries=(existing.tries||1)+1; existing.ts=Date.now(); existing.module=moduleKey; }
+  else { state.reviewQueue.push({id:"rev-"+itemId+"-"+Date.now(), itemId:itemId, module:moduleKey, label:label, errorType:errorType, ts:Date.now(), tries:1}); }
+  state.errors.unshift({itemId:itemId, module:moduleKey, label:label, errorType:errorType, wrongText:wrongText, correctText:correctText, ts:Date.now()});
+  state.errors = state.errors.slice(0,40);
+  saveState();
+}
+function removeFromReview(itemId){
+  state.reviewQueue = state.reviewQueue.filter(function(r){ return r.itemId!==itemId; });
+  saveState();
+}
+function toggleFavorite(id){
+  const i = state.favorites.indexOf(id);
+  if(i>=0) state.favorites.splice(i,1); else state.favorites.push(id);
+  saveState();
+}
+function isFav(id){ return state.favorites.indexOf(id) !== -1; }
+function markPhraseViewed(id){
+  if(!state.viewedPhrases) state.viewedPhrases=[];
+  if(state.viewedPhrases.indexOf(id)===-1){ state.viewedPhrases.push(id); saveState(); }
+}
+
+/* =====================================================================
+   PROGRESSO POR MÓDULO
+   ===================================================================== */
+function moduleIds(key){
+  switch(key){
+    case "essential": return GOLDEN_PHRASES.map(function(p){return p.id;});
+    case "pronunciation": return SOUND_POOL.map(function(s){return s.id;});
+    case "asking": return BUILD_ITEMS.map(function(b){return b.id;});
+    case "listening": return LISTEN_ITEMS.map(function(l){return l.id;});
+    case "whatwasq": return QM_PAIRS.map(function(q){return q.id;});
+    case "introducing": { var ids=[]; PROFILES.forEach(function(p){ ids.push(p.id+"-rec"); ids.push(p.id+"-intro"); }); return ids; }
+    case "keepgoing": return WWS_ITEMS.map(function(w){return w.id;});
+    case "clarifying": return FIX_ITEMS.map(function(f){return f.id;});
+    case "meetsomeone": return LADDER_STEPS.map(function(s){return s.id;});
+    default: return [];
+  }
+}
+function moduleProgress(key){
+  if(key==="essential"){
+    const total = GOLDEN_PHRASES.length;
+    const done = Math.min((state.viewedPhrases||[]).length, total);
+    return {done:done, total:total, pct: total? Math.round(100*done/total):0};
+  }
+  if(key==="pronunciation"){
+    return {done: state.pronunciationCompleted?10:0, total:10, pct: state.pronunciationCompleted?100:0};
+  }
+  const ids = moduleIds(key);
+  const done = ids.filter(function(id){ return state.progress[id] && state.progress[id].correct>0; }).length;
+  return {done:done, total:ids.length, pct: ids.length? Math.round(100*done/ids.length):0};
+}
+function overallProgress(){
+  let doneSum=0, totalSum=0;
+  MODULES_META.forEach(function(m){ const p=moduleProgress(m.key); doneSum+=p.done; totalSum+=p.total; });
+  return totalSum? Math.round(100*doneSum/totalSum):0;
+}
+function computeStats(){
+  const ids = Object.keys(state.progress);
+  let correct=0, wrong=0, seen=0;
+  ids.forEach(function(id){ const p=state.progress[id]; correct+=p.correct; wrong+=p.wrong; seen+=p.seen; });
+  const accuracy = seen>0 ? Math.round(100*correct/(correct+wrong||1)) : 0;
+  return {accuracy:accuracy, seen:seen};
+}
+
+/* =====================================================================
+   NAVEGAÇÃO POR NÍVEIS
+   ===================================================================== */
+let level = "hub"; // hub | path | module | review | catalog | performance
+let activeModule = null;
+let sessionState = {};
+
+function goHub(){ level="hub"; activeModule=null; sessionState={}; render(); scrollTop(); }
+function goPath(){ level="path"; activeModule=null; sessionState={}; render(); scrollTop(); }
+function goModule(key){ level="module"; activeModule=key; sessionState={}; render(); scrollTop(); }
+function goReview(){ level="review"; sessionState={}; render(); scrollTop(); }
+function goCatalog(){
+  level="catalog";
+  sessionState={catalogCategory:"All", catalogFavOnly:false, catalogQuery:"", catalogExpanded:{}};
+  render(); scrollTop();
+}
+function goPerformance(){ level="performance"; sessionState={perfExpanded:{}}; render(); scrollTop(); }
+function scrollTop(){ window.scrollTo({top:0, behavior:"smooth"}); }
+
+document.getElementById("reviewShortcut").addEventListener("click", function(e){ e.stopPropagation(); goReview(); });
+document.getElementById("headerClick").addEventListener("click", function(){ goHub(); });
+
+function updateHeader(){
+  const pct = overallProgress();
+  document.getElementById("hsProgFill").style.width = pct+"%";
+  document.getElementById("hsProgPct").textContent = pct+"%";
+  const rq = state.reviewQueue.length;
+  const badge = document.getElementById("reviewBadge");
+  if(rq>0){ badge.style.display="inline-block"; badge.textContent = rq; } else { badge.style.display="none"; }
+}
+
+function backBar(label, onClick){
+  const b = document.createElement("button");
+  b.className = "back-bar";
+  b.textContent = "← " + label;
+  b.addEventListener("click", onClick);
+  return b;
+}
+
+function render(){
+  updateHeader();
+  const el = document.getElementById("mainCard");
+  el.innerHTML = "";
+  if(level==="hub") return renderHub(el);
+  if(level==="path") return renderPath(el);
+  if(level==="module") return renderModuleExercise(el);
+  if(level==="review") return renderReview(el);
+  if(level==="catalog") return renderCatalog(el);
+  if(level==="performance") return renderPerformance(el);
+}
+
+/* ---------------- NÍVEL 1 — HUB ---------------- */
+function renderHub(el){
+  const pct = overallProgress();
+  const firstIncomplete = MODULES_META.find(function(m){ return moduleProgress(m.key).pct < 100; });
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🏠 Unit 1 — Where Are You From?</div>
+    <div class="module-desc">Progresso geral da unidade: <b>${pct}%</b>. Escolha um portal para continuar.</div>
+    <button class="quickstart" id="quickBtn">▶ Continuar Estudos</button>
+    <div class="portal-grid" id="portalGrid"></div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("quickBtn").addEventListener("click", function(){
+    if(firstIncomplete) goModule(firstIncomplete.key); else goReview();
+  });
+  const portals = [
+    {em:"📘", title:"Trilha de Estudos", desc:"Acesse os 9 módulos da lição, em ordem pedagógica.", action:goPath, badge:null},
+    {em:"🔁", title:"Fila de Revisão", desc:"Recupere ativamente os itens que você errou.", action:goReview, badge: state.reviewQueue.length>0 ? state.reviewQueue.length : null},
+    {em:"📚", title:"Central de Conteúdo", desc:"Consulte todas as frases da unidade, acesse seus itens favoritados e adicione novos termos personalizados.", action:goCatalog, badge:null},
+    {em:"📊", title:"Desempenho & Habilidades", desc:"Veja sua precisão, domínio e erros por categoria.", action:goPerformance, badge:null}
+  ];
+  const grid = document.getElementById("portalGrid");
+  portals.forEach(function(p){
+    const card = document.createElement("button");
+    card.className = "portal-card";
+    card.innerHTML = `<div class="em">${p.em}</div><div><b>${p.title}</b><span>${p.desc}</span></div>${p.badge?`<div class="pb">${p.badge}</div>`:""}`;
+    card.addEventListener("click", function(e){ e.stopPropagation(); p.action(); });
+    grid.appendChild(card);
+  });
+}
+
+/* ---------------- NÍVEL 2 — TRILHA DE ESTUDOS ---------------- */
+function renderPath(el){
+  el.appendChild(backBar("Voltar ao Início", goHub));
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">📘 Trilha de Estudos</div>
+    <div class="module-desc">Progressão pedagógica: do reconhecimento à produção livre em conversa real.</div>
+    <div class="path-list" id="pathList"></div>
+  `;
+  el.appendChild(wrap);
+  const list = document.getElementById("pathList");
+  MODULES_META.forEach(function(m){
+    const p = moduleProgress(m.key);
+    const status = p.pct>=100 ? "done" : (p.done>0 ? "progress" : "pending");
+    const card = document.createElement("button");
+    card.className = "path-card" + (status==="done" ? " done":"");
+    card.innerHTML = `
+      <div class="em">${m.em}</div>
+      <div class="pc-main">
+        <b>${m.title}</b>
+        <div class="pc-desc">${m.desc}</div>
+        <div class="pc-status ${status==='done'?'done':(status==='progress'?'progress':'')}">${status==='done'?'Concluído':(status==='progress'?'Em progresso':'Pendente')} · ${p.done}/${p.total}</div>
+        <div class="mini-bar"><div style="width:${p.pct}%"></div></div>
+      </div>
+      ${status==='done' ? '<div class="check-badge">✓</div>' : ''}
+    `;
+    card.addEventListener("click", function(){ goModule(m.key); });
+    list.appendChild(card);
+  });
+}
+
+function nextModuleKey(key){
+  const idx = MODULES_META.findIndex(function(m){ return m.key===key; });
+  if(idx>=0 && idx<MODULES_META.length-1) return MODULES_META[idx+1].key;
+  return null;
+}
+
+/* ---------------- NÍVEL 3 — EXERCÍCIO ATIVO ---------------- */
+function renderModuleExercise(el){
+  el.appendChild(backBar("Voltar para a Trilha", goPath));
+  const holder = document.createElement("div");
+  holder.id = "moduleHolder";
+  el.appendChild(holder);
+  const key = activeModule;
+  if(key==="essential") return renderEssential(holder);
+  if(key==="pronunciation") return renderPronunciation(holder);
+  if(key==="asking") return renderAsking(holder);
+  if(key==="listening") return renderListening(holder);
+  if(key==="whatwasq") return renderWhatWasQ(holder);
+  if(key==="introducing") return renderIntroducing(holder);
+  if(key==="keepgoing") return renderSession(holder,"keepgoing","🎭 Keep the Conversation Going","Situações sociais reais — escolha ou escreva o que você diria.", WWS_ITEMS);
+  if(key==="clarifying") return renderSession(holder,"clarifying","🛠️ Clarifying & Repairing","Identifique o mal-entendido e produza a correção.", FIX_ITEMS.map(function(f){ return Object.assign({},f,{kind:"typed"}); }));
+  if(key==="meetsomeone") return renderMeetSomeone(holder);
+}
+
+function moduleSummary(el, title, moduleKey, correctCount, total){
+  const wrap = document.createElement("div");
+  const nextKey = nextModuleKey(moduleKey);
+  const nextMeta = nextKey ? MODULES_META.find(function(m){return m.key===nextKey;}) : null;
+  wrap.innerHTML = `
+    <div class="module-title">${title}</div>
+    <div class="feedback ok" style="margin-top:14px;">
+      🏆 Rodada concluída! ${correctCount!==undefined ? `Você acertou <b>${correctCount}/${total}</b>.` : ""}
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="restartBtn">Reiniciar</button>
+      ${nextMeta ? `<button class="btn btn-primary" id="nextModBtn">Avançar para ${nextMeta.title} ▶</button>` : `<button class="btn btn-primary" id="pathBtn">Voltar para a Trilha</button>`}
+    </div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("restartBtn").addEventListener("click", function(){
+    if(moduleKey==="pronunciation" && state.pronunciationCompleted){ state.pronunciationCompleted = false; saveState(); }
+    sessionState={}; render();
+  });
+  if(nextMeta) document.getElementById("nextModBtn").addEventListener("click", function(){ goModule(nextKey); });
+  else document.getElementById("pathBtn").addEventListener("click", goPath);
+}
+
+/* ---- ESSENTIAL PHRASES ---- */
+function renderEssential(el){
+  if(sessionState.idx===undefined) sessionState.idx=0;
+  const allItems = GOLDEN_PHRASES.concat(state.customContent);
+  const item = allItems[sessionState.idx % allItems.length];
+  if(item.id && item.id.indexOf("gp-")===0) markPhraseViewed(item.id);
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🔎 Essential Phrases</div>
+    <div class="ex-progress"><span>${sessionState.idx+1} / ${allItems.length}</span><span class="mono">${item.cat||""}</span></div>
+    <div class="target-box">
+      <div class="eng-line">${item.en} ${audioBtn(item.en)}
+        <button class="icon-btn star ${isFav(item.id)?'active':''}" data-favtoggle="${item.id}" title="favoritar">${isFav(item.id)?'⭐':'☆'}</button>
+      </div>
+      <div class="pt-line">🇧🇷 ${item.pt}</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="prevBtn">◀ Anterior</button>
+      <button class="btn btn-primary" id="nextBtn">Próxima ▶</button>
+    </div>
+  `;
+  el.appendChild(wrap);
+  wireAudioButtons(el);
+  el.querySelector("[data-favtoggle]").addEventListener("click", function(){ toggleFavorite(item.id); render(); });
+  document.getElementById("prevBtn").addEventListener("click", function(){ sessionState.idx=(sessionState.idx-1+allItems.length)%allItems.length; render(); });
+  document.getElementById("nextBtn").addEventListener("click", function(){ sessionState.idx=(sessionState.idx+1)%allItems.length; render(); });
+}
+
+/* ---- ASKING QUESTIONS (build the sentence) ---- */
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function renderAsking(el){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.order = shuffle(BUILD_ITEMS.map(function(_,i){return i;})); sessionState.correctCount=0; }
+  if(sessionState.idx >= sessionState.order.length){ return moduleSummary(el, "🧩 Asking Questions", "asking", sessionState.correctCount, BUILD_ITEMS.length); }
+  const item = BUILD_ITEMS[sessionState.order[sessionState.idx]];
+  const p = getProgress(item.id);
+  if(!sessionState.built){ sessionState.built = buildTileSetup(item, p.level||1); }
+  const setup = sessionState.built;
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🧩 Asking Questions</div>
+    <div class="ex-progress"><span>Item ${sessionState.idx+1} / ${sessionState.order.length}</span><span class="mono">Nível ${p.level||1}/5</span></div>
+    <div class="instr-box"><b>Situação:</b> ${item.situation}</div>
+    <div id="buildArea"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="checkBtn">Verificar</button>
+      <button class="btn btn-ghost" id="clearBtn">Limpar</button>
+      <button class="btn btn-ghost" id="skipBtn" style="display:none;">Próxima frase ▶</button>
+    </div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  renderBuildArea();
+  document.getElementById("clearBtn").addEventListener("click", function(){ sessionState.built = buildTileSetup(item, p.level||1); renderBuildArea(); document.getElementById("fbArea").innerHTML=""; });
+  document.getElementById("checkBtn").addEventListener("click", function(){ checkBuildAnswer(item); });
+
+  function renderBuildArea(){
+    const area = document.getElementById("buildArea");
+    if(setup.mode==="type-all"){
+      area.innerHTML = '<input type="text" class="type-input" id="typeAllInput" placeholder="Digite a frase completa em inglês..." autocomplete="off">';
+      return;
+    }
+    const answerHtml = setup.answer.length===0 ? "" : setup.answer.map(function(t,i){
+      if(t.type==="blank") return '<input type="text" class="blank-input" data-blank-idx="'+i+'" value="'+escapeAttr(t.typed||'')+'" placeholder="?">';
+      return '<span class="ans-tile" data-remove-idx="'+i+'">'+t.word+'</span>';
+    }).join("");
+    area.innerHTML = `
+      <div class="answer-strip ${setup.answer.length===0?'empty':''}" id="answerStrip">${answerHtml}</div>
+      <div class="tile-bank" id="tileBank">${setup.bank.map(function(t,i){ return t.used?"":'<span class="tile" data-tile-idx="'+i+'">'+(t.type==='blank' ? '✏️ ___' : t.word)+'</span>'; }).join("")}</div>
+    `;
+    area.querySelectorAll("[data-tile-idx]").forEach(function(t){
+      t.addEventListener("click", function(){
+        const idx = +t.dataset.tileIdx;
+        setup.bank[idx].used = true;
+        setup.answer.push(Object.assign({}, setup.bank[idx]));
+        renderBuildArea();
+      });
+    });
+    area.querySelectorAll("[data-remove-idx]").forEach(function(t){
+      t.addEventListener("click", function(){
+        const idx = +t.dataset.removeIdx;
+        const removed = setup.answer.splice(idx,1)[0];
+        const bankItem = setup.bank.find(function(b){ return b.used && b.word===removed.word && b.type===removed.type; });
+        if(bankItem) bankItem.used = false;
+        renderBuildArea();
+      });
+    });
+    area.querySelectorAll("[data-blank-idx]").forEach(function(inp){
+      inp.addEventListener("input", function(){
+        const idx = +inp.dataset.blankIdx;
+        setup.answer[idx].typed = inp.value;
+      });
+    });
+  }
+  function checkBuildAnswer(item){
+    let assembled;
+    if(setup.mode==="type-all"){
+      assembled = document.getElementById("typeAllInput").value;
+    } else {
+      assembled = setup.answer.map(function(t){ return t.type==="blank" ? (t.typed||"") : t.word; }).join(" ");
+    }
+    const correct = normalize(assembled) === normalize(item.target);
+    registerResult(item.id, correct);
+    if(correct) sessionState.correctCount++;
+    const fb = document.getElementById("fbArea");
+    if(correct){
+      removeFromReview(item.id);
+      fb.innerHTML = `<div class="feedback ok"><div class="fb-line">✅ Muito bem! <b>${item.target}</b></div><div class="fb-line">🔊 ${audioBtn(item.target)} 🇧🇷 ${item.situation}</div></div>`;
+    } else {
+      pushError(item.id,"asking",item.situation,"QUESTION_ORDER",assembled,item.target);
+      fb.innerHTML = `<div class="feedback bad">
+        <div class="fb-line">❌ Você escreveu: “${assembled||'(vazio)'}”</div>
+        <div class="fb-line">✅ Melhor: <b>${item.target}</b> ${audioBtn(item.target)}</div>
+        <div class="fb-line">💡 Confira a ordem das palavras e a forma do verbo be.</div>
+        <span class="tag">QUESTION_ORDER</span>
+      </div>`;
+    }
+    wireAudioButtons(fb);
+    document.getElementById("checkBtn").disabled = true;
+    document.getElementById("skipBtn").style.display = "inline-block";
+    document.getElementById("skipBtn").addEventListener("click", function(){ sessionState.idx++; sessionState.built=null; render(); });
+  }
+}
+function buildTileSetup(item, level){
+  const words = item.target.split(" ");
+  if(level>=5){ return {mode:"type-all", answer:[]}; }
+  let hideCount = Math.max(0, Math.min(level-1, words.length-1));
+  const idxs = shuffle(words.map(function(_,i){return i;})).slice(0,hideCount);
+  const tiles = words.map(function(w,i){ return idxs.indexOf(i)!==-1 ? {type:"blank", word:w, used:false, typed:""} : {type:"word", word:w, used:false}; });
+  return {mode:"tiles", bank: shuffle(tiles.map(function(t){ return Object.assign({},t); })), answer:[]};
+}
+
+/* ---- INTRODUCING OTHERS (profile detective) ---- */
+function renderIntroducing(el){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.phase="reconstruct"; sessionState.order = shuffle(PROFILES.map(function(_,i){return i;})); }
+  if(sessionState.idx >= sessionState.order.length){ return moduleSummary(el, "🕵️ Introducing Others", "introducing"); }
+  const profile = PROFILES[sessionState.order[sessionState.idx]];
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🕵️ Introducing Others</div>
+    <div class="ex-progress"><span>Perfil ${sessionState.idx+1} / ${sessionState.order.length}</span><span class="mono">${sessionState.phase}</span></div>
+    <div id="profArea"></div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  if(sessionState.phase==="reconstruct") renderReconstruct(profile); else renderIntro(profile);
+
+  function renderReconstruct(profile){
+    document.getElementById("profArea").innerHTML = `
+      ${profile.dialogue.map(function(l){ return '<div class="dialogue-line">“'+l+'” '+audioBtn(l)+'</div>'; }).join("")}
+      <div class="field-group"><span class="field-label">First name</span><input class="type-input" id="f_first"></div>
+      <div class="field-group"><span class="field-label">Last name</span><input class="type-input" id="f_last"></div>
+      ${profile.nick?'<div class="field-group"><span class="field-label">Nickname</span><input class="type-input" id="f_nick"></div>':""}
+      <div class="field-group"><span class="field-label">Country</span><input class="type-input" id="f_country"></div>
+      <div class="field-group"><span class="field-label">Age</span><input class="type-input" id="f_age"></div>
+      <div class="field-group"><span class="field-label">Job</span><input class="type-input" id="f_job"></div>
+      <div class="field-group"><span class="field-label">${profile.extraLabel}</span><input class="type-input" id="f_extra"></div>
+      <div class="btn-row"><button class="btn btn-primary" id="checkProfBtn">Verificar</button></div>
+    `;
+    wireAudioButtons(el);
+    document.getElementById("checkProfBtn").addEventListener("click", function(){
+      const checks = [["f_first", profile.first], ["f_last", profile.last], ["f_country", profile.country], ["f_age", profile.age], ["f_job", profile.job], ["f_extra", profile.extra]];
+      if(profile.nick) checks.push(["f_nick", profile.nick]);
+      let allCorrect = true; const wrongFields=[];
+      checks.forEach(function(pair){
+        const ok = normalize(document.getElementById(pair[0]).value)===normalize(pair[1]);
+        if(!ok){ allCorrect=false; wrongFields.push(pair[0].replace("f_","")); }
+      });
+      registerResult(profile.id+"-rec", allCorrect);
+      const fb = document.getElementById("fbArea");
+      if(allCorrect){
+        removeFromReview(profile.id+"-rec");
+        fb.innerHTML = '<div class="feedback ok">✅ Perfil reconstruído corretamente!</div>';
+      } else {
+        pushError(profile.id+"-rec","introducing","Perfil de "+profile.first,"VOCABULARY","",wrongFields.join(", "));
+        fb.innerHTML = `<div class="feedback bad">❌ Alguns campos estão incorretos: <b>${wrongFields.join(", ")}</b>. 💡 Releia o diálogo com atenção. <span class="tag">VOCABULARY</span></div>`;
+      }
+      const btnRow = document.createElement("div");
+      btnRow.className="btn-row";
+      btnRow.innerHTML = '<button class="btn btn-primary" id="toIntroBtn">Continuar ▶</button>';
+      fb.appendChild(btnRow);
+      document.getElementById("toIntroBtn").addEventListener("click", function(){ sessionState.phase="intro"; render(); });
+    });
+  }
+  function renderIntro(profile){
+    const isFemale = ["Alexandra","Soo-jin","Maria"].indexOf(profile.first) !== -1;
+    const pron = isFemale ? "She's" : "He's";
+    document.getElementById("profArea").innerHTML = `
+      <div class="profile-card">
+        <div class="pf-row"><b>First name</b>${profile.first}</div>
+        <div class="pf-row"><b>Last name</b>${profile.last}</div>
+        ${profile.nick?'<div class="pf-row"><b>Nickname</b>'+profile.nick+'</div>':""}
+        <div class="pf-row"><b>Country</b>${profile.country}</div>
+        <div class="pf-row"><b>Age</b>${profile.age}</div>
+        <div class="pf-row"><b>Job</b>${profile.job}</div>
+        <div class="pf-row"><b>${profile.extraLabel}</b>${profile.extra}</div>
+      </div>
+      <div class="instr-box"><b>Tarefa:</b> Apresente ${profile.first} para outro colega. Escreva a introdução completa (nome, país, idade, profissão).</div>
+      <textarea class="type-input" id="introInput" placeholder="This is ${profile.first}. ${pron} from..."></textarea>
+      <div class="btn-row"><button class="btn btn-primary" id="checkIntroBtn">Verificar</button></div>
+    `;
+    document.getElementById("checkIntroBtn").addEventListener("click", function(){
+      const txt = normalize(document.getElementById("introInput").value);
+      const need = [profile.first.toLowerCase(), profile.country.toLowerCase(), profile.age, profile.job.toLowerCase()];
+      const present = need.filter(function(n){ return txt.indexOf(n.toLowerCase())!==-1; });
+      const correct = present.length===need.length;
+      registerResult(profile.id+"-intro", correct);
+      const fb = document.getElementById("fbArea");
+      const model = `This is ${profile.first}. ${pron} from ${profile.country}. ${pron} ${profile.age}. ${pron} a ${profile.job}.`;
+      if(correct){
+        removeFromReview(profile.id+"-intro");
+        fb.innerHTML = `<div class="feedback ok">✅ Ótima apresentação! Você incluiu todos os elementos importantes.<div class="fb-line" style="margin-top:8px;">Exemplo: <i>${model}</i> ${audioBtn(model)}</div></div>`;
+      } else {
+        pushError(profile.id+"-intro","introducing","Introdução de "+profile.first,"VOCABULARY",document.getElementById("introInput").value, model);
+        fb.innerHTML = `<div class="feedback bad">❌ Faltou incluir: <b>${need.filter(function(n){return present.indexOf(n)===-1;}).join(", ")}</b>.<div class="fb-line">💡 Exemplo: <i>${model}</i> ${audioBtn(model)}</div><span class="tag">VOCABULARY</span></div>`;
+      }
+      wireAudioButtons(fb);
+      const btnRow = document.createElement("div");
+      btnRow.className="btn-row";
+      btnRow.innerHTML = '<button class="btn btn-primary" id="nextProfBtn">Próximo perfil ▶</button>';
+      fb.appendChild(btnRow);
+      document.getElementById("nextProfBtn").addEventListener("click", function(){ sessionState.idx++; sessionState.phase="reconstruct"; render(); });
+    });
+  }
+}
+
+/* ---- GENERIC SESSION (keepgoing / clarifying) ---- */
+function renderSession(el, moduleKey, title, desc, items){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.order = shuffle(items.map(function(_,i){return i;})); sessionState.correctCount=0; }
+  if(sessionState.idx >= sessionState.order.length) return moduleSummary(el, title, moduleKey, sessionState.correctCount, items.length);
+  const item = items[sessionState.order[sessionState.idx]];
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">${title}</div>
+    <div class="ex-progress"><span>Item ${sessionState.idx+1} / ${items.length}</span></div>
+    <div class="instr-box">${item.context}</div>
+    <div class="instr-box" style="background:var(--card-cream);border-color:var(--border-line);"><b>${item.prompt}</b></div>
+    <div id="itemArea"></div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  renderItemInteraction(item, document.getElementById("itemArea"), function(correct, userText){
+    registerResult(item.id, correct);
+    if(correct){ removeFromReview(item.id); sessionState.correctCount++; }
+    else pushError(item.id, moduleKey, item.prompt, item.errorType||"VOCABULARY", userText, item.answerIndex!==undefined?item.options[item.answerIndex]:(item.accepted?item.accepted[0]:""));
+    const fb = document.getElementById("fbArea");
+    const correctText = item.answerIndex!==undefined ? item.options[item.answerIndex] : (item.accepted ? item.accepted[0] : "");
+    fb.innerHTML = correct
+      ? `<div class="feedback ok"><div class="fb-line">✅ Correto! <b>${correctText}</b> ${audioBtn(correctText)}</div><div class="fb-line">💡 ${item.explain||""}</div></div>`
+      : `<div class="feedback bad"><div class="fb-line">❌ Sua resposta: “${userText||"(vazio)"}”</div><div class="fb-line">✅ Melhor: <b>${correctText}</b> ${audioBtn(correctText)}</div><div class="fb-line">💡 ${item.explain||""}</div><span class="tag">${item.errorType||""}</span></div>`;
+    wireAudioButtons(fb);
+    const btnRow = document.createElement("div");
+    btnRow.className="btn-row";
+    btnRow.innerHTML = '<button class="btn btn-primary" id="nextItemBtn">Próximo ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("nextItemBtn").addEventListener("click", function(){ sessionState.idx++; render(); });
+  });
+}
+function renderItemInteraction(item, area, onAnswer){
+  if(item.kind==="mcq"){
+    area.innerHTML = '<div class="options">' + item.options.map(function(o,i){ return '<button class="opt-btn" data-oi="'+i+'">'+o+'</button>'; }).join("") + '</div>';
+    area.querySelectorAll(".opt-btn").forEach(function(b){
+      b.addEventListener("click", function(){
+        const oi = +b.dataset.oi;
+        area.querySelectorAll(".opt-btn").forEach(function(x){ x.disabled=true; });
+        b.classList.add(oi===item.answerIndex ? "correct":"wrong");
+        if(oi!==item.answerIndex) area.querySelector('[data-oi="'+item.answerIndex+'"]').classList.add("correct");
+        onAnswer(oi===item.answerIndex, item.options[oi]);
+      });
+    });
+  } else {
+    area.innerHTML = '<input type="text" class="type-input" id="typedAns" placeholder="Escreva em inglês..." autocomplete="off">' +
+      '<div class="btn-row"><button class="btn btn-primary" id="sendTypedBtn">Enviar</button></div>';
+    const input = document.getElementById("typedAns");
+    input.addEventListener("keydown", function(e){ if(e.key==="Enter") document.getElementById("sendTypedBtn").click(); });
+    document.getElementById("sendTypedBtn").addEventListener("click", function(){
+      const val = input.value;
+      document.getElementById("sendTypedBtn").disabled = true; input.disabled = true;
+      onAnswer(acceptedMatch(val, item.accepted), val);
+    });
+  }
+}
+
+/* ---- LISTENING FOR DETAILS ---- */
+function renderListening(el){
+  if(sessionState.idx===undefined) sessionState.idx=0;
+  if(sessionState.idx >= LISTEN_ITEMS.length) return moduleSummary(el, "🎧 Listening for Details", "listening");
+  const item = LISTEN_ITEMS[sessionState.idx];
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🎧 Listening for Details</div>
+    <div class="ex-progress"><span>Áudio ${sessionState.idx+1} / ${LISTEN_ITEMS.length}</span></div>
+    <div class="target-box"><button class="btn btn-primary" id="playAudioBtn">🔊 Ouvir Áudio</button></div>
+    <div id="fieldsArea"></div>
+    <div class="btn-row"><button class="btn btn-primary" id="checkListenBtn">Verificar</button></div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  document.getElementById("playAudioBtn").addEventListener("click", function(){ speak(item.script); });
+  const fieldsArea = document.getElementById("fieldsArea");
+  const rows = item.fields ? item.fields.map(function(f){return f[0];}) : item.questions.map(function(q){return q[0];});
+  fieldsArea.innerHTML = rows.map(function(label,i){ return '<div class="field-group"><span class="field-label">'+label+'</span><input class="type-input" data-lc-idx="'+i+'"></div>'; }).join("");
+  document.getElementById("checkListenBtn").addEventListener("click", function(){
+    const answers = item.fields ? item.fields.map(function(f){return [f[1]];}) : item.questions.map(function(q){return q[1];});
+    let correctCount=0; const wrongLabels=[];
+    document.querySelectorAll("[data-lc-idx]").forEach(function(inp){
+      const idx = +inp.dataset.lcIdx;
+      const ok = acceptedMatch(inp.value, answers[idx]);
+      if(ok) correctCount++; else wrongLabels.push(rows[idx]);
+    });
+    const allCorrect = correctCount===rows.length;
+    registerResult(item.id, allCorrect);
+    const fb = document.getElementById("fbArea");
+    if(allCorrect){
+      removeFromReview(item.id);
+      fb.innerHTML = `<div class="feedback ok">✅ Você capturou todas as informações corretamente! <div class="fb-line" style="margin-top:6px;">📜 “${item.script}” ${audioBtn(item.script)}</div></div>`;
+    } else {
+      pushError(item.id,"listening","Listening for Details","LISTENING","",item.script);
+      fb.innerHTML = `<div class="feedback bad">❌ Você acertou ${correctCount}/${rows.length}. Campos a revisar: <b>${wrongLabels.join(", ")}</b>.<div class="fb-line" style="margin-top:6px;">📜 “${item.script}” ${audioBtn(item.script)}</div><span class="tag">LISTENING</span></div>`;
+    }
+    wireAudioButtons(fb);
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-primary" id="nextListenBtn">Próximo áudio ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("nextListenBtn").addEventListener("click", function(){ sessionState.idx++; render(); });
+  });
+}
+
+/* ---- WHAT WAS THE QUESTION? ---- */
+function renderWhatWasQ(el){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.order=shuffle(QM_PAIRS.map(function(_,i){return i;})); sessionState.correctCount=0; }
+  if(sessionState.idx >= sessionState.order.length) return moduleSummary(el,"❓ What Was the Question?","whatwasq", sessionState.correctCount, QM_PAIRS.length);
+  const pair = QM_PAIRS[sessionState.order[sessionState.idx]];
+  const useType = sessionState.idx >= Math.ceil(QM_PAIRS.length/2);
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">❓ What Was the Question?</div>
+    <div class="ex-progress"><span>Item ${sessionState.idx+1} / ${sessionState.order.length}</span><span class="mono">${useType?'PRODUCE':'CHOOSE'}</span></div>
+    <div class="target-box"><div class="eng-line"><b>Answer:</b> ${pair.answer} ${audioBtn(pair.answer)}</div></div>
+    <div class="instr-box"><b>Escreva ou escolha a pergunta correspondente.</b></div>
+    <div id="qmArea"></div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  wireAudioButtons(el);
+  const area = document.getElementById("qmArea");
+  if(!useType){
+    area.innerHTML = '<div class="options">' + pair.options.map(function(o,i){ return '<button class="opt-btn" data-oi="'+i+'">'+o+'</button>'; }).join("") + '</div>';
+    area.querySelectorAll(".opt-btn").forEach(function(b){
+      b.addEventListener("click", function(){
+        const oi = +b.dataset.oi;
+        area.querySelectorAll(".opt-btn").forEach(function(x){ x.disabled=true; });
+        const correct = pair.options[oi]===pair.question;
+        b.classList.add(correct?"correct":"wrong");
+        if(!correct){ const el2=[].slice.call(area.querySelectorAll(".opt-btn")).find(function(x){return x.textContent===pair.question;}); if(el2) el2.classList.add("correct"); }
+        finishQM(correct, pair.options[oi]);
+      });
+    });
+  } else {
+    area.innerHTML = '<input type="text" class="type-input" id="qmInput" placeholder="Escreva a pergunta em inglês..." autocomplete="off">' +
+      '<div class="btn-row"><button class="btn btn-primary" id="qmSend">Enviar</button></div>';
+    document.getElementById("qmInput").addEventListener("keydown", function(e){ if(e.key==="Enter") document.getElementById("qmSend").click(); });
+    document.getElementById("qmSend").addEventListener("click", function(){
+      const val = document.getElementById("qmInput").value;
+      document.getElementById("qmSend").disabled=true;
+      finishQM(normalize(val)===normalize(pair.question), val);
+    });
+  }
+  function finishQM(correct, userText){
+    registerResult(pair.id, correct);
+    if(correct){ sessionState.correctCount++; removeFromReview(pair.id); } else pushError(pair.id,"whatwasq","What Was the Question?","QUESTION_ORDER",userText,pair.question);
+    const fb = document.getElementById("fbArea");
+    fb.innerHTML = correct
+      ? `<div class="feedback ok">✅ Perfeito! <b>${pair.question}</b> ${audioBtn(pair.question)}</div>`
+      : `<div class="feedback bad">❌ Você respondeu: “${userText}”. ✅ Correto: <b>${pair.question}</b> ${audioBtn(pair.question)}<span class="tag">QUESTION_ORDER</span></div>`;
+    wireAudioButtons(fb);
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-primary" id="qmNext">Próximo ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("qmNext").addEventListener("click", function(){ sessionState.idx++; render(); });
+  }
+}
+
+/* ---- PRONUNCIATION & LINKING ---- */
+/* Engine: sorteia 10 itens entre os 20 do pool a cada rodada. Itens com mais de
+   uma resposta correta usam seleção múltipla (checkboxes) + botão "Verificar".
+   Ao concluir o 10º item, o módulo é marcado como concluído (100%) de forma
+   persistente; "Reiniciar" apenas sorteia uma nova rodada, sem desfazer a conclusão. */
+function getBalancedSoundRound(){
+  const cv = shuffle(SOUND_POOL.filter(function(i){ return i.cat==="Consoante → Vogal"; })).slice(0,3);
+  const ss = shuffle(SOUND_POOL.filter(function(i){ return i.cat==="Mesmo Som"; })).slice(0,3);
+  const ft = shuffle(SOUND_POOL.filter(function(i){ return i.cat==="Flap T"; })).slice(0,2);
+  const se = shuffle(SOUND_POOL.filter(function(i){ return i.cat==="Silent E"; })).slice(0,2);
+  return shuffle(cv.concat(ss, ft, se));
+}
+function renderPronunciation(el){
+  if(!sessionState.roundItems){
+    sessionState.roundItems = getBalancedSoundRound();
+    sessionState.idx = 0; sessionState.correctCount = 0;
+  }
+  if(sessionState.idx >= sessionState.roundItems.length){
+    if(!state.pronunciationCompleted){ state.pronunciationCompleted = true; saveState(); }
+    return moduleSummary(el, "🔊 Pronunciation & Linking", "pronunciation", sessionState.correctCount, sessionState.roundItems.length);
+  }
+  const item = sessionState.roundItems[sessionState.idx];
+  if(!sessionState.currentOptions) sessionState.currentOptions = shuffle(item.options.slice());
+  const shuffledOptions = sessionState.currentOptions;
+  const isMulti = item.correct.length > 1;
+  if(!sessionState.multiSelected) sessionState.multiSelected = [];
+  const showBadge = item.stimulusType === "sentence";
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🔊 Pronunciation & Linking</div>
+    <div class="ex-progress"><span>Item ${sessionState.idx+1} / ${sessionState.roundItems.length}</span></div>
+    <div class="target-box"><div class="eng-line">${item.stimulus} ${audioBtn(item.stimulus)}</div></div>
+    ${showBadge ? '<div class="sound-badge-row"><span class="sound-badge-pill">'+item.badge+'</span></div>' : ''}
+    <div class="instr-box"><b>${item.command}</b>${isMulti?' <span class="pt-line">(pode haver mais de uma resposta certa)</span>':''}</div>
+    <div class="options" id="soundOptions">${shuffledOptions.map(function(o){
+      return isMulti
+        ? '<button class="opt-btn" data-opt="'+escapeAttr(o)+'"><span class="chk">☐</span> '+o+'</button>'
+        : '<button class="opt-btn" data-opt="'+escapeAttr(o)+'">'+o+'</button>';
+    }).join("")}</div>
+    ${isMulti ? '<div class="btn-row"><button class="btn btn-primary" id="verifyMultiBtn">Verificar</button></div>' : ''}
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  wireAudioButtons(el);
+  const optButtons = el.querySelectorAll("#soundOptions .opt-btn");
+
+  if(isMulti){
+    optButtons.forEach(function(b){
+      b.addEventListener("click", function(){
+        const val = b.dataset.opt;
+        const i = sessionState.multiSelected.indexOf(val);
+        if(i===-1){ sessionState.multiSelected.push(val); b.classList.add("selected"); b.querySelector(".chk").textContent="☑"; }
+        else { sessionState.multiSelected.splice(i,1); b.classList.remove("selected"); b.querySelector(".chk").textContent="☐"; }
+      });
+    });
+    document.getElementById("verifyMultiBtn").addEventListener("click", function(){
+      optButtons.forEach(function(b){ b.disabled = true; });
+      const chosenSet = sessionState.multiSelected.slice();
+      const correctSet = item.correct;
+      const isCorrect = chosenSet.length===correctSet.length && chosenSet.every(function(v){ return correctSet.indexOf(v)!==-1; });
+      optButtons.forEach(function(b){
+        const val = b.dataset.opt;
+        const wasSelected = chosenSet.indexOf(val)!==-1;
+        const isRight = correctSet.indexOf(val)!==-1;
+        if(isRight) b.classList.add("correct");
+        else if(wasSelected) b.classList.add("wrong");
+      });
+      finishSoundItem(isCorrect);
+    });
+  } else {
+    optButtons.forEach(function(b){
+      b.addEventListener("click", function(){
+        optButtons.forEach(function(x){ x.disabled=true; });
+        const val = b.dataset.opt;
+        const correct = item.correct.indexOf(val)!==-1;
+        b.classList.add(correct?"correct":"wrong");
+        if(!correct){
+          const rightBtn = [].slice.call(optButtons).find(function(x){ return x.dataset.opt===item.correct[0]; });
+          if(rightBtn) rightBtn.classList.add("correct");
+        }
+        finishSoundItem(correct);
+      });
+    });
+  }
+
+  function finishSoundItem(correct){
+    registerResult(item.id, correct);
+    if(correct){ sessionState.correctCount++; removeFromReview(item.id); }
+    else pushError(item.id,"pronunciation",item.cat,"CONNECTED_SPEECH", sessionState.multiSelected.join(", "), item.correct.join(", "));
+    const fb = document.getElementById("fbArea");
+    fb.innerHTML = '<div class="feedback '+(correct?'ok':'bad')+'">'+(correct?'✅ Correto!':'❌ Não foi dessa vez.')+' <div class="fb-line">💡 '+item.explain+'</div>'+(!correct?'<span class="tag">CONNECTED_SPEECH</span>':'')+'</div>';
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-primary" id="slNext">Próximo ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("slNext").addEventListener("click", function(){
+      sessionState.idx++; sessionState.currentOptions=null; sessionState.multiSelected=[];
+      render();
+    });
+  }
+}
+
+/* ---- MEET SOMEONE NEW (conversation ladder) ---- */
+function renderMeetSomeone(el){
+  if(sessionState.idx===undefined){ sessionState.idx=0; sessionState.log=[]; }
+  if(sessionState.idx >= LADDER_STEPS.length){
+    const passed = sessionState.log.filter(function(l){return l.ok;}).length;
+    const wrap = document.createElement("div");
+    wrap.innerHTML = `
+      <div class="module-title">🗣️ Meet Someone New — Avaliação Final</div>
+      <div class="feedback ${passed>=7?'ok':'bad'}" style="margin-top:10px;">
+        🏆 Você completou a conversa! Respostas adequadas: <b>${passed}/${LADDER_STEPS.length}</b>.
+      </div>
+      <div class="module-desc" style="margin-top:10px;">Resumo da conversa:</div>
+      ${sessionState.log.map(function(l){ return '<div class="review-item"><b>'+l.ask+'</b><div class="pt-line">Você: “'+l.userText+'” '+(l.ok?'✅':'⚠️')+'</div></div>'; }).join("")}
+      <div class="btn-row" id="finalBtnRow"></div>
+    `;
+    el.appendChild(wrap);
+    const nextKey = nextModuleKey("meetsomeone");
+    const row = document.getElementById("finalBtnRow");
+    const restartBtn = document.createElement("button"); restartBtn.className="btn btn-ghost"; restartBtn.textContent="Tentar novamente";
+    restartBtn.addEventListener("click", function(){ sessionState={}; render(); });
+    row.appendChild(restartBtn);
+    const pathBtn = document.createElement("button"); pathBtn.className="btn btn-primary"; pathBtn.textContent="Voltar para a Trilha";
+    pathBtn.addEventListener("click", goPath);
+    row.appendChild(pathBtn);
+    return;
+  }
+  const step = LADDER_STEPS[sessionState.idx];
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🗣️ Meet Someone New</div>
+    <div class="ex-progress"><span>Passo ${sessionState.idx+1} / ${LADDER_STEPS.length}</span></div>
+    <div class="target-box"><div class="eng-line">${step.ask} ${audioBtn(step.audio)}</div></div>
+    <div class="pt-line" style="margin-bottom:10px;">💡 ${step.hintPt}</div>
+    <input type="text" class="type-input" id="ladderInput" placeholder="Escreva sua resposta em inglês..." autocomplete="off">
+    <div class="btn-row"><button class="btn btn-primary" id="ladderSend">Enviar</button></div>
+    <div id="fbArea"></div>
+  `;
+  el.appendChild(wrap);
+  wireAudioButtons(el);
+  document.getElementById("ladderInput").addEventListener("keydown", function(e){ if(e.key==="Enter") document.getElementById("ladderSend").click(); });
+  document.getElementById("ladderSend").addEventListener("click", function(){
+    const val = document.getElementById("ladderInput").value;
+    const ok = looseContains(val, step.need);
+    registerResult(step.id, ok);
+    sessionState.log.push({ask:step.ask, userText:val, ok:ok});
+    if(!ok) pushError(step.id,"meetsomeone",step.ask,"SOCIAL_RESPONSE",val,step.hintPt); else removeFromReview(step.id);
+    const fb = document.getElementById("fbArea");
+    fb.innerHTML = `<div class="feedback ${ok?'ok':'bad'}">${ok?'✅ Boa resposta!':'⚠️ Resposta registrada — tente se aproximar do modelo sugerido na dica.'}</div>`;
+    document.getElementById("ladderSend").disabled = true;
+    document.getElementById("ladderInput").disabled = true;
+    const btnRow=document.createElement("div"); btnRow.className="btn-row";
+    btnRow.innerHTML='<button class="btn btn-primary" id="ladderNext">Continuar ▶</button>';
+    fb.appendChild(btnRow);
+    document.getElementById("ladderNext").addEventListener("click", function(){ sessionState.idx++; render(); });
+  });
+}
+
+/* ---------------- FILA DE REVISÃO ---------------- */
+function renderReview(el){
+  el.appendChild(backBar("Voltar ao Início", goHub));
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">🔁 Fila de Revisão</div>
+    <div class="module-desc">Itens que você errou entram automaticamente aqui. Pratique novamente até dominar!</div>
+    <div id="reviewList"></div>
+  `;
+  el.appendChild(wrap);
+  const box = document.getElementById("reviewList");
+  if(state.reviewQueue.length===0){ box.innerHTML = '<div class="empty-state"><div class="big">🎉</div>Nenhum item pendente de revisão no momento.</div>'; return; }
+  const frames = ["🔁 Revisão", "🔁 Tente de novo", "🔁 Reforçando"];
+  const moduleTitle = {};
+  MODULES_META.forEach(function(m){ moduleTitle[m.key]=m.title; });
+  box.innerHTML = state.reviewQueue.map(function(r,i){
+    return `<div class="review-item">
+      <div class="badge-pill">${r.errorType||"REVIEW"}</div>
+      <div style="margin-top:6px;"><b>${frames[i%frames.length]}:</b> ${r.label}</div>
+      <div class="pt-line">Módulo original: ${moduleTitle[r.module]||r.module} · tentativas com erro: ${r.tries}</div>
+      <div class="btn-row"><button class="btn btn-primary btn-sm" data-review-go="${r.module}">Revisar agora</button></div>
+    </div>`;
+  }).join("");
+  box.querySelectorAll("[data-review-go]").forEach(function(b){
+    b.addEventListener("click", function(){ goModule(b.dataset.reviewGo); });
+  });
+}
+
+/* ---------------- CATÁLOGO & FAVORITOS ---------------- */
+function buildCatalogItems(){
+  const items = [];
+  GOLDEN_PHRASES.forEach(function(p){ items.push({id:p.id, en:p.en, pt:p.pt, cat:"Phrases", origin:"Original", example:null, examplePt:null, note:null}); });
+  COLLOCATIONS.forEach(function(c){ items.push({id:c.id, en:c.full, pt:c.note, cat:"Collocations", origin:"Original", example:c.ex, examplePt:c.exPt, note:c.note}); });
+  SOUND_POOL.forEach(function(s){ items.push({id:s.id, en:s.stimulus, pt:s.cat, cat:"Connected Speech", origin:"Original", example:s.correct.join(" / "), examplePt:null, note:s.explain}); });
+  PROFILES.forEach(function(p){ items.push({id:p.id, en:p.first+" "+p.last, pt:"Perfil: "+p.country+", "+p.age+" anos, "+p.job, cat:"Profiles", origin:"Original", example:p.dialogue[0], examplePt:null, note:null}); });
+  state.customContent.forEach(function(c){ items.push({id:c.id, en:c.en, pt:c.pt, cat:"My Vocabulary", origin:"My Vocabulary", example:null, examplePt:null, note:null}); });
+  return items;
+}
+function renderCatalog(el){
+  el.appendChild(backBar("Voltar ao Início", goHub));
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">📚 Central de Conteúdo</div>
+    <div class="module-desc">Consulte todas as frases da unidade, acesse seus itens favoritados e adicione novos termos personalizados.</div>
+    <input type="text" class="search-input" id="catQuery" placeholder="Pesquisar (ex: “where”, “actually”, “linking”...)">
+    <div class="chip-row" id="catCatRow"></div>
+    <div class="btn-row" style="margin-top:0;margin-bottom:6px;">
+      <button class="btn btn-primary btn-sm" id="addTermBtn">➕ Adicionar Termo</button>
+    </div>
+    <div id="addTermForm"></div>
+    <div id="catList"></div>
+  `;
+  el.appendChild(wrap);
+
+  const categories = ["All","Phrases","Collocations","Connected Speech","Profiles","My Vocabulary"];
+  const catRow = document.getElementById("catCatRow");
+  categories.forEach(function(c){
+    const chip = document.createElement("button");
+    chip.className = "chip" + (sessionState.catalogCategory===c ? " active":"");
+    chip.textContent = c==="All" ? "All" : c;
+    chip.addEventListener("click", function(){ sessionState.catalogCategory=c; render(); });
+    catRow.appendChild(chip);
+  });
+  const favChip = document.createElement("button");
+  favChip.className = "chip" + (sessionState.catalogFavOnly ? " active":"");
+  favChip.textContent = "⭐ Favorites";
+  favChip.addEventListener("click", function(){ sessionState.catalogFavOnly = !sessionState.catalogFavOnly; render(); });
+  catRow.appendChild(favChip);
+
+  const queryInput = document.getElementById("catQuery");
+  queryInput.value = sessionState.catalogQuery || "";
+  queryInput.addEventListener("input", function(){ sessionState.catalogQuery = queryInput.value; renderList(); });
+
+  document.getElementById("addTermBtn").addEventListener("click", function(){
+    const formArea = document.getElementById("addTermForm");
+    formArea.innerHTML = `
+      <div class="field-group"><span class="field-label">Inglês (frase/termo) *</span><input class="type-input" id="f_en"></div>
+      <div class="field-group"><span class="field-label">Português (tradução) *</span><input class="type-input" id="f_pt"></div>
+      <div class="btn-row"><button class="btn btn-primary" id="saveTermBtn">Salvar</button><button class="btn btn-ghost" id="cancelTermBtn">Cancelar</button></div>
+    `;
+    document.getElementById("saveTermBtn").addEventListener("click", function(){
+      const en = document.getElementById("f_en").value.trim();
+      const pt = document.getElementById("f_pt").value.trim();
+      if(!en || !pt){ alert("Preencha inglês e português."); return; }
+      state.customContent.push({id:"custom-"+Date.now(), en:en, pt:pt});
+      saveState();
+      render();
+    });
+    document.getElementById("cancelTermBtn").addEventListener("click", function(){ formArea.innerHTML=""; });
+  });
+
+  renderList();
+  function renderList(){
+    const box = document.getElementById("catList");
+    const q = normalize(sessionState.catalogQuery);
+    let items = buildCatalogItems();
+    items = items.filter(function(it){
+      if(sessionState.catalogCategory!=="All" && it.cat!==sessionState.catalogCategory) return false;
+      if(sessionState.catalogFavOnly && !isFav(it.id)) return false;
+      if(q && normalize(it.en).indexOf(q)===-1 && normalize(it.pt).indexOf(q)===-1) return false;
+      return true;
+    });
+    if(items.length===0){ box.innerHTML = '<div class="empty-state"><div class="big">📭</div>Nenhum item encontrado com esses filtros.</div>'; return; }
+    box.innerHTML = items.map(function(it){
+      const expanded = !!sessionState.catalogExpanded[it.id];
+      return `<div class="cat-item">
+        <div class="cat-item-head expandable-card" data-headtoggle="${it.id}">
+          <div class="ci-text"><div class="ci-en">${it.en}</div><div class="ci-pt">${it.pt}</div></div>
+          <div class="cat-item-actions">
+            <span class="tag">${it.cat}</span>
+            <button class="icon-btn star ${isFav(it.id)?'active':''}" data-favtoggle="${it.id}">${isFav(it.id)?'⭐':'☆'}</button>
+            <span class="expand-hint"><span class="expand-chevron ${expanded?'open':''}">▼</span></span>
+          </div>
+        </div>
+        <div class="cat-item-body ${expanded?'open':''}">
+          ${audioBtn(it.en)}
+          ${it.example ? '<div class="arrow-line">→ '+it.example+(it.examplePt?' <span class="pt-line">('+it.examplePt+')</span>':'')+'</div>' : ''}
+          ${it.note ? '<div class="arrow-line">💡 '+it.note+'</div>' : ''}
+          ${!it.example && !it.note ? '<div class="pt-line">Sem detalhes adicionais para este item.</div>' : ''}
+        </div>
+      </div>`;
+    }).join("");
+    wireAudioButtons(box);
+    box.querySelectorAll("[data-favtoggle]").forEach(function(b){
+      b.addEventListener("click", function(e){ e.stopPropagation(); toggleFavorite(b.dataset.favtoggle); renderList(); updateHeader(); });
+    });
+    box.querySelectorAll("[data-headtoggle]").forEach(function(head){
+      head.addEventListener("click", function(e){
+        if(e.target.closest("[data-favtoggle]") || e.target.closest("[data-speak]")) return;
+        const id = head.dataset.headtoggle;
+        sessionState.catalogExpanded[id] = !sessionState.catalogExpanded[id];
+        renderList();
+      });
+    });
+  }
+}
+
+const SKILL_INFO = {
+  QUESTION_ORDER: {what:"É a ordem correta das palavras ao formar perguntas com o verbo be (ex.: “Where are you from?” em vez de “Where you are from?”).",
+    why:"Na Unit 1 quase toda a comunicação depende de perguntas pessoais (nome, idade, origem). Errar a ordem torna a pergunta incompreensível para um falante nativo.",
+    tip:"Lembre-se: em perguntas com be, o verbo vem ANTES do sujeito — “Where + are + you + from?”. Pratique no módulo Asking Questions."},
+  VOCABULARY: {what:"Reconhecimento e uso correto de palavras e informações específicas (nomes, países, profissões, etc.).",
+    why:"Confundir um dado (ex.: “Alexander” em vez de “Alexandra”) muda o sentido da apresentação e pode gerar mal-entendidos reais.",
+    tip:"Releia o diálogo com atenção antes de preencher os campos no módulo Introducing Others."},
+  SOCIAL_RESPONSE: {what:"Saber reagir de forma apropriada a saudações, convites, despedidas e confirmações do dia a dia.",
+    why:"São as respostas mais usadas em conversas reais e casuais — dominar essas fórmulas prontas dá fluência imediata.",
+    tip:"Memorize as Golden Phrases (“Pretty good, thanks.”, “Sure, I'd love some.”) no módulo Essential Phrases antes de praticar Keep the Conversation Going."},
+  LISTENING: {what:"Capacidade de capturar informações específicas (nomes, países, idades) a partir de um áudio.",
+    why:"Em uma conversa real você não tem texto escrito — só o que ouve. Esse é o teste mais próximo de uma situação autêntica.",
+    tip:"Ouça o áudio quantas vezes precisar no módulo Listening for Details e escreva exatamente o que você ouviu, sem adivinhar."},
+  SPELLING: {what:"Pedir e fornecer a soletração correta de nomes e palavras em inglês.",
+    why:"Nomes próprios não têm tradução — a única forma de garantir que foram entendidos corretamente é soletrando.",
+    tip:"Pratique a pergunta “How do you spell that?” e responda soletrando letra por letra, como no módulo Clarifying & Repairing."},
+  CONNECTED_SPEECH: {what:"Como as palavras se conectam na fala natural em inglês (linking, flap T, silent e).",
+    why:"Sem entender essas conexões, um inglês falado naturalmente soa muito mais rápido e confuso do que o inglês “separado” dos livros.",
+    tip:"Treine o ouvido no módulo Pronunciation & Linking, prestando atenção em como o final de uma palavra “gruda” no início da próxima."}
+};
+function renderPerformance(el){
+  el.appendChild(backBar("Voltar ao Início", goHub));
+  const st = computeStats();
+  const skillTags = ["QUESTION_ORDER","VOCABULARY","SOCIAL_RESPONSE","LISTENING","SPELLING","CONNECTED_SPEECH"];
+  const counts = {};
+  skillTags.forEach(function(t){ counts[t]=0; });
+  state.errors.forEach(function(e){ if(counts[e.errorType]!==undefined) counts[e.errorType]++; });
+  const weakest = Object.entries(counts).sort(function(a,b){ return b[1]-a[1]; })[0];
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+    <div class="module-title">📊 Desempenho &amp; Habilidades</div>
+    <div class="module-desc">Seu progresso geral nesta unidade.</div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">${st.accuracy}%</div><div class="stat-label">Accuracy</div></div>
+      <div class="stat-card"><div class="stat-num">${state.xp}</div><div class="stat-label">XP total</div></div>
+      <div class="stat-card"><div class="stat-num">${overallProgress()}%</div><div class="stat-label">Progresso da unidade</div></div>
+      <div class="stat-card"><div class="stat-num">${state.reviewQueue.length}</div><div class="stat-label">Review queue</div></div>
+      <div class="stat-card"><div class="stat-num">${state.bestStreak}</div><div class="stat-label">Best streak</div></div>
+      <div class="stat-card"><div class="stat-num">${state.favorites.length}</div><div class="stat-label">⭐ Favorites</div></div>
+    </div>
+    <div class="module-desc" style="margin-top:18px;"><b>Habilidades (baseado em erros recentes)</b>${weakest && weakest[1]>0 ? ` — precisa mais atenção: <b>${weakest[0]}</b>` : " — nenhum erro recente registrado 🎉"}</div>
+    <div id="skillCards"></div>
+    <div class="module-desc" style="margin-top:18px;"><b>Erros recentes</b></div>
+    <div id="recentErrors"></div>
+  `;
+  el.appendChild(wrap);
+  if(!sessionState.perfExpanded) sessionState.perfExpanded = {};
+  renderSkillCards();
+  function renderSkillCards(){
+    const box = document.getElementById("skillCards");
+    const shown = skillTags.filter(function(t){ return counts[t]>0; });
+    if(shown.length===0){ box.innerHTML = ""; return; }
+    box.innerHTML = shown.map(function(t){
+      const expanded = !!sessionState.perfExpanded[t];
+      const info = SKILL_INFO[t] || {};
+      return `<div class="skill-card">
+        <div class="skill-card-head expandable-card" data-skilltoggle="${t}">
+          <div style="flex:1;">
+            <span class="field-label" style="margin-bottom:0;">${t} — ${counts[t]} erro(s)</span>
+            <div class="mini-bar"><div style="width:${Math.min(100,counts[t]*20)}%"></div></div>
+          </div>
+          <span class="expand-hint">ℹ️ Dicas <span class="expand-chevron ${expanded?'open':''}">▼</span></span>
+        </div>
+        <div class="skill-card-body ${expanded?'open':''}">
+          <div class="fb-line"><b>O que é:</b> ${info.what||""}</div>
+          <div class="fb-line"><b>Por que importa:</b> ${info.why||""}</div>
+          <div class="fb-line"><b>💡 Dica prática:</b> ${info.tip||""}</div>
+        </div>
+      </div>`;
+    }).join("");
+    box.querySelectorAll("[data-skilltoggle]").forEach(function(h){
+      h.addEventListener("click", function(){
+        const t = h.dataset.skilltoggle;
+        sessionState.perfExpanded[t] = !sessionState.perfExpanded[t];
+        renderSkillCards();
+      });
+    });
+  }
+  const box = document.getElementById("recentErrors");
+  if(state.errors.length===0){ box.innerHTML = '<div class="empty-state"><div class="big">🎉</div>Nenhum erro registrado ainda.</div>'; return; }
+  box.innerHTML = state.errors.slice(0,10).map(function(e){
+    return `<div class="review-item">
+      <span class="tag">${e.errorType}</span>
+      <div class="pt-line" style="margin-top:6px;">${e.label}</div>
+      ${e.wrongText? '<div class="fb-line">❌ “'+e.wrongText+'”</div>':""}
+      ${e.correctText? '<div class="fb-line">✅ “'+e.correctText+'”</div>':""}
+    </div>`;
+  }).join("");
+}
+
+/* =====================================================================
+   INIT
+   ===================================================================== */
+render();
+</script>
+</body>
+</html>
