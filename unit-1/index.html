@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 1 — Where Are You From? | English Acquisition Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary-red:#E31B23;
+  --primary-red-hover:#C6131B;
+  --header-gradient: linear-gradient(135deg, #E31B23 0%, #C2185B 50%, #8E24AA 100%);
+  --soft-peach:#FFEBE6;
+  --card-cream:#FFF9E6;
+  --surface-white:#FFFFFF;
+  --surface-light:#F4F5F7;
+  --text-main:#212121;
+  --text-muted:#757575;
+  --border-line:#E0D6C8;
+  --success-green:#2E7D32;
+  --success-bg:#E8F5E9;
+  --error-red:#D32F2F;
+  --error-bg:#FFEBEE;
+  --star-gold:#FFA000;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+html{height:-webkit-fill-available;}
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  background:var(--surface-light);
+  font-family:'Source Sans 3', sans-serif;
+  color:var(--text-main);
+  display:flex;
+  justify-content:center;
+  padding:0 0 env(safe-area-inset-bottom, 24px);
+  -webkit-overflow-scrolling:touch;
+}
+.wrap{width:100%;max-width:900px;}
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif;margin:0;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+button{font-family:inherit;touch-action:manipulation;}
+input,textarea{touch-action:manipulation;}
+
+/* ---------- HEADER ---------- */
+.app-header{
+  background:var(--header-gradient);
+  color:#fff;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 18px 16px;
+  border-radius:0 0 18px 18px;
+  margin-bottom:14px;
+  box-shadow:0 8px 24px rgba(142,36,170,0.25);
+  cursor:pointer;
+}
+.header-top{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.header-title{
+  font-weight:800;font-style:italic;letter-spacing:.4px;
+  font-size:clamp(19px,5vw,26px);line-height:1;
+}
+.header-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;opacity:.85;margin-top:4px;}
+.review-shortcut{
+  background:rgba(255,255,255,0.18);border:none;color:#fff;border-radius:20px;
+  padding:7px 12px;font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap;
+}
+.review-shortcut .nb{background:#fff;color:var(--primary-red);border-radius:10px;padding:0 6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;}
+.header-progress-row{display:flex;align-items:center;gap:8px;margin-top:12px;}
+.header-progress{flex:1;background:rgba(255,255,255,0.25);border-radius:10px;height:8px;overflow:hidden;}
+.header-progress-fill{background:#fff;height:100%;border-radius:10px;transition:width .3s;}
+.header-progress-pct{font-family:'IBM Plex Mono',monospace;font-size:11px;opacity:.9;}
+
+/* ---------- SHELL ---------- */
+.app-shell{padding:0 14px;}
+.main-card{
+  background:var(--surface-white);border-radius:16px;border:1px solid var(--border-line);
+  box-shadow:0 8px 22px rgba(0,0,0,0.06);padding:20px 18px 24px;min-height:400px;
+}
+.module-title{font-size:clamp(19px,4.4vw,24px);font-weight:800;color:var(--text-main);display:flex;align-items:center;gap:8px;}
+.module-desc{color:var(--text-muted);font-size:13.5px;margin-top:4px;margin-bottom:16px;line-height:1.5;}
+
+.back-bar{
+  background:none;border:none;color:var(--primary-red);font-weight:700;font-size:13.5px;
+  padding:0 0 14px;cursor:pointer;display:flex;align-items:center;gap:5px;
+}
+.back-bar:hover{text-decoration:underline;}
+
+/* ---------- BUTTONS ---------- */
+.btn{
+  border-radius:10px;padding:11px 16px;font-size:14px;font-weight:700;cursor:pointer;border:1.5px solid transparent;
+  font-family:'Source Sans 3',sans-serif;
+}
+.btn-primary{background:var(--primary-red);color:#fff;}
+.btn-primary:hover{background:var(--primary-red-hover);}
+.btn-primary:disabled{opacity:.45;cursor:default;}
+.btn-ghost{background:#fff;border-color:var(--border-line);color:var(--text-main);}
+.btn-ghost:hover{border-color:var(--primary-red);color:var(--primary-red);}
+.btn-ghost.active{background:var(--header-gradient);color:#fff;border-color:transparent;}
+.btn-sm{padding:7px 12px;font-size:12.5px;border-radius:8px;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.icon-btn{background:none;border:1px solid var(--border-line);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);}
+.icon-btn:hover{border-color:var(--primary-red);color:var(--primary-red);}
+.icon-btn.star.active{color:var(--star-gold);border-color:var(--star-gold);}
+
+/* ---------- HUB PORTALS ---------- */
+.quickstart{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  background:var(--header-gradient);color:#fff;border:none;border-radius:14px;
+  padding:16px;font-size:16px;font-weight:800;font-family:'Barlow Condensed',sans-serif;
+  letter-spacing:.3px;cursor:pointer;margin-bottom:18px;box-shadow:0 6px 16px rgba(227,27,35,0.25);
+}
+.portal-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+@media (min-width:600px){ .portal-grid{grid-template-columns:1fr 1fr;} }
+.portal-card{
+  text-align:left;background:var(--card-cream);border:1px solid var(--border-line);border-radius:14px;
+  padding:18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;position:relative;
+}
+.portal-card:hover{border-color:var(--primary-red);}
+.portal-card .em{font-size:30px;}
+.portal-card b{display:block;font-size:16.5px;color:var(--text-main);}
+.portal-card span{font-size:12.5px;color:var(--text-muted);line-height:1.4;display:block;margin-top:3px;}
+.portal-card .pb{position:absolute;top:12px;right:12px;background:var(--primary-red);color:#fff;border-radius:10px;font-size:10.5px;padding:2px 8px;font-family:'IBM Plex Mono',monospace;}
+
+/* ---------- STUDY PATH ---------- */
+.path-list{display:flex;flex-direction:column;gap:10px;}
+.path-card{
+  background:#fff;border:1.5px solid var(--border-line);border-radius:14px;padding:14px 16px;
+  display:flex;gap:12px;align-items:center;cursor:pointer;
+}
+.path-card:hover{border-color:var(--primary-red);}
+.path-card.done{border-color:var(--success-green);}
+.path-card .em{font-size:26px;flex-shrink:0;}
+.path-card .pc-main{flex:1;min-width:0;}
+.path-card b{font-size:15px;}
+.path-card .pc-desc{font-size:12px;color:var(--text-muted);margin-top:2px;line-height:1.4;}
+.path-card .pc-status{font-size:11px;font-family:'IBM Plex Mono',monospace;margin-top:6px;color:var(--text-muted);}
+.path-card .pc-status.done{color:var(--success-green);font-weight:700;}
+.path-card .pc-status.progress{color:var(--primary-red);font-weight:700;}
+.mini-bar{background:var(--surface-light);border-radius:6px;height:6px;overflow:hidden;margin-top:6px;}
+.mini-bar > div{background:var(--primary-red);height:100%;}
+.path-card.done .mini-bar > div{background:var(--success-green);}
+.check-badge{font-size:18px;color:var(--success-green);flex-shrink:0;}
+
+/* ---------- EXERCISE CARD ---------- */
+.ex-progress{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);margin-bottom:8px;display:flex;justify-content:space-between;}
+.instr-box{
+  background:var(--soft-peach);border-left:4px solid var(--primary-red);border-radius:8px;
+  padding:12px 14px;margin-bottom:14px;font-size:14.5px;line-height:1.5;
+}
+.instr-box b{color:var(--primary-red);}
+.target-box{
+  background:var(--card-cream);border:1px solid var(--border-line);border-radius:10px;
+  padding:14px 16px;margin-bottom:14px;
+}
+.eng-line{font-size:16.5px;font-style:italic;color:var(--text-main);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.pt-line{font-size:12.5px;color:var(--text-muted);margin-top:4px;}
+.audio-btn{background:var(--primary-red);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:13px;flex-shrink:0;}
+.audio-btn:hover{background:var(--primary-red-hover);}
+
+.options{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
+.opt-btn{
+  display:flex;align-items:center;gap:8px;text-align:left;background:#fff;border:1.5px solid var(--border-line);
+  border-radius:10px;padding:12px 14px;font-size:14.5px;color:var(--text-main);cursor:pointer;width:100%;
+}
+.opt-btn:hover:not(:disabled){border-color:var(--primary-red);}
+.opt-btn.correct{background:var(--success-bg);border-color:var(--success-green);font-weight:700;}
+.opt-btn.wrong{background:var(--error-bg);border-color:var(--error-red);}
+.opt-btn:disabled{cursor:default;}
+.opt-btn.selected{background:var(--soft-peach);border-color:var(--primary-red);}
+.opt-btn .chk{font-size:15px;flex-shrink:0;}
+
+.sound-badge-row{display:flex;justify-content:flex-end;margin-bottom:8px;}
+.sound-badge-pill{
+  display:inline-block;background:var(--header-gradient);color:#ffffff;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.4px;
+  padding:6px 16px;border-radius:20px;box-shadow:0 4px 10px rgba(227,27,35,0.2);
+}
+.expand-hint{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.expand-chevron{display:inline-block;transition:transform .2s;color:var(--primary-red);font-size:13px;}
+.expand-chevron.open{transform:rotate(180deg);}
+.expandable-card{cursor:pointer;}
+.skill-card{border:1px solid var(--border-line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff;}
+.skill-card-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;gap:10px;cursor:pointer;}
+.skill-card-body{padding:0 14px 14px;border-top:1px dashed var(--border-line);font-size:13.5px;color:var(--text-main);line-height:1.55;display:none;}
+.skill-card-body.open{display:block;padding-top:10px;}
+.skill-card-body b{color:var(--primary-red);}
+
+.type-input{width:100%;border:1.5px solid var(--border-line);border-radius:10px;padding:12px 13px;font-size:16px;color:var(--text-main);-webkit-appearance:none;}
+.type-input:focus{outline:none;border-color:var(--primary-red);}
+textarea.type-input{min-height:70px;resize:vertical;}
+
+.tile-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;min-height:44px;padding:10px;background:var(--surface-light);border-radius:10px;border:1px dashed var(--border-line);}
+.tile{background:#fff;border:1.5px solid var(--border-line);border-radius:8px;padding:9px 12px;font-size:14.5px;cursor:pointer;font-weight:600;color:var(--text-main);}
+.tile:hover{border-color:var(--primary-red);}
+.answer-strip{display:flex;flex-wrap:wrap;gap:8px;min-height:46px;padding:10px;background:#fff;border:2px solid var(--border-line);border-radius:10px;margin-bottom:10px;}
+.answer-strip.empty::before{content:"Toque nas palavras abaixo para montar a frase...";color:var(--text-muted);font-size:13px;}
+.ans-tile{background:var(--soft-peach);border:1.5px solid var(--primary-red);border-radius:8px;padding:9px 12px;font-size:14.5px;cursor:pointer;font-weight:600;}
+.blank-input{width:90px;border:1.5px solid var(--primary-red);border-radius:6px;padding:7px 8px;font-size:14px;}
+
+.feedback{border-radius:10px;padding:14px 16px;margin-top:14px;font-size:14.5px;line-height:1.55;}
+.feedback.ok{background:var(--success-bg);border:1px solid var(--success-green);}
+.feedback.bad{background:var(--error-bg);border:1px solid var(--error-red);}
+.feedback .fb-line{margin-bottom:4px;}
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-transform:uppercase;background:#fff;border:1px solid var(--border-line);border-radius:10px;padding:1px 7px;margin-left:6px;color:var(--text-muted);}
+
+.field-group{margin-bottom:10px;}
+.field-label{font-size:12.5px;font-weight:700;color:var(--text-muted);margin-bottom:4px;display:block;}
+.dialogue-line{background:var(--card-cream);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-style:italic;font-size:14.5px;display:flex;align-items:center;gap:8px;}
+
+.profile-card{background:var(--card-cream);border:1px solid var(--border-line);border-radius:10px;padding:14px 16px;margin-bottom:14px;}
+.profile-card .pf-row{display:flex;gap:6px;font-size:13.5px;padding:3px 0;}
+.profile-card .pf-row b{min-width:120px;color:var(--text-muted);font-weight:600;}
+
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(min-width:640px){.stat-grid{grid-template-columns:repeat(3,1fr);}}
+.stat-card{background:var(--card-cream);border:1px solid var(--border-line);border-radius:12px;padding:14px;}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:26px;color:var(--primary-red);}
+.stat-label{font-size:12px;color:var(--text-muted);margin-top:2px;}
+
+.empty-state{text-align:center;padding:32px 10px;color:var(--text-muted);}
+.empty-state .big{font-size:36px;margin-bottom:8px;}
+
+/* ---------- CATALOG ---------- */
+.search-input{width:100%;border:1.5px solid var(--border-line);border-radius:10px;padding:11px 14px;font-size:16px;margin-bottom:12px;-webkit-appearance:none;}
+.chip-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;-webkit-overflow-scrolling:touch;}
+.chip{background:#fff;border:1.5px solid var(--border-line);border-radius:20px;padding:6px 13px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--text-muted);white-space:nowrap;}
+.chip.active{background:var(--header-gradient);color:#fff;border-color:transparent;}
+.cat-item{border:1px solid var(--border-line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff;}
+.cat-item-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;gap:10px;}
+.cat-item-head .ci-text{flex:1;min-width:0;}
+.cat-item-head .ci-en{font-weight:700;font-size:14.5px;}
+.cat-item-head .ci-pt{font-size:12px;color:var(--text-muted);margin-top:2px;}
+.cat-item-actions{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.cat-item-body{padding:0 14px 14px;border-top:1px dashed var(--border-line);font-size:13.5px;color:var(--text-main);display:none;}
+.cat-item-body.open{display:block;padding-top:10px;}
+.cat-item-body .arrow-line{margin-top:6px;color:var(--text-muted);}
+
+.search-result{background:var(--card-cream);border:1px solid var(--border-line);border-radius:10px;padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+
+.review-item{border:1px solid var(--border-line);border-radius:10px;padding:12px 14px;margin-bottom:10px;background:#fff;}
+.badge-pill{font-family:'IBM Plex Mono',monospace;font-size:10px;background:var(--error-bg);color:var(--error-red);border-radius:10px;padding:2px 8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="app-header" id="headerClick">
+    <div class="header-top">
+      <div>
+        <div class="header-title">WHERE ARE YOU FROM?</div>
+        <div class="header-sub">UNIT 1 · ENGLISH ACQUISITION LAB</div>
+      </div>
+      <button class="review-shortcut" id="reviewShortcut">🔁 Revisão <span class="nb" id="reviewBadge" style="display:none;">0</span></button>
+    </div>
+    <div class="header-progress-row">
+      <div class="header-progress"><div class="header-progress-fill" id="hsProgFill" style="width:0%"></div></div>
+      <div class="header-progress-pct" id="hsProgPct">0%</div>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <div class="main-card" id="mainCard"></div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DADOS
+   ===================================================================== */
+const PROFILES = [
+  {id:"px-alexandra", first:"Alexandra", last:"Costa", nick:"Alexa", country:"Brazil", age:"24", job:"student", extra:"tennis", extraLabel:"favorite sport",
+    dialogue:["My name is Alexandra Costa, but please call me Alexa.","I'm from Brazil.","I'm 24.","I'm a student.","My favorite sport is tennis."]},
+  {id:"px-jay", first:"Jay", last:"Park", nick:"", country:"South Korea", age:"21", job:"student", extra:"Business", extraLabel:"favorite subject",
+    dialogue:["Hi, I'm Jay Park.","I'm from South Korea.","I'm 21.","I'm a student.","My favorite subject is Business."]},
+  {id:"px-soojin", first:"Soo-jin", last:"Kim", nick:"", country:"South Korea", age:"22", job:"student", extra:"Biology", extraLabel:"favorite subject",
+    dialogue:["My name is Soo-jin Kim.","I'm from South Korea.","I'm 22.","I'm a student.","My favorite subject is Biology."]},
+  {id:"px-maria", first:"Maria", last:"Valdez", nick:"", country:"Mexico", age:"26", job:"teacher", extra:"Literature", extraLabel:"favorite subject",
+    dialogue:["My name is Maria Valdez.","I'm from Mexico.","I'm 26.","I'm a teacher.","My favorite subject is Literature."]}
+];
+
+const GOLDEN_PHRASES = [
+  {id:"gp-01", en:"My name is Alexandra Costa, but please call me Alexa.", pt:"Meu nome é Alexandra Costa, mas por favor me chame de Alexa.", cat:"Apresentação"},
+  {id:"gp-02", en:"Everyone calls me Bill.", pt:"Todo mundo me chama de Bill.", cat:"Apresentação"},
+  {id:"gp-03", en:"What do people call you?", pt:"Como as pessoas costumam te chamar?", cat:"Perguntas"},
+  {id:"gp-04", en:"How about you?", pt:"E você?", cat:"Conversa"},
+  {id:"gp-05", en:"So, you're from South Korea?", pt:"Então, você é da Coreia do Sul?", cat:"Confirmação"},
+  {id:"gp-06", en:"That's right.", pt:"Isso mesmo.", cat:"Confirmação"},
+  {id:"gp-07", en:"I'm sorry. What's your last name again?", pt:"Desculpe. Qual é o seu sobrenome mesmo?", cat:"Repetição"},
+  {id:"gp-08", en:"How do you spell that?", pt:"Como se soletra isso?", cat:"Soletração"},
+  {id:"gp-09", en:"Actually, it's Valdez.", pt:"Na verdade, é Valdez.", cat:"Correção"},
+  {id:"gp-10", en:"Can you say that again?", pt:"Você pode repetir isso?", cat:"Repetição"},
+  {id:"gp-11", en:"What's Seoul like?", pt:"Como é Seul?", cat:"Descrição"},
+  {id:"gp-12", en:"It's a very exciting city.", pt:"É uma cidade muito animada.", cat:"Descrição"},
+  {id:"gp-13", en:"What are your classmates like?", pt:"Como são os seus colegas de classe?", cat:"Descrição"},
+  {id:"gp-14", en:"They're shy, but very friendly.", pt:"Eles são tímidos, mas muito simpáticos.", cat:"Descrição"},
+  {id:"gp-15", en:"Let's go and say hello.", pt:"Vamos lá cumprimentar.", cat:"Conversa"},
+  {id:"gp-16", en:"How's it going?", pt:"Como vai?", cat:"Saudação"},
+  {id:"gp-17", en:"Pretty good, thanks.", pt:"Bem legal, obrigado(a).", cat:"Saudação"},
+  {id:"gp-18", en:"Do you have time for coffee?", pt:"Você tem tempo para um café?", cat:"Convite"},
+  {id:"gp-19", en:"Sure. I'd love some coffee.", pt:"Claro. Eu adoraria um café.", cat:"Convite"},
+  {id:"gp-20", en:"Have a good day.", pt:"Tenha um bom dia.", cat:"Despedida"},
+  {id:"gp-21", en:"Thank you. You, too.", pt:"Obrigado(a). Você também.", cat:"Despedida"},
+  {id:"gp-22", en:"What's up?", pt:"E aí, tudo bem?", cat:"Saudação"},
+  {id:"gp-23", en:"Oh, not much.", pt:"Ah, nada de mais.", cat:"Saudação"},
+  {id:"gp-24", en:"Good morning.", pt:"Bom dia.", cat:"Saudação"},
+  {id:"gp-25", en:"Good night.", pt:"Boa noite.", cat:"Despedida"},
+  {id:"gp-26", en:"See you later.", pt:"Até mais.", cat:"Despedida"},
+  {id:"gp-27", en:"Talk to you later.", pt:"Falo com você depois.", cat:"Despedida"}
+];
+
+const COLLOCATIONS = [
+  {id:"col-01", prompt:"She works ___ a living.", options:["for","of","at","in"], answer:"for", full:"work for a living", note:"Usamos “for a living” para dizer qual é a profissão de alguém.", ex:"What do you do for a living?", exPt:"O que você faz para viver / qual é a sua profissão?"},
+  {id:"col-02", prompt:"I'm in the same class ___ Soo-jin.", options:["with","as","of","for"], answer:"as", full:"in the same class as", note:"Usamos “the same ___ as” para comparar/igualar duas coisas.", ex:"I'm in the same class as Jay.", exPt:"Eu estou na mesma turma que o Jay."},
+  {id:"col-03", prompt:"See you ___ the morning.", options:["at","on","in","for"], answer:"in", full:"in the morning", note:"Usamos “in the morning/aftern
